@@ -1,4 +1,4 @@
-example
+accumulation
 =======
 
-记录着angularjs做的的一些例子。
+学习零碎的知识点，慢慢积累。
