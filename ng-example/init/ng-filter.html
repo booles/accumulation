@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>angular module</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-controller="myController">
+			
+		</div>
+
+	</body>
+	<script type="text/javascript">
+
+
+		var myApp = angular.module('myApp',[]);
+		myApp.controller('myController', ['$scope',"$http","$q", function ($scope,$http,$q) {
+			
+		}]);
+
+
+
+		/*var injector = angular.injector(['ng', 'myApp']); 
+		console.log(injector.get("$controller"));
+		console.log(injector.annotate(function($q, greeter,abc) {}));;*/
+
+
+	</script>
+</html>

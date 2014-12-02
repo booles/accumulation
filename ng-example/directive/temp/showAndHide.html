@@ -1,0 +1,8 @@
+
+	<h5 ng-click="changShow($event.target)">{{value.title}}</h5>
+	<ul ng-show="show">
+		<li ng-repeat="contentValue in value.content" >
+			{{contentValue}}
+		</li>
+	</ul>
+<input type="text" ng-model="inputValue" />

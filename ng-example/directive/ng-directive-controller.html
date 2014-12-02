@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			<example-prelink></example-prelink>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*
+			如果不是子级，而是共享directive。应该使用到controller；
+			指令的controller可以定义一个公共的API
+			. A controller is a place where directive can define it’s public API;
+
+			require:引入一个指令，并在link函数最后一个参数ctrl使用;
+			执行顺序：
+			Order of Execution
+			Controller gets executed first
+			Pre-link gets executed next
+			Post-link gets executed last
+
+			在本例中执行顺序：父级的controller最先执行，其次是子级的link函数，再其次是父级的link函数
+
+		*/
+		var myApp = angular.module("myApp",[]).
+		directive('examplePrelink', [function () {
+			return {
+				restrict: 'EA',
+				template:"<div>父级和子级都有自定义directive时：{{fatherName}}<children-link></children-link></div>",
+				controller:function ($scope,$element,$attrs){
+					this.fatherName = "controllerName";
+					console.log("1111111111111");
+				},
+				link:function (scope,element,attr,ctrl){
+					scope.fatherName = ctrl.fatherName;
+					console.log("2222222222222");
+				}
+			};
+		}]).
+		directive('childrenLink', [function () {
+			return {
+				restrict: 'EA',
+				require:"^examplePrelink",
+				template:"<div>我取父级的fatherName:{{childrenName}}</div>",
+				link: function (scope, iElement, iAttrs,ctrl) {
+					scope.childrenName = ctrl.fatherName;
+					console.log("33333333333333333");
+				}
+			};
+		}])
+		myApp.controller("conTroll",function ($scope){
+			
+		});
+
+
+	</script>
+</html>

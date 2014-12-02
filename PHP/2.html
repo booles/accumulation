@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+        <script src="../../lib/jq17.js"></script>
+        <script src="../../lib/multiline.js"></script>
+        <script src="../../lib/template.js"></script>
+	</head>
+
+	<body>
+		<div id="adiv"></div>
+	</body>
+	<script>
+
+		function randerHtml(data){
+			var html = multiline(function (){
+					/*
+						<%for(i=0;i<list.length;i++){%>
+							<p>
+								姓名：<span><%=list[i].userName%></span>
+							</p>
+							<p>
+								密码：<span><%=list[i].passWord%></span>
+							</p>
+						<%}%>
+						
+
+					*/
+				});
+
+			var rander = template.compile(html);
+
+			var newHtml = rander(data);
+			$("#adiv").html(newHtml);
+		}
+
+
+
+		$.ajax({
+			url:"php/2.php"
+		})
+		.done(function (data,erorr){
+				console.log("111");
+				data = JSON.parse(data);
+				var json = {};
+				json['list'] = [];
+				for(var i=0;i<data.length;i++){
+					json['list'].push(data[i]);
+				}
+				
+				randerHtml(json);
+		});
+	</script>
+</html>

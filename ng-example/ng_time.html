@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			Date format: <input ng-model="format" type="text"/><hr/>
+			Current time is : <span x-current-time="format" id="myFormat"></span><br/>
+    		<button ng-click="remove()">remove the span</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module("MyApp",[]);
+			app.directive("currentTime",function (dateFilter){
+				return function (scope,element,attr){
+					var oTime;
+						function updataTime(){
+							element.text(dateFilter(new Date(),scope.format));
+						};
+						
+						scope.$watch(attr.currentTime,function (value){
+							console.log(value);
+							scope.format = value;
+							updataTime();	
+						});
+						element.bind("$destroy",function (){
+								clearInterval(oTime);
+						})
+
+						oTime = setInterval(updataTime,1000)
+				};
+			});
+			app.controller("MyappContro",function ($scope,$rootScope){
+					$scope.format="M/d/yy h:mm:ss a";
+
+					$scope.remove = function (){
+						var MyFormat = document.getElementById("myFormat");
+						if(MyFormat){
+							angular.element(MyFormat).remove();
+						}
+					};
+
+			});
+
+	</script>
+</html>

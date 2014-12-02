@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>事件</title>
+		<style>/* 
+			#div1{
+				width: 300px;
+				height: 300px;
+				background-color: red;
+				position: absolute;
+				left: 0px;
+				top:0px;
+			}
+			#div2{
+				width: 200px;
+				height: 200px;
+				background-color: blue;
+				position: absolute;
+				left: 50%;
+				top:50%;
+				margin-left: -100px;
+				margin-top: -100px;
+			}
+			#div3{
+				width: 100px;
+				height: 100px;
+				background-color: green;
+				position: absolute;
+				left: 50%;
+				top:50%;
+				margin-left: -50px;
+				margin-top: -50px;
+			}
+			div{
+				border-radius: 100%;
+			} */
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">1
+			<div id="div2">2
+				<div id="div3">3</div>
+			</div>
+		</div>
+	</body>
+	<script>
+
+	/*	
+		绑定多个函数
+		@param object 对象
+		@param string 事件名
+		@param [function,..] / function.. 可以是数组 /  可以依次写入函数
+	*/
+	function on(obj,eventName){
+		var handle = [].slice.call(arguments,2);
+		for(var i=0;i<handle.length;i++){
+			obj.addEventListener(eventName,handle[i],false)
+		}
+	}
+	var oDiv1 = document.getElementById("div1");
+		var oDiv2 = document.getElementById("div2");
+		var oDiv3 = document.getElementById("div3");
+
+		on(oDiv1,"click",function(){alert("111");},function(){alert("111");});
+		on(oDiv1,"click",[function(){alert("111");},function(){alert("111");}]);
+
+	</script>
+	<script>
+		
+	</script>
+</html>

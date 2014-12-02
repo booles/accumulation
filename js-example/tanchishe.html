@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style>
+			*{
+				margin:0px;padding: 0px;
+			}
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+			}
+			table tr {
+				height: 10px;
+				width: 10px;
+			}
+			table tr td {
+				border: 1px solid #ccc;
+				width: 10px;
+				height: 10px;
+			}
+			.black {
+				background: #000;
+			}
+			.eat {
+				margin: 20px;
+			}
+			.red {
+				background: red;
+			}
+        </style>
+		<script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
+	</head>
+
+	<body>
+		<div class="eat"></div>
+	</body>
+	<script>
+	var col,cos;
+		function creatTable(){
+			var table = $("<table></table>");col = 50,cos=50;
+			for(var i=0;i<col;i++){
+				var tr = $("<tr></tr>");
+				for(var k=0;k<cos;k++){
+					var td = $("<td></td>");
+					td.appendTo(tr);
+				};
+
+				table.append(tr);
+			};
+			table.find("td").eq(random(col,cos)).addClass("black");
+			table.find("td").eq(random(col,cos)).addClass("red");
+			$(".eat").append(table);
+
+		};
+
+		creatTable();
+
+		/*
+			event.keyCode  38 上，40下 右 39 37 左
+		*/
+
+		var black = $(".black");
+
+		var key,time,arr=[],speek = 100;
+
+
+
+		$(document).keydown(function (event){
+
+			var keyCode = event.keyCode;
+
+			if(keyCode === 38 && key != 40){
+				move(keyCode)
+			};
+			if(keyCode === 40 && key != 38){
+				move(keyCode)
+			};
+			if(keyCode === 37 && key != 39){
+				move(keyCode)
+			};
+
+			if(keyCode === 39 && key != 37){
+				move(keyCode)
+			}
+				
+
+		});
+
+		var num = 4;
+
+		function move(n){
+			black;
+			if(key == n) return;
+				clearInterval(time);
+				time = setInterval(function (){
+
+					arr.push(black);
+					if(black.index()<0){
+						clearInterval(time);
+						if(confirm("您挂了，重来一局？")){
+							location.reload();
+						}else {
+							return false;
+						};
+						return false;
+					};
+
+					var red = $(".red");
+
+					if(black.index() === red.index() && black.parent().index() === red.parent().index()){
+						num++;
+						red.removeClass("red");
+						$("table").find("td").eq(random(col,cos)).addClass("red");
+					};
+
+					switch(n){
+						case 38:
+							black.parent().prev().find("td:eq("+black.index()+")").addClass("black");	
+							black =black.parent().prev().find("td:eq("+black.index()+")");
+						break;
+						case 40:
+							black.parent().next().find("td:eq("+black.index()+")").addClass("black");	
+							black = black.parent().next().find("td:eq("+black.index()+")");
+						break;
+						case 37:
+							black.prev().addClass("black");	
+							black = black.prev();
+						break;
+						case 39:
+							black.next().addClass("black");	
+							black = black.next();
+						break;
+						
+					};
+					for(var i=0;i<arr.length;i++){
+						if(arr[i].index() === black.index() && arr[i].parent().index() === black.parent().index()){
+							clearInterval(time);
+							if(confirm("您挂了，重来一局？")){
+								location.reload();
+							}else {
+								return false;
+							};
+							return false;
+						}
+					}
+
+					if(arr.length>num){
+						var oldBlack = arr.shift();
+						oldBlack.removeClass("black");
+					};
+
+
+					if(num ==10){
+						speek = 80;
+					};
+					if(num ==20){
+						speek = 60;
+					};
+					if(num ==30){
+						speek = 40;
+					};
+					if(num ==40){
+						speek = 20;
+					};
+
+
+				},speek)
+			
+			
+			
+
+
+			key = n;		
+		};
+	
+		function random(col,cos){
+			return Math.floor(Math.random()*(col*cos));
+		};	
+
+	
+	</script>
+</html>

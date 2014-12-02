@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			<div move></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var app = angular.module("MyApp",[]);
+			app.directive("move",function ($document){
+				var maxLeft=450,maxtop=450,msg  = ["我闪~~", "抓我呀~~~", "雅蠛蝶~~", "噢耶~~", "你真逊~！","就差那么一点点了！","继续吧~~总有一天我会累的"];
+				return function (scope,element,attr){
+					element.css({
+						width: "100px",
+						height: "100px",
+						background: "red",
+						position: "absolute",
+						left:0,
+						top:0
+					});
+					element.bind("mouseenter",function (){
+						element.css({
+							"left":parseInt(Math.random()*1000 % maxLeft) +"px",
+							"top":parseInt(Math.random()*1000 % maxtop) +"px"
+						}).text(msg[parseInt(Math.random()*1000)%msg.length]);
+					}).bind("click",function (event){
+						element.text("中關於逮到你了！");
+						element.unbind("mouseenter");
+					})
+				};
+			});
+			app.controller("MyappContro",function ($scope,$rootScope){
+					
+
+			});
+
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>factory</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.8/angular.min.js"></script>
+		<style>
+			.contentDiv{
+				width: 200px;
+				height: 100px;
+				border: 1px solid #000;
+			}
+			.ng-cloak {
+				display: none;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			<div>{{time.now}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var app = angular.module("MyApp",[]).
+			factory("myFactory",function ($timeout){
+				var time = {};
+
+				(function timeFn(){
+					time.now = new Date().toString();
+					$timeout(timeFn,1000);	
+				})();
+
+				return time;
+
+			}).
+			controller("MyappContro",function ($scope,myFactory){
+				$scope.time = myFactory;
+				
+			});
+
+
+	</script>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>事件</title>
+		<style>
+			#div1{
+				width: 300px;
+				height: 300px;
+				background-color: red;
+				position: absolute;
+				left: 0px;
+				top:0px;
+			}
+			#div2{
+				width: 200px;
+				height: 200px;
+				background-color: blue;
+				position: absolute;
+				left: 50%;
+				top:50%;
+				margin-left: -100px;
+				margin-top: -100px;
+			}
+			#div3{
+				width: 100px;
+				height: 100px;
+				background-color: green;
+				position: absolute;
+				left: 50%;
+				top:50%;
+				margin-left: -50px;
+				margin-top: -50px;
+			}
+			div{
+				border-radius: 100%;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var oDiv1 = document.getElementById("div1");
+		var oDiv2 = document.getElementById("div2");
+		var oDiv3 = document.getElementById("div3");
+
+		/*oDiv1.onclick = function (ev){
+			var ev = ev || window.event;
+			alert(ev.target.targetName);
+			alert(ev.currentTarget);
+			alert("oDiv1.onmouseenter11111111111111");	
+		}*//*
+		oDiv2.onmouseenter = function (){
+			alert("oDiv1.onmouseenter222222222222222");	
+		}
+		oDiv3.onmouseenter = function (){
+			alert("oDiv1.onmouseenter333333333333333333");	
+		}*/
+
+		/*oDiv1.onmouseover = function (){
+			alert("oDiv1.onmouseenter11111111111111");	
+		}
+		oDiv2.onmouseover = function (){
+			alert("oDiv1.onmouseenter222222222222222");	
+		}
+		oDiv3.onmouseover = function (){
+			alert("oDiv1.onmouseenter333333333333333333");	
+		}*/
+
+		/*window.addEventListener("click",function (){
+			//console.log(event);
+			//alert("window");	
+		})*/
+
+			oDiv1.onclick = function(ev){
+				var ev = ev || window.event;
+				alert(ev.cancelable);
+			}
+
+		oDiv1.addEventListener("click",function (){
+
+			alert("在冒泡阶段触发1111111111");	
+		},false);
+		oDiv2.addEventListener("click",function (ev){
+			alert(ev.eventPhase);
+			alert("在冒泡阶段触发2222222222");	
+		},false);
+		oDiv2.addEventListener("click",function (ev){
+			alert(ev.eventPhase);
+			alert("在捕获阶段触发bbbbbbbbbbbbbbbbbbbb");	
+		},true);
+		oDiv3.addEventListener("click",function (ev){
+			alert(ev.eventPhase);
+			alert("在捕获阶段触发ccccccccccccccccccccc");	
+		},true);
+		oDiv3.addEventListener("click",function (ev){
+			//ev.stopPropagation();
+			alert(ev.eventPhase);
+			alert("在冒泡阶段触发33333333333333");	
+		},false);
+
+
+	</script>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>angular module</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-controller="myController">
+			{{names}}
+		</div>
+
+	</body>
+	<script type="text/javascript">
+
+		var app = angular.module('moduleName', []).
+		service('serviceNames', [function () {
+			this.abc = function (){
+					
+			};
+		}]).
+			factory('names', [function () {
+				this.abc = function (){
+						
+				};
+				/*return {
+					gets:function (){
+						console.log("123");	
+					}
+				};*/
+				return this;
+			}]).
+			service('nameServer', [function () {
+				this.fn = function (){
+					console.log("123");	
+				};
+			}])
+
+
+		angular.module('myApp',[]);/*
+		myApp.controller('myController', ['$scope',"$http","$q", function ($scope,$http,$q) {
+			
+		}]);*/
+
+	var myController = function (scope,http){
+		scope.names = "wang";
+		/*
+		$scope.names2 = "wang";
+		console.log($scope.constructor);
+		
+		$scope.$watch("names",function (){
+				
+		});
+		$scope.$watch("names2",function (){
+				
+		});
+		console.log($scope.$$watchers);*/
+	};
+
+
+
+		var injector = angular.injector(['ng',"myApp","moduleName"]); 
+		/*
+				
+annotate
+	
+	annotate(fn)
+	
+get
+	
+	getService(serviceName)
+	
+has
+	
+	function(name)
+	
+instantiate
+	
+	instantiate(Type, locals)
+	
+invoke
+
+	invoke(fn, self, locals)
+		*/
+
+		//console.log(injector);
+
+		injector.invoke(function (){
+				
+		})
+
+		/*var abcd = injector.instantiate(function (){
+				
+		});*/
+
+		var $http = injector.get("$http");
+		var names = injector.get("names");
+		var serviceNames = injector.get("serviceNames");
+
+		//console.log(injector.has("names"));
+
+		//console.log(injector.instantiate);
+		//console.log(names);
+		//console.log(injector.get("nameServer"));
+
+		myController.$injector = ["$scope",$http];	
+
+
+
+		//console.log(injector.annotate(function($q, greeter,abc) {}));;
+
+
+	</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app >
+		
+		<div ng-controller="myController">
+			<p>{{num | currency }}</p>
+			<p>{{num | date }}</p>
+			<p>{{datas}}</p>
+			<p>{{currents}}</p>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+
+		
+
+		var app = angular.module('myApp',["ng"]);
+
+			function myController(){
+					
+			};
+		/*
+		app.controller('myController', ['$scope',"$filter", function ($scope,$filter) {
+
+			$scope.num = 5;	
+			//$scope.currents = $filter("wangyun")(555);
+
+			$scope.datas = $filter("date")(new Date());
+
+		}]);*/
+	</script>
+</html>

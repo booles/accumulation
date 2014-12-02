@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			
+			<node-list></node-list>
+
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+
+		var myApp = angular.module("myApp",[])
+
+		.directive("nodeList",function (){
+			return {
+				restrict:"E",
+				template:"<div>{{name}}<node2></node2><node1></node1></div>",
+				replace:true,
+				controller:function ($scope){
+					$scope.name = "wang";	
+					this.list = function (){
+							console.log("11111111111111111");
+					}
+				},
+				controllerAs:"abc",
+				link:function (scope,ele,attr,controller){
+					ele.on("click",function (){
+						controller.list();
+					});
+				}
+
+			}	
+		})
+		.directive("node1",function (){
+			return {
+				restrict:"E",
+				contoller:function ($scope){
+					this.nodeFn = function (){
+						console.log(node1);	
+					};
+				}			
+			}	
+		})
+		.directive("node2",function (){
+			return {
+				restrict:"E",
+				require:"^nodeList",
+				template:"<button>按钮</button>",
+				replace:true,
+				link:function (scope,ele,attr,controller){
+						ele.on("click",function (ev){
+							controller.list();
+							ev.stopPropagation();
+						});
+				}
+			}	
+		})
+
+		myApp.controller("conTroll",function ($scope){
+			$scope.name = "yun";
+		});
+
+
+	</script>
+</html>

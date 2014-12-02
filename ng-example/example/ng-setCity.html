@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/getData.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			li{
+				list-style: none;
+			}
+			.box {
+				width: 800px;
+				height: 800px;
+				margin:0px auto;
+			}
+			.box ul li {
+				float: left;
+				margin:20px;
+				width: 90px;
+				text-align: center;
+			}
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div class="box"  ng-controller="conCtrl">
+			<div x-load-dom></div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		/*
+			理解的意思：自定义指令中会有各种dom以及表达式，但通过加载templte。会覆盖指令中的内容，此时需要在指令中
+						设置transclude：true，并且在被加载的template中指定要加载的位置ng-transclude；
+		*/
+		var datas = null;
+		function g(data){
+				datas = data;
+				console.log(data);
+		}
+		var myApp = angular.module("myApp",["getDataModule"]).
+		directive('loadDom', ["getInitData","$http","$compile",function (getInitData,http,compile) {
+			return {
+				restrict: 'EA',
+				link: function (scope, iElement, iAttrs) {
+
+					var noLoad = "../tempHtml/cityHtml.html";
+						http({method:"GET",url:noLoad,cache:true}).then(function(tmpl) {
+				              template = compile(tmpl.data)(scope);
+				              iElement.append(template);
+				        });
+				}
+			}
+		}]).
+		controller('conCtrl', ['$scope',"$http", function ($scope,$http) {
+			
+		}]).
+		directive('getProvince', ["getCityHttp","$http",function (getCityHttp,$http) {
+			return {
+				restrict: 'AE',
+				transclude:true,
+				template:"<div ng-transclude></div>",
+				replace:true,
+				link: function ($scope, iElement, iAttrs) {
+					$scope.cache = {};
+					$http({
+						url:"http://www.gome.com.cn/ec/homeus/browse/provinceDroplet.jsp",
+						params:{
+							callBack:"g"
+						},
+						method:"jsonp"
+					});
+
+					$scope.choose = function (oTrue){
+						if(!$scope.cache["province"]){
+							var countries = datas.citys;
+							$scope.countries = $scope.cache["province"] = countries;
+						};
+					};	
+					//点击省请求市
+					$scope.chooseProvince = function (ev){
+						var id = angular.element(ev.target).attr("id");
+						var html = angular.element(ev.target).html();
+						if(!$scope.cache[id]){
+							/*getCityHttp.getCityFn({
+								params:{"id":"12",method:'general.listCity',"params":{"provinceId":id}}
+							}).then(function (data){
+								$scope.cities = $scope.cache[id] = data.data.result.cities;
+							});*/	
+							console.log("123");
+							$http({
+								url:"http://www.gome.com.cn/ec/homeus/browse/areaCommonDroplet.jsp",
+								params:{
+									callBack:"g"
+								},
+								method:"jsonp"
+							});
+							
+						}else {
+							$scope.cities = $scope.cache[id];
+						};
+						$scope.counties = [];
+						$scope.towns = [];
+					};
+					//点击市请求县
+					$scope.chooseCity = function (ev){
+						var id = angular.element(ev.target).attr("id");
+						var html = angular.element(ev.target).html();
+						if(!$scope.cache[id]){
+							getCityHttp.getCityFn({
+								params:{"id":"12",method:'general.listCounty',"params":{"cityId":id}}
+							}).then(function (data){
+								$scope.counties = $scope.cache[id] = data.data.result.counties;
+							});	
+						}else {
+							$scope.counties = $scope.cache[id];
+						};
+						$scope.towns = [];
+					};
+					//点击市请求县
+					$scope.chooseCounty = function (ev){
+						var id = angular.element(ev.target).attr("id");
+						var html = angular.element(ev.target).html();
+						if(!$scope.cache[id]){
+							getCityHttp.getCityFn({
+								params:{"id":"12",method:'general.listTown',"params":{"countyId":id}}
+							}).then(function (data){
+								$scope.towns = $scope.cache[id] = data.data.result.towns;
+							});	
+						}else {
+							$scope.towns = $scope.cache[id];
+						}
+					};
+				}
+			};
+		}])
+		.controller('gCityCtrl', ['$scope',"getCityHttp", function ($scope,getCityHttp) {
+			
+			
+		}]);
+
+
+	</script>
+</html>

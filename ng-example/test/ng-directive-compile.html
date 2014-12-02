@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-controller="myController">
+			<div x-my-directive="first">click me!</div>
+			<div x-my-directive="two">click me!</div>
+			<div x-my-directive="objects">click me!</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+	angular.module('cutomModule', []).
+	directive('cutomDirective', ["$compile",function ($compile) {
+		return {
+			restrict: 'A',
+			link: function (scope, iElement, iAttrs) {
+
+				var html = angular.element(iElement).html();
+					angular.element(iElement).html("");
+					$compile(html)(scope,function (a,b){
+							 iElement.append(a);	
+					});
+			}
+		};
+	}]).
+	controller('cutomCtrl', ['$scope',"$rootScope", function ($scope,$rootScope) {
+		
+	}])
+
+
+		angular.module('myApp', ["cutomModule"]).
+		controller('myController', ['$scope', function ($scope) {
+			$scope.testCon = "111";
+			$scope.first = "<span>first:</span><input type='text' ng-model='cutomCon' /><p>{{cutomCon}}</p>";
+			$scope.two = "<span>two:</span>:<input type='text' ng-model='cutomCon' /><p>{{cutomCon}}</p>";
+			$scope.objects = {
+
+			}
+		}]).
+		directive('myDirective', ["$compile","$document","$timeout",function ($compile,$document,$timeout) {
+			return {
+				restrict: 'A',
+				link: function (scope, iElement, iAttrs) {
+					var num = iAttrs.myDirective;
+					console.log(scope.objects);
+					iElement.on("click",function (){
+						$timeout(function (){
+							$document.find("body").append(scope[num]);	
+						},0);
+					})
+				}
+			};
+		}])
+	</script>
+</html>

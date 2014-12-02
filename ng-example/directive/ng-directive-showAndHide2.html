@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding: 0px;
+			}
+			.main {
+				width: 600px;
+				height: 1000px;
+				border: 1px solid #333;
+				margin:0px auto;
+			}
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div class="main"  ng-controller="exampleCtrl">
+			
+			<div ng-repeat="(key, value) in data">
+				<div show-hide value="value" show="isShow" chang = "changShow()"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var myApp = angular.module("myApp",[]);	
+
+		myApp.directive('showHide', [function () {
+			return {
+				restrict: 'A'/*,
+				scope:{
+					value:"=",
+					show:"=",
+					chang:"&"
+				}*/,
+				templateUrl:"temp/showAndHide.html",
+				link: function (scope, iElement, iAttrs) {
+					// /scope.chang();
+					/*iElement.find("h5").on("click", function (){
+						scope.$apply(function (){
+							scope.show = !scope.show;
+						});
+					});*/
+				}
+			};
+		}]);
+		myApp.controller('exampleCtrl', ['$scope',"$http", function ($scope,$http) {
+
+			$scope.data = {};
+			$http({
+				url:"json/show.json",
+				method:"GET"
+			}).then(function (data){
+				$scope.data = data.data;
+			});	
+			$scope.isShow = false;
+			$scope.changShow  = function (e){
+
+				$scope.isShow = false;	
+			}
+		}]);
+	</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive3</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.8/angular.min.js"></script>
+		<style>
+			.contentDiv{
+				width: 200px;
+				height: 100px;
+				border: 1px solid #000;
+			}
+			.ng-cloak {
+				display: none;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			<div class="contentDiv" ng-model="content" contenteditable="true">This is Date!</div>
+			<pre class="ng-cloak">content={{content}}</pre>
+			<button ng-click="reset()">reset model!</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var app = angular.module("MyApp",[]).
+			directive("contenteditable",function (){
+				return{
+					require:'ngModel',                      //引进一个module
+					link:function (scope,element,attr,ngModel){
+
+						function setVal(){
+							ngModel.$setViewValue(element.text());   //设置model的值
+						};
+						//View -- model
+						element.bind("keyup",function (){
+							scope.$apply(setVal);	
+						});
+						//model -- view
+						ngModel.$render = function (val){
+							
+							element.html(ngModel.$modelValue);		 //modle更新设置view的值
+						}
+
+						setVal();
+							
+					}
+				}		
+			}).
+			controller("MyappContro",function ($scope){
+				$scope.reset = function (){
+					$scope.content = "change！";	
+				};		
+			});
+
+
+	</script>
+</html>

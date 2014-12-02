@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive about transclude</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conCtrl">
+			
+			<node-list info='wangyun'>wangyunaaaaaaaaaaaaa</node-list>
+			<pane class="parent">
+				<span class="time">123</span>
+				<span class="title">wangyuuuuu</span>
+			</pane>
+			<input type="text" ng-model="name" />
+			{{name}}
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		/*
+			理解的意思：自定义指令中会有各种dom以及表达式，但通过加载templte。会覆盖指令中的内容，此时需要在指令中
+						设置transclude：true，并且在被加载的template中指定要加载的位置ng-transclude；
+		*/
+		var myApp = angular.module("myApp",[]).
+			directive('nodeList', [function () {     //transclude:true 用法
+				return {
+					restrict: 'E',
+					transclude:true,
+					templateUrl:"abc.html",
+					scope:{
+						cursor: "=info"
+					},
+					link: function (scope, iElement, iAttrs) {
+
+					}
+				};
+			}]).
+			directive('pane', [function () {			// transcludeFn 用法
+				return {
+					restrict: 'E',
+					transclude:true,
+					templateUrl:"abc.html",
+					compile:function (iElement, iAttrs,transcludeFn){
+						console.log(iElement);
+						return function (scope,iElement, iAttrs){
+
+							transcludeFn(scope,function (clone){
+								console.log(iElement);
+								var good = iElement.find(".good"),
+									time = clone.find(".time"),
+									title = clone.find(".title");
+								good.append(time);
+								isElement.append(title);
+							});	
+						} 
+					}
+				};
+			}]).
+			controller('conCtrl', ['$scope', function ($scope) {
+				$scope.wangyun = {
+					name:"seven",
+					age:24
+				}
+			}])
+
+
+	</script>
+</html>

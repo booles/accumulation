@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/angular-animate.js"></script>
+		<style>
+			.content {
+				width: 200px;
+				height: 200px;
+				border: 1px solid #ccc;
+			}
+.my-slide-animation {
+  width:200px;
+  height:200px;
+  left:0px;
+  top:200px;
+  position:absolute;
+  background:#eee;
+  border:1px solid black;
+
+  -webkit-transition:0.5s ease-in-out all;
+  transition:0.5s linear all;
+}
+
+.my-slide-animation-0 {
+  -webkit-transform:translate(200px,0);
+  transform:translate(0,-10px);
+  background:#ccc;
+}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<div ng-controller="conTroll">
+			<h1 click-dobule>{{userName}}</h1>
+		</div>
+		<div class="content my-animate my-slide-animation" ng-view id="abc" my-animate>
+			 	
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		var myApp = angular.module("myApp",["ngAnimate"])
+
+		.controller("conTroll",["$scope",function (scope){
+				scope.userName = "wang";
+		}])
+		.animation(".my-animate",function (){
+			return {
+				addCLass:function (element){
+					return function (){
+						console.log("111");	
+					};
+				}
+			}	
+		});
+
+		myApp.directive('clickDobule', ["$animate",function ($animate) {
+			return {
+				restrict: 'A',
+				link: function (scope, element, iAttrs) {
+					//console.log(element);
+				    element.bind('click', function() {
+				    	//console.log(angular.element("#abc"));
+				    	//angular.element("#abc").addClass("my-slide-animation-0");
+				    //  $animate.addClass(angular.element(".content"), "my-slide-animation-0");
+				    });
+				}
+			};
+		}])
+
+
+
+	</script>
+</html>

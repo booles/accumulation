@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding: 0px;
+			}
+			.main {
+				width: 600px;
+				height: 1000px;
+				border: 1px solid #333;
+				margin:0px auto;
+			}
+		</style>
+	</head>
+	<body ng-app="myApp">		
+		<div class="main"  ng-controller="exampleCtrl">
+			<pan></pan>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var myApp = angular.module("myApp",[]);	
+
+		myApp.directive('pan', [function () {
+			return {
+				restrict: 'AE',
+				temple:"id"
+				templateUrl:"temp/showAndHide.html",
+				link: function (scope, iElement, iAttrs) {
+					
+				}
+			};
+		}])
+		myApp.controller('exampleCtrl', ['$scope', function ($scope,$http) {
+			
+		}]);
+	</script>
+</html>

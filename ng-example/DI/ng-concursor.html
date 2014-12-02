@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>constructor </title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body>
+
+	</body>
+	<script type="text/javascript">
+	function writeDate(){
+		console.log("123");	
+	};
+
+	var Contr = function (action){
+		this.action =action;
+	};	
+
+	Contr.prototype.openLid = function (){
+		this._open = true;	
+	};
+
+	Contr.prototype.closeLid = function (){
+		this._close = false;	
+	};
+
+	Contr.prototype.push = function (){
+		if(this._open){
+			this.action();
+		}	
+	};
+
+
+	function active(contr){
+		contr.openLid();
+		contr.push();
+		contr.closeLid();	
+	};
+
+	active(new Contr(writeDate));
+
+
+	</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>factory</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.8/angular.min.js"></script>
+		<style>
+			.contentDiv{
+				width: 200px;
+				height: 100px;
+				border: 1px solid #000;
+			}
+			.ng-cloak {
+				display: none;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			<form novalidate>
+		        名字: <input ng-model="user.name" type="text"><br/>
+		        Email: <input ng-model="user.email" type="email"><br/>
+		        性别: <input value="男" ng-model="user.gender" type="radio">男
+		        <input value="女" ng-model="user.gender" type="radio">女
+		        <br/>
+		        <button ng-click="reset()">还原上次保存</button>
+		        <button ng-click="update(user)">保存</button>
+		    </form>
+		    <pre>form = {{user | json}}</pre>
+		    <pre>saved = {{save | json}}</pre>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var app = angular.module("MyApp",[]).
+			controller("MyappContro",function ($scope){
+				$scope.save = {};
+				$scope.reset = function (){
+					$scope.user = angular.copy($scope.save);	
+				};	
+
+				$scope.update = function (user){
+					$scope.save = angular.copy(user);	
+				};	
+				$scope.reset();
+			});
+
+
+	</script>
+</html>

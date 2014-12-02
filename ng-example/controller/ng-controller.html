@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-app="myApp" ng-controller="conCtrl">
+			{{names}}
+			<button ng-click="clickme()">click me!</button>
+		</div>
+		<div  ng-controller="maskCtrl">
+			{{maskNames}}
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+
+	angular.module('myApp', []).
+		controller('conCtrl', ['$scope',"$rootScope","$timeout", function ($scope,$rootScope,$timeout) {
+
+			 $scope.$on('hello3', function (event,msg){
+				$scope.names = msg;
+				
+			});
+			 $timeout(function (){
+			 		$rootScope.$broadcast('hello', 'first');
+			 },0)
+		}]).
+		controller('maskCtrl', ['$scope',"$rootScope", function ($scope,$rootScope) {
+
+			$scope.$on('hello', function (event,msg){
+				$scope.maskNames = msg;
+			});
+			$rootScope.$broadcast('hello3', 'Two');	
+
+		}]);
+	</script>
+</html>

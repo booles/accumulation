@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			
+			<h1 ng-click="revert()">{{name}} ,is very good！{{color}}</h1>
+			<input ng-model="name" /><br/>
+			<input ng-model="threename" /><br/>
+			<input ng-model="twobind" /><br/>
+			<div x-example-dir name="{{name}}" reverse="revert()" color="color"></div>
+			<hr/>
+			<h1>重新定义scope中标示的含义：<br/></h1>
+			<div example-boolean3 threename="{{threename}}" names="names" name="{{name}}" revert="revert()">作为属性时：{{threeName}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+	/*
+		scope三个参数：
+		true：继承父级的scope，改变则不会影响父级的scope
+		fale：沿用父级的scope，改变影响父级的scope
+		{}:创建一个全新的scope，不会从父级继承以及沿用父级的scope
+
+		当为{}时，设置一定的标示规则，也可以共享父级的scope
+
+		1. "@"   (  Text binding / one-way binding )        字符串绑定，单项绑定
+		2. "="   ( Direct model binding / two-way binding )  指向model，双向绑定  写法如=name，是在元素写属性是申请的别名
+		3. "&"   ( Behaviour binding / Method binding  )	行为绑定，功能绑定		在自己上绑定行为要反射在父级上需要绑定行为
+
+		例如：{name:"@"}也可以指定具体名字{name:@name}
+
+	*/
+
+		var myApp = angular.module("myApp",[]).		
+		directive('exampleBoolean3', [function () {
+			return {
+				restrict: 'EA',
+				scope:{
+					threename:"@",
+					name:"@",
+					twobind:"=names",
+					revert:"&"
+				},
+				transclude:true,
+				template:"<div><input type='text' ng-model='twobind' />数据显示：{{twobind}}</div><br/><div><input type='text' ng-model='threename' />数据显示：{{threename}}</div><br/><div><input type='text' ng-model='name' />数据显示：{{name}}，先要反转父级的name<div ng-click='revert()'>同时翻转父级的name</div></div><div ng-transclude></div>"
+			};
+		}])
+		myApp.controller("conTroll",function ($scope){
+			$scope.name = "yun";
+			$scope.twobind = "module to template";
+			$scope.names = "names";
+			$scope.revert = function (){
+				$scope.name = $scope.name.split('').reverse().join('');	
+			};
+			$scope.randomColor = function (){
+				 $scope.color = '#'+Math.floor(Math.random()*16777215).toString(16);
+			};
+			$scope.threename = "ParentThreeName";
+		});
+
+
+	</script>
+</html>

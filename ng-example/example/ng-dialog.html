@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			li{
+				list-style: none;
+			}
+			.box {
+				width: 800px;
+				height: 800px;
+				margin:0px auto;
+			}
+			.box ul li {
+				float: left;
+				margin:20px;
+				width: 90px;
+				text-align: center;
+			}
+			.mask {
+				width: 10%;
+				height: 100%;
+				background: #333;
+				position: absolute;
+				top:0;
+			}
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp" style="height:3000px;">
+		
+		<div class="box" ng-app="myApp" ng-controller="conCtrl">
+			<button x-dialog-div>click me!</button>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+
+	angular.module('dialogApp', []).
+		factory('dialogFactory', ["$document","$interpolate","$window",function ($document,$interpolate,$window) {
+			return {
+				creatDialog:function ($scope){
+					
+					var ngWindow = angular.element($window);
+
+					console.log(ngWindow.width);
+
+					var div = "<div class='mask'></div>";
+					var interpolateDiv = $interpolate(div)({name:"wangyun"});
+					$document.find("body").append(interpolateDiv);
+				}
+			};
+		}]).
+		directive('dialogDiv', ["dialogFactory","$window","$document","$interpolate",function (dialogFactory,$window,$document,$interpolate) {
+			return {
+				restrict: 'A',
+				link: function ($scope, iElement, iAttrs) {
+					iElement.on("click",function (){
+						//dialogFactory.creatDialog(scope);	
+					});
+					
+					 $scope.maskStyle = function (){
+					 	var height = $document[0].body.clientHeight;
+						var width = $document[0].body.clientWidth;
+					 	return {
+						 	background: "#333",
+						 	opacity: "0.2",
+						 	width: width+"px",
+						 	height:height+"px"
+						 };	
+					 }
+					 var div = angular.element("<div class='mask'></div>");
+					div.css($scope.maskStyle());
+					var dialog = angular.element("<div></div>");
+					
+					$document.find("body").append(div);
+/*
+					$scope.watch( $scope.maskStyle, function (newData,oldData){
+							console.log(newData);
+					},true);
+
+				   	angular.element($window).bind("resize",function (){
+				   		$scope.$apply();	
+				   	})*/
+				}
+			};
+		}]);
+
+		var myApp = angular.module("myApp",["dialogApp"]).
+			controller('conCtrl', ['$scope',"$document", function ($scope,$document) {
+				
+			}]);
+
+
+	</script>
+</html>

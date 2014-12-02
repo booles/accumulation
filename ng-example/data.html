@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+
+	function monthData(_year){
+			return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+
+	}
+		
+		//判断某年某月的1号是星期几
+		function getFirstDay(_year,_month) {
+		    var allDay = 0, y = _year-1, i = 1;
+		    allDay = y + Math.floor(y/4) - Math.floor(y/100) + Math.floor(y/400) + 1;
+		    var arr = monthData(_year);
+		    for ( ; i<_month; i++) {
+		      allDay += arr[i-1]; 
+		    };
+		    return allDay%7;
+		};
+		function runNian(_year) {
+		    if(_year%400 === 0 || (_year%4 === 0 && _year%100 !== 0) ) {
+		        return true;
+		    }
+		    else { return false; }
+		};
+
+		var scope = {};
+
+		var dataTime  = new Date();	
+
+				scope.Y = dataTime.getFullYear();
+				scope.M = dataTime.getMonth()+1;
+				scope.Da = dataTime.getDate();
+				scope.H = dataTime.getHours();
+				scope.Mi = dataTime.getMinutes();
+				scope.S= dataTime.getSeconds();
+				scope.D = dataTime.getDay();
+
+				setInterval(function (){
+					scope.S= new Date().getSeconds();
+				},1000);
+		var first = getFirstDay(scope.Y,scope.M);	
+		
+		console.log(first);	
+
+
+		
+
+
+
+
+		
+
+
+
+	</script>
+</html>

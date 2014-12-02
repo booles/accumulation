@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp" style="height:3000px;" >
+		
+		<div style="height:3000px;" class="box"  ng-controller="conCtrl">
+			<div x-dialog-div>
+				width:{{width}}<br/>
+				height:{{height}}
+			</div>
+			<button ng-click="showMask()">click me!</button>
+		</div>
+		<!-- <div class='mask' ng-controller='maskCtrl' x-mask-direc></div> -->
+	</body>
+	<script type="text/javascript">
+
+	angular.module('myApp', []).
+		factory('maskFactory', ["$rootScope","$timeout",function ($rootScope,$timeout) {	
+			var facObj = {};
+
+			facObj.emitMag = function (eventName,args){
+				$timeout(function (){
+					$rootScope.$broadcast(eventName, args);	
+				},0);	
+			};
+			facObj.onMag = function (eventName,scope,func){
+				$rootScope.$on(eventName, func);
+			};
+
+			return facObj;
+		}]).
+		directive('dialogDiv', ["$window","maskFactory",function ($window,maskFactory) {
+			return {
+				restrict: 'A',
+				link: function ($scope, iElement, iAttrs) {
+					$scope.getWH = function (){
+						var width = $window.innerWidth,height = $window.innerHeight;
+						$scope.width = width;
+						$scope.height = height;
+						return {
+							width:width ,
+							height: height
+						}	
+					};
+
+					$scope.getWH();
+					maskFactory.emitMag("emitWh",$scope.getWH());
+					angular.element($window).on("resize",function (){
+						$scope.$apply($scope.getWH);	
+					})
+				}
+			};
+		}]).
+		controller('conCtrl', ['$scope',"$document", function ($scope,$document) {
+
+			$scope.showMask = function (){
+				var div = angular.element("<div class='mask' ng-controller='maskCtrl' x-mask-direc></div>");
+				$document.find("body").append(div);
+			};
+			
+		}]).
+		controller('maskCtrl', ['$scope',"maskFactory", function ($scope,maskFactory) {
+			
+		}]).
+		directive('maskDirec', ["maskFactory",function (maskFactory) {
+			return {
+				restrict: 'A',
+				link: function ($scope, iElement, iAttrs) {
+					maskFactory.onMag("emitWh",$scope,function (event,msg){
+						iElement.css({
+							width: msg.width+"px",
+							height: msg.height+"px"
+						});
+					})
+				}
+			};
+		}]);
+	</script>
+</html>

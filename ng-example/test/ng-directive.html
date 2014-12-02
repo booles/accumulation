@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-controller="myController">
+			<input type="text" ng-model="testCon" />
+			<p>{{testCon}}</p>
+			cutomCon:<input type="text" ng-model="cutomCon" />
+			<p>{{cutomCon}}</p>
+			<div x-my-directive>click me!</div>
+
+		</div>
+
+	</body>
+	<script type="text/javascript">
+	angular.module('cutomModule', []).
+	directive('cutomDirective', ["$compile",function ($compile) {
+		return {
+			restrict: 'A',
+			link: function (scope, iElement, iAttrs) {
+				var html = angular.element(iElement).html();
+					angular.element(iElement).html("");
+					$compile(html)(scope,function (a,b){
+							 iElement.append(a);	
+					});
+			}
+		};
+	}]).
+	controller('cutomCtrl', ['$scope',"$rootScope", function ($scope,$rootScope) {
+		$scope.cutomCon = "111";
+	}])
+
+
+		angular.module('myApp', ["cutomModule"]).
+		controller('myController', ['$scope', function ($scope) {
+			$scope.testCon = "111";
+		}]).
+		directive('myDirective', ["$compile","$interpolate","$document",function ($compile,$interpolate,$document) {
+			return {
+				restrict: 'A',
+				link: function (scope, iElement, iAttrs) {
+					var html = $compile("<div x-cutom-directive ng-controller='cutomCtrl'><input type='text' ng-model='cutomCon' /><p>{{cutomCon}}</p></div>")(scope);
+					iElement.on("click",function (){
+
+						
+								
+						$document.find("body").append(html);
+					})
+				}
+			};
+		}])
+	</script>
+</html>

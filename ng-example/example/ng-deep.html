@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="../css/angular.treeview.css">
+		<script type="text/javascript" src="../js/angular.js"></script>		
+    <style>
+      li{
+        list-style-type: none;
+      }
+      .tabUl li {
+        padding: 30px;
+        float: left;
+      }
+      .aaa{
+        background: red;
+      }
+    </style>
+	</head>
+
+	<body ng-app="myApp" >
+		
+	       <div ng-controller="myController">
+              <div ng-repeat="(key, value) in datas" ng-show="isValue(value)">
+                  <h1>{{key}}</h1>
+                  <div ng-repeat="shoppName in value">
+                    <span ng-click="dele(key,$index)">{{shoppName.name}}</span>
+                  </div>
+              </div>
+              删除项目
+              <div ng-repeat="deletOption in deletOptions">
+                <span>{{deletOption.name}}</span>
+              </div>
+         </div>
+
+  </div>
+</div>
+	</body>
+	<script type="text/javascript">
+  var datas = {
+      "100":[
+        {
+          name:"a1",
+          url:"localhost"
+        },
+        {
+          name:"a2",
+          url:"localhost"
+        }
+      ],
+      "101":[
+        {
+          name:"b1",
+          url:"localhost"
+        },
+        {
+          name:"b2",
+          url:"localhost"
+        }
+      ]
+  };
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('myController', ['$scope', function ($scope) {
+      
+      $scope.datas = angular.copy(datas);
+
+      $scope.deletOptions = [];
+
+      $scope.dele = function (key,index){
+        $scope.deleOp = $scope.datas[key].splice(index,1);
+        $scope.deletOptions.push($scope.deleOp[0]);
+      };
+
+
+      $scope.isValue = function (value){
+        return !!value.length;  
+      };
+
+
+
+    }])
+
+
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			<example-dir></example-dir>
+			<example-postlink></example-postlink>
+			<example-prelink></example-prelink>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var myApp = angular.module("myApp",[]).
+		directive('exampleDir', [function () {				//link函数
+			return {
+				restrict: 'EA',
+				template:"<div>{{name}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					scope.name = "wangyun"
+				}
+			};
+		}]).
+		directive('examplePostlink', [function () {			//link函数写成{}字面量形式时，其中post对应的函数就是link函数
+			return {
+				restrict: 'EA',
+				template:"<div>{{name2}}</div>",
+				link: {
+					post:function (scope, iElement, iAttrs) {
+						scope.name2 = "weiwei";
+					}
+				}
+			};
+		}]).
+		directive('examplePrelink', [function () {
+			return {
+				restrict: 'EA',
+				template:"<div>父级和子级都有自定义directive时：{{fatherName}}<children-link></children-link></div>",
+				link: function (scope, iElement, iAttrs) {
+					scope.fatherName = "fatherName";
+				}
+			};
+		}]).
+		directive('childrenLink', [function () {
+			return {
+				restrict: 'EA',
+				template:"<div>我取父级的fatherName:{{childrenName}}</div>",
+				link: function (scope, iElement, iAttrs) {		//此时取父级的fatherName是取不到的，因为父子都有link函数时，子元素link先执行的 	all of the child directive’s link functions executed first then the parent directive link function.
+					console.log(scope.fatherName);
+					scope.childrenName = scope.fatherName;
+				}
+			};
+		}])
+		myApp.controller("conTroll",function ($scope){
+			
+		});
+
+
+	</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>event</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.8/angular.min.js"></script>
+		<style>
+			.contentDiv{
+				width: 200px;
+				height: 100px;
+				border: 1px solid #000;
+			}
+			.ng-cloak {
+				display: none;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+		<div ng-controller="MyappContro">
+			<p ng-click="$emit('myEvent')" id="abc">点击加数</p>
+			{{num}}
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		angular.module("otherApp",[]).
+			factory("myfactory",function ($window){
+				return {
+					greet:function (text){
+						alert($window.alert(text))
+					}
+				}	
+			});
+		var injector = angular.injector(["otherApp","ng"]);	
+		  var g = injector.get("myfactory");
+    //直接调用它~
+   // g.greet("Hi~My Little Dada~");
+var app = angular.module("MyApp",["otherApp"]).
+			controller("MyappContro",function ($scope,myfactory){
+				//myfactory.greet("1111");
+				$scope.num = 1;
+			});
+
+
+	</script>
+</html>

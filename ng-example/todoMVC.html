@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <style  type="text/css">[ng-cloak]{display: none;}</style>
+        <script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+	</head>
+
+	<body ng-app="myApp">
+		<ng-view/>
+	</body>
+	
+</html>
+<script id="good.html" type="text/ng-template">
+	<div id="todoapp" ng-controller="todoMVC">
+		<form id="todo-form" ng-submit="add()">
+			<input id="new-todo" ng-model="newTodo" type="text" autofocus />
+		</form>
+
+		<div id="main" ng-show="todos.length" ng-cloak >
+			<input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+				<label for="toggle-all">Mark all as complete</label>
+				<ul id="todo-list">
+					<li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+						<div class="view">
+							<input class="toggle" type="checkbox" ng-model="todo.completed">
+							<label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+							<button class="destroy" ng-click="removeTodo(todo)"></button>
+						</div>
+						<form ng-submit="doneEditing(todo)">
+							<input class="edit" ng-trim="false" ng-model="todo.title" todoescape = "revertEditing(todo)" ng-blur="doneEditing(todo)" autofocus="todo == editedTodo">
+						</form>
+					</li>
+				</ul>
+		</div>
+		<footer id="footer" ng-show="todos.length" ng-cloak>
+                <span id="todo-count"><strong>{{remainingCount}}</strong>
+                    <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+                </span>
+                <ul id="filters">
+                    <li>
+                        <a ng-class="{selected: location.path() == '/'} " href="#/">All</a>
+                    </li>
+                    <li>
+                        <a ng-class="{selected: location.path() == '/active'}" href="#/active">Active</a>
+                    </li>
+                    <li>
+                        <a ng-class="{selected: location.path() == '/completed'}" href="#/completed">Completed</a>
+                    </li>
+                </ul>
+                <button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed ({{completedCount}})</button>
+            </footer>
+
+	</div>
+	
+</script>
+<script src="js/app.js"></script>
+<script src="js/localstore.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/autofouc.js"></script>
+<script src="js/escape.js"></script>

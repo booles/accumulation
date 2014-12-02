@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive about scope</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conCtrl">
+			
+			<node-list info='wangyun'></node-list>
+
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		/*
+			理解的意思：找到指令中info的值，匹配在scope中找到相关的属性，然后赋给cursor作为变量在模板中使用。
+		*/
+		var myApp = angular.module("myApp",[]).
+			directive('nodeList', [function () {
+				return {
+					restrict: 'E',
+					template:"<div>{{cursor.name}} and {{cursor.age}}</div>",
+					scope:{
+						cursor: "=info"
+					},
+					link: function (scope, iElement, iAttrs) {
+						
+					}
+				};
+			}]).
+			controller('conCtrl', ['$scope', function ($scope) {
+				$scope.wangyun = {
+					name:"seven",
+					age:24
+				}
+			}])
+
+
+	</script>
+</html>

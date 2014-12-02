@@ -1,0 +1,17 @@
+<div ng-controller="gCityCtrl">
+	<button ng-click="choose(oTrue)">选择</button>
+	<get-province>
+		<ul style="float:left;" ng-click="chooseProvince($event)">
+			<li ng-repeat="item in countries" id="{{item.id}}" >{{item.city}}</li>
+		</ul>	
+		<ul style="float:left;" ng-click="chooseCity($event)">
+			<li ng-repeat="item in cities" id="{{item.code}}" >{{item.label}}</li>
+		</ul>
+		<ul style="float:left;" ng-click="chooseCounty($event)">
+			<li ng-repeat="item in counties" id="{{item.code}}" >{{item.label}}</li>
+		</ul>	
+		<ul style="float:left;" ng-click="chooseTown($event)">
+			<li ng-repeat="item in towns" id="{{item.code}}" >{{item.label}}</li>
+		</ul>		
+	</get-province>
+</div>

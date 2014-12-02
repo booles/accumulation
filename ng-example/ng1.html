@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp"  ng-controller="conTroll">
+		
+		<div ng-class="{block:list.oTrue,noned: a == b}">
+			<label class="nod"  ng-dblclick="good(a)">双击！！</label>
+			<input type="text" value="显示" class="inputBlock" ng-blur="rest()" a-focus="a == b">
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp",[],function(){});
+
+		myApp.controller("conTroll",function ($scope,$http){
+			
+			$http({url:"./a.text",type:"get",dataType:"json"}).success(function (data){
+				
+			});
+			
+		});
+
+
+
+	</script>
+</html>

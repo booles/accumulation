@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>angular module</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app >
+		
+		<div ng-controller="myController">
+			{{names}}
+		</div>
+
+	</body>
+	<script type="text/javascript">
+
+
+		var app = angular.module('myApp',[]);
+		var myController = function (scope,http){
+				scope.names = "wang";
+				console.log(http);
+			};
+
+			
+
+		var injector = angular.injector(['ng']); 
+
+
+		var $http = injector.get("$http");
+		//var names = injector.get("names");
+		//var serviceNames = injector.get("serviceNames");
+
+		//myController['$inject'] = ["$scope",$http];
+
+		console.log($http);
+
+		myController['$inject'] = ["$scope","$http"];
+		
+
+	</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			<example-prelink></example-prelink>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*
+			子级scope取不到父级的scope，用父级的pre改进。
+			父级的prelink函数会在所有子级指令执行前执行。
+			.(A pre-link function of a directive will get executed before all of its child directives’ link functions.)
+
+		*/
+		var myApp = angular.module("myApp",[]).
+		directive('examplePrelink', [function () {
+			return {
+				restrict: 'EA',
+				template:"<div>父级和子级都有自定义directive时：{{fatherName}}<children-link></children-link></div>",
+				link: {
+					pre:function (scope, iElement, iAttrs) {
+						scope.fatherName = "fatherName";
+					}
+				}
+			};
+		}]).
+		directive('childrenLink', [function () {
+			return {
+				restrict: 'EA',
+				template:"<div>我取父级的fatherName:{{childrenName}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					console.log(scope.fatherName);
+					scope.childrenName = scope.fatherName;
+				}
+			};
+		}])
+		myApp.controller("conTroll",function ($scope){
+			
+		});
+
+
+	</script>
+</html>

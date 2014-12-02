@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/angular-animate.js"></script>
+		<style>
+			.content {
+				width: 200px;
+				height: 200px;
+				border: 1px solid #ccc;
+			}
+.my-slide-animation {
+  width:200px;
+  height:200px;
+  left:0px;
+  top:200px;
+  position:absolute;
+  background:#eee;
+  border:1px solid black;
+
+  -webkit-transition:0.5s ease-in-out all;
+  transition:0.5s linear all;
+}
+
+.my-slide-animation-0 {
+  -webkit-transform:translate(200px,0);
+  transform:translate(0,-10px);
+  background:#ccc;
+}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<button ng-click="showMe = !showMe">Toggle Show Hide</button>
+		<div class="big-box show-hide-animation" ng-show="showMe">
+		  I am visible
+		</div
+	</body>
+	<script type="text/javascript">
+		
+		var myModule = angular.module('myApp', ['ngAnimate'])
+
+myModule.animation('.show-hide-animation', function() {
+  return {
+
+    beforeAddClass : function(element, className, done) {
+      if(className == 'ng-hide') {
+
+        return function() {
+
+          console.log("1231111111111111111");
+        }
+      } else {
+        done();
+      }
+    },
+    removeClass : function(element, className, done) {
+      if(className == 'ng-hide') {
+       
+        return function() {
+         
+         console.log("123");
+        }
+      } else {
+        done();
+      }
+    }
+  }
+});
+
+
+
+	</script>
+</html>

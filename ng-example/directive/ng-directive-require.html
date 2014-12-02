@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			.drag {
+				width:100px;
+				height: 100px;
+				background: red;
+				cursor: move;
+			}
+			.mask {
+				width: 100px;
+				height: 100px;
+				
+			}
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conCtrl">
+			<div exa-pane></div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		/*
+			理解的意思：自定义指令中会有各种dom以及表达式，但通过加载templte。会覆盖指令中的内容，此时需要在指令中
+						设置transclude：true，并且在被加载的template中指定要加载的位置ng-transclude；
+		*/
+		var myApp = angular.module("myApp",[]).
+		directive('exaPane', [function () {
+			return {
+				restrict: 'A',
+				controller:function ($scope){
+					this.getName = function (){
+						console.log($scope.name);
+						console.log("11");
+					}
+				},
+				templateUrl:'temp/require.html',
+				link: function (scope, iElement, iAttrs) {
+					scope.name="wangyun";
+					console.log("222");
+				}
+			};
+		}]).
+		directive('dataBind', [function () {
+			return {
+				restrict: 'A',
+				template:"<p>2222222222222222222222</p>",
+				require:"^exaPane",
+				link: function (scope, iElement, iAttrs,exaPane) {
+					exaPane.getName();
+					console.log("333333333");
+				}
+			};
+		}]).
+		controller('conCtrl', ['$scope', function ($scope) {
+			$scope.name="111"
+		}])
+
+
+	</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="../css/angular.treeview.css">
+		<script type="text/javascript" src="../js/angular.js"></script>		
+    <style>
+      li{
+        list-style-type: none;
+      }
+      .tabUl li {
+        padding: 30px;
+        float: left;
+      }
+      .aaa{
+        background: red;
+      }
+    </style>
+	</head>
+
+	<body ng-app="myApp" >
+		
+	       <div ng-controller="myController">
+              <label for="">
+                全选
+                <input type="checkbox" ng-change="allCheckedFn()" ng-model="allChecked" />
+              </label><br/>
+              <label for=""  ng-repeat="user in userArray">
+               {{user.index}}
+                <input type="checkbox" ng-change="userFn($index)"  ng-model="user.user" />
+              </label><br/>
+              <label for="">
+                还原
+                <input type="checkbox" ng-change="restFn()" ng-model="noChecked" />
+              </label>
+         </div>
+
+  </div>
+</div>
+	</body>
+	<script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('myController', ['$scope', function ($scope) {
+
+      $scope.userArray = [
+        {
+          index:1,
+          user:true
+        },
+        {
+          index:2,
+          user:true
+        },
+        {
+          index:3,
+          user:true
+        }
+      ];
+     
+      function watchallChecked(){
+           $scope.allChecked = $scope.userArray.every(function (item){
+            return item.user;
+        });
+      };
+
+      watchallChecked();
+     
+      $scope.userArray3 = angular.copy($scope.userArray);
+
+      $scope.userFn = function (index){
+         $scope.userArray[index].user = $scope.userArray[index].user;
+         watchallChecked();
+      };
+
+      $scope.allCheckedFn = function (){
+        angular.forEach( $scope.userArray, function (item,index){
+            item.user = $scope.allChecked;
+        });
+      };
+
+      $scope.restFn = function (){
+          $scope.userArray = angular.copy($scope.userArray3);    
+      };
+
+     // $scope.$watch("allChecked",watchallChecked);
+
+
+
+
+
+
+    }]);
+
+
+</script>
+</html>

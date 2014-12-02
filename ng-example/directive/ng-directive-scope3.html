@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			<div example-boolean3  name="{{name}}" >作为属性时：{{threeName}}<p ng-click="hideFn()">点击隐藏</p></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+	/*
+		scope三个参数：
+		true：继承父级的scope，改变则不会影响父级的scope
+		fale：沿用父级的scope，改变影响父级的scope
+		{}:创建一个全新的scope，不会从父级继承以及沿用父级的scope
+
+		当为{}时，设置一定的标示规则，也可以共享父级的scope
+
+		1. "@"   (  Text binding / one-way binding )        字符串绑定，单项绑定
+		2. "="   ( Direct model binding / two-way binding )  指向model，双向绑定  写法如=name，是在元素写属性是申请的别名
+		3. "&"   ( Behaviour binding / Method binding  )	行为绑定，功能绑定		在自己上绑定行为要反射在父级上需要绑定行为
+
+		例如：{name:"@"}也可以指定具体名字{name:@name}
+
+	*/
+
+		var myApp = angular.module("myApp",[]).		
+		directive('exampleBoolean3', [function () {
+			return {
+				restrict: 'EA',
+				scope:{
+					name:"@"
+				},
+				link:function (scope,ele,attr){
+					scope.hideFn = function (){
+						console.log("123");	
+					};
+				}
+			}
+		}]);
+		myApp.controller("conTroll",function ($scope){
+			$scope.name = "<div></div>";
+			$scope.hideFn = function (){
+						console.log("123");	
+					};
+		});
+
+
+	</script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div ng-controller="myController">
+			<ul>
+			<!-- {{ childrenArray | filter : 'a' }} </br>
+			{{ childrenArray | filter : 4 }}  </br>
+			{{ childrenArray | filter : {name : 'i'} }} </br> 
+			{{childrenArray | filter : func }} </br>
+			{{childrenArray | filter : "name" }} </br>
+			{{childrenArray | filter : {$:"a"} }} </br> -->
+				<span ng-repeat="value in arr | nameFilter">
+					
+					{{value}}
+				</span>
+				<span>{{names | nameFilter2}}</span>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+
+		angular.module('myApp', []).
+		filter("nameFilter",function (){
+			console.log("1233333333333333333");
+			return function (item){
+
+				angular.forEach(item, function (item2){
+
+					 item2 = item2 + "!";	
+					
+				});
+
+
+
+				//console.log(item);
+
+				return item;
+			};	
+		}).
+		filter("nameFilter2",function (){
+			return function (item){
+
+				console.log(item);
+
+				return item;
+			};	
+		}).
+		controller('myController', ['$scope', function ($scope) {
+
+		/*	$scope.childrenArray = [
+			        {name:'kimi',age:3},
+			        {name:'cindy',age:4},
+			        {name:'anglar',age:4},
+			        {name:'shitou',age:6},
+			        {name:'tiantian',age:5}
+			    ];*/
+
+			$scope.arr = [1,2,3];
+
+			$scope.names = "wang";
+
+			//$scope.func = function(e){return e.age>4;}
+
+
+		}]);
+	</script>
+</html>

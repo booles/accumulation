@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			
+			<h1 ng-click="revert()">{{name}} ,is very good！{{color}}</h1>
+			<div x-example-dir name="{{name}}" reverse="revert()" color="color"></div>
+			<hr/>
+			<example-boolean></example-boolean>
+			<h2>{{booleanName}}</h2>
+			<example-boolean1></example-boolean1>
+			<h2>{{booleanName1}}</h2>
+			<example-boolean2></example-boolean2>
+			<h2>{{booleanName2}}</h2>
+			<hr/>
+			<h1>重新定义scope中标示的含义：<br/></h1>
+			
+			<div example-boolean3 threeName="{{threeName}}">作为属性时：{{threeName}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+	/*
+		scope三个参数：
+		true：继承父级的scope，改变则不会影响父级的scope
+		fale：沿用父级的scope，改变影响父级的scope
+		{}:创建一个全新的scope，不会从父级继承以及沿用父级的scope
+
+		当为{}时，设置一定的标示规则，也可以共享父级的scope
+
+		1. "@"   (  Text binding / one-way binding )        字符串绑定，单项绑定
+		2. "="   ( Direct model binding / two-way binding )  指向model，双向绑定
+		3. "&"   ( Behaviour binding / Method binding  )	行为绑定，功能绑定	
+
+		例如：{name:"@"}也可以指定具体名字{name:@name}
+
+	*/
+
+		var myApp = angular.module("myApp",[]).
+		directive('exampleDir', [function () {
+			return {
+				restrict: 'A',
+				scope:{
+					name:"@",
+					color:"=",
+					reverse:"&"
+				},
+				template:"<input type='text' ng-model='name'/><div>{{name}}</div><input type='text' ng-model='color'/><div>{{color}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					
+				}
+			};
+		}]).
+		directive('exampleBoolean', [function () {
+			return {
+				restrict: 'EA',
+				scope:true,
+				template:"<div>测试scope的三个参数(true)：<br/><input type='text' ng-model='booleanName' />{{booleanName}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					
+				}
+			};
+		}]).
+		directive('exampleBoolean1', [function () {
+			return {
+				restrict: 'EA',
+				scope:false,
+				template:"<div>测试scope的三个参数(false)：<br/><input type='text' ng-model='booleanName1' />{{booleanName1}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					
+				}
+			};
+		}]).
+		directive('exampleBoolean2', [function () {
+			return {
+				restrict: 'EA',
+				scope:{},
+				template:"<div>测试scope的三个参数({})：<br/><input type='text' ng-model='booleanName2' />{{booleanName2}}</div>",
+				link: function (scope, iElement, iAttrs) {
+					
+				}
+			};
+		}]).		
+		directive('exampleBoolean3', [function () {
+			return {
+				restrict: 'EA',
+				scope:{
+					threeName:"@"
+				},
+				template:"<div><br/><input type='text' ng-model='threeName' />{{booleanName2}}{{threeName}}</div>"
+			};
+		}])
+		myApp.controller("conTroll",function ($scope){
+			$scope.name = "yun";
+			$scope.names = "wang";
+			$scope.color = "#000";
+			$scope.revert = function (){
+				$scope.name = $scope.name.split('').reverse().join('');	
+			};
+			$scope.randomColor = function (){
+				 $scope.color = '#'+Math.floor(Math.random()*16777215).toString(16);
+			};
+
+			$scope.booleanName = "booleanName";
+			$scope.booleanName1 = "booleanName1";
+			$scope.booleanName2 = "booleanName2";
+			$scope.threeName = "ParentThreeName";
+		});
+
+
+	</script>
+</html>

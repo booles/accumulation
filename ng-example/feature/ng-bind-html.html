@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp" style="height:3000px;" >
+		
+		<div ng-controller="conCtrl">
+			<div ng-bind-html-unsafe="htmls"></div>
+			<button ng-click="fetch()">点击添加html</button>
+		</div>
+		<!-- <div class='mask' ng-controller='maskCtrl' x-mask-direc></div> -->
+	</body>
+	<script type="text/javascript">
+
+	angular.module('myApp', []).		
+		controller('conCtrl', ['$scope',"$http","$sce", function ($scope,$http,$sce) {
+			
+			$scope.htmls = $sce.trustAsHtml("<div>hello wangyun !</div>");
+
+			console.log($sce.parseAsHtml("<div>hello wangyun !</div>"));
+
+			$scope.fetch = function (){
+					
+			};
+
+		}]);
+	</script>
+</html>

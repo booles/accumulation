@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+        <script src="../../lib/jq17.js"></script>
+	</head>
+
+	<body>
+		您已登录，账号是：
+	</body>
+	<script>
+		$.ajax({
+			url:"php/getContent.php",
+			success:function (data,success){
+					
+					console.log(data);
+			}
+		});
+		$.ajax({
+			url:"php/1.php",
+			success:function (data,success){
+					
+					console.log(data);
+			}
+		});
+	</script>
+</html>

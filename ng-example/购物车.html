@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			input{
+				text-align: center;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<div ng-controller="conTroll">
+			<h3>
+				您选中了{{getLen()}}个商品
+			</h3>
+			<ul>
+				{{setHtml()}}
+				<li ng-repeat="item in youso">
+					<span>商品:{{item.youName}}，</span>
+					<input type="button"  value="-"ng-click = "dudectNum($index)"/>
+					<input type="text" ng-model="item.count" readonly />	
+					<input type="button" ng-click = "addNum($index)" value="+" />
+					<span>单价：${{item.pice}}，</span>
+					<span>总价格：${{item.count*item.pice}}</span>
+					<button ng-click="rest($index)">重置</button>
+					<button ng-click="remove($index)">移除商品</button>
+				</li>
+
+			</ul>		
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		var myApp = angular.module("myApp",[])
+
+		
+		.controller("conTroll",["$scope",function (scope){
+				//商品基本信息
+				var youso = [
+					{
+						youName:"上衣",
+						pice:"20",
+						count:1
+					},
+					{
+						youName:"裤子",
+						pice:"50",
+						count:1
+					},
+					{
+						youName:"帽子",
+						pice:"100",
+						count:1
+					}
+				];
+
+
+				scope.youso = youso;
+
+				//计算选中的商品个数
+				scope.getLen = function (){
+					return youso.length;	
+				};
+				//重置
+				scope.rest = function (index){
+					scope.youso[index].count = 1;
+				};
+				//删除
+				scope.remove = function (index){
+					scope.youso.splice(index,1);	
+				};
+				//加法
+				scope.addNum = function (index){
+					scope.youso[index].count++;	
+				};
+				//减法
+				scope.dudectNum = function (index){
+					if(scope.youso[index].count<= 0) scope.youso[index].count = 0;
+					else scope.youso[index].count--;	
+				};
+				scope.setHtml = function (){
+					if(!scope.youso.length)	return "请选择商品！";
+				};
+
+		}]);
+
+
+
+	</script>
+</html>

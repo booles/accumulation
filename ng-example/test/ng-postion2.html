@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>directive drag example</title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/toolsModule.js"></script>
+		<script type="text/javascript" src="../js/dialog.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			li{
+				list-style: none;
+			}
+			.box {
+				width: 800px;
+				height: 800px;
+				margin:0px auto;
+			}
+			.box ul li {
+				float: left;
+				margin:20px;
+				width: 90px;
+				text-align: center;
+			}
+			.mask {
+				width: 10%;
+				height: 100%;
+				border:1px solid #000;
+				position: absolute;
+				top:0;
+			}
+			.dialogContent {
+				background: #999;
+				position: absolute;
+				z-index: 2;
+				left:0px;
+				top:0px;
+			}
+			.default-dialog-top {
+				height: 30px;
+				background: #c00;
+				width: 100%;
+			}
+		</style>
+		
+	</head>
+
+	<body ng-app="myApp" >
+		
+		<div style="height:3000px;" class="box" ng-controller="conCtrl">
+			<button x-dialog-div>default dialog!</button>
+			<button x-dialog-div="first">click me!</button>
+			<button x-dialog-div="two">mouseover me!</button>
+		</div>
+		<!-- <div class='mask' ng-controller='maskCtrl' x-mask-direc></div> -->
+	</body>
+	<script type="text/javascript">
+	angular.module('myApp', ["dialogModule"]).
+		
+		controller('conCtrl', ['$scope', function ($scope) {
+			
+			$scope.first = {
+				eventType:"click",
+				width:900,
+				height: 300,
+				mask:false,
+				title:"first-dialog",
+				content:"<div ng-click='ssss()'>first:<input ng-model='content'/><p>{{content}}</p></div>",
+				bindScope:function (scope){
+					scope.ssss  =function (){
+						console.log("111");	
+					};
+					scope.content = "wangyun";
+				}
+			};
+
+			$scope.two = {
+				eventType:"mouseover",
+				width:500,
+				height: 500,
+				mask:false,
+				title:"two-dialog",
+				content:"<div>two</div>"
+			};
+
+
+
+		}]);
+
+	</script>
+</html>

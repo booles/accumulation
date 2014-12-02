@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		
+		
+	</head>
+
+	<body ng-app="myApp">
+		
+		<div  ng-controller="conTroll">
+			
+			<input type="text" /><span>日期</span>
+			今天是：{{Y}}年{{M}}月{{Da}}日{{H}}点{{Mi}}分{{S}}秒,星期{{D}}
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<td>日</td>
+							<td>一</td>
+							<td>二</td>
+							<td>三</td>
+							<td>四</td>
+							<td>五</td>
+							<td>六</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+
+
+
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+
+	
+
+		var myApp = angular.module("myApp",[])
+
+
+			.controller("conTroll",["$scope","$interval",function (scope,interval){
+
+				var dataTime = scope.dataTime = new Date();	
+
+				scope.Y = dataTime.getFullYear();
+				scope.M = dataTime.getMonth()+1;
+				scope.Da = dataTime.getDate();
+				scope.H = dataTime.getHours();
+				scope.Mi = dataTime.getMinutes();
+				scope.S= dataTime.getSeconds();
+				scope.D = dataTime.getDay();
+
+				interval(function (){
+					scope.S= new Date().getSeconds();
+				},1000);
+				console.log(getFirstDay(scope.Y,scope.M));
+
+				
+
+
+			}]);
+
+			//判断某年某月的1号是星期几
+function getFirstDay(_year,_month) {
+    var allDay = 0, y = _year-1, i = 1;
+	var arr = [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+    allDay = y + Math.floor(y/4) - Math.floor(y/100) + Math.floor(y/400) + 1;
+    
+    for ( ; i<_month; i++) {
+      allDay += arr[i-1]; 
+    };
+    return allDay%7;
+};
+function runNian(_year) {
+    if(_year%400 === 0 || (_year%4 === 0 && _year%100 !== 0) ) {
+        return true;
+    }
+    else { return false; }
+}
+
+	</script>
+</html>

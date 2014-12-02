@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<div ng-controller="conTroll">
+				{{userName}}
+			 <div cutom></div>
+		</div>
+		<div ng-controller="conTroll2">
+				{{userName}}
+			 <div cutom2></div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		
+		var myApp = angular.module("myApp",[])
+
+		.directive("cutom",function (){
+			return{
+				restrict:"ECMA",
+				replace:true,
+				template:"<div>aaaaaaaaaaa</div>",
+				compile:function (ele,attr){
+						
+					
+
+						return {
+							pre:function (scope,ele){
+								console.log(ele);
+								console.log("编译连接。。。");		
+							},
+							post:function (ele){
+								console.log(ele);
+								console.log("绑定事件。。。");
+							}
+						}
+				}
+			}	
+		})
+		.directive("cutom2",function (){
+			return{
+				restrict:"ECMA",
+				replace:true,
+				template:"<div>bbbbbbbbbbbbb</div>",
+				compile:function (ele,attr){
+						
+						return {
+							pre:function (ele){
+								console.log(ele);
+								console.log("编译连接。。。");		
+							},
+							post:function (scope){
+								console.log(scope);
+								console.log("绑定事件。。。");
+								scope.userName = "fskdfsjdfi";
+							}
+						}
+				}
+			}	
+		})
+
+		.controller("conTroll",["$scope",function (scope){
+				scope.userName = "wang";
+		}])
+		.controller("conTroll2",["$scope",function (scope){
+				scope.userName = "yun";
+		}]);
+
+
+
+	</script>
+</html>
