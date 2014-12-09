@@ -20,6 +20,10 @@ define(['app'],function (app){
         	{
         		name:"弹框",
         		routeUrl:"#/routeTpl/dralog"
+        	},
+        	{
+        		name:"下拉框",
+        		routeUrl:"#/routeTpl/select"
         	}
         ]
 

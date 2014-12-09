@@ -1,4 +1,4 @@
-require.config({//第一块，配置
+require.config({
     baseUrl: '',
     paths: {
         text: 'vendor/require/text',
@@ -8,8 +8,9 @@ require.config({//第一块，配置
         angular: "vendor/ng/angular",
         "angular-route": "vendor/ng/angular-route",
         app:"./app",
-        direSet:'comm/dire/direSet',
+        direSet:'comm/direSet/direSet',
         controller:'comm/controller/controller',
+        routeController:'comm/controller/routeController',
         route:'comm/routes/route'
     },
     priority: ['text', 'css'],
@@ -27,8 +28,15 @@ require.config({//第一块，配置
     }
 });
 
-require(['angular','app','domReady','controller','direSet',"route"], function(angular,app,dom) {
-  dom(function (){
-      angular.bootstrap(document,["firstApp"]);
-  });
+require(['angular',
+        'app',
+        'domReady',
+        'controller',
+        'routeController',
+        'direSet',
+        "route"], function(angular,app,dom) {
+            
+            dom(function (){
+              angular.bootstrap(document,["firstApp"]);
+            });
 });
