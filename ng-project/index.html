@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>angularjs组织结构</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="./css/bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="vendor/require/require.js" data-main="main.js"></script>
+        <style>
+        </style>
+            
+    </head>
+    <body ng-controller="firstCtrl">
+
+        <div class="container" ng-controller="headerCtrl">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="" class="navbar-brand">Project Name</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="javascript:void(0)">登陆</a>
+                            </li>
+                            <li>
+                                <a href="/login">注册</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container app-content">
+            <div class="col-sm-2" ng-controller="leftSlidCtrl" ng-include="template.left_silder_tpl"></div>
+            <div class="col-sm-10" ng-controller="contentCtrl">
+                <div ng-view></div>
+            </div>
+        </div>
+        <div class="container" ng-controller="footerCtrl">
+            footer
+        </div>
+    </body>
+</html>

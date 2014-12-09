@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>dragExa</title>
+		<style>
+			#div1{
+				width: 200px;
+				height: 200px;
+				background: #ccc;
+				position: absolute;
+				left: 0px;
+				top:0px;
+				cursor: move;
+			}
+		</style>
+		<script>
+			window.onload = function (){
+				var oDiv = document.getElementById("div1");	
+
+				oDiv.onmousedown = function (ev){
+					var ev = ev || event;
+					var left = ev.clientX - this.offsetLeft;
+					var top = ev.clientY - this.offsetTop;
+					document.onmousemove = function (ev){
+						var ev = ev || event;
+						var cx = ev.clientX;
+						var cy = ev.clientY;
+						oDiv.style.left = cx - left +"px";	
+						oDiv.style.top = cy - top +"px";	
+					};
+					document.onmouseup = function (ev){
+						document.onmousemove = null;
+						document.onmouseup = null;
+					};
+				};	
+
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>
