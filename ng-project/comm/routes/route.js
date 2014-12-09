@@ -10,6 +10,7 @@ define(["app"],function (app){
 		tab: rootUrl+"tab/tab.html",
 		dralog:rootUrl+"dralog/dralog.html",
 		select:rootUrl+"select/select.html",
+		todoList:rootUrl+"todoList/todoList.html"
 	}
 
 
@@ -24,6 +25,10 @@ define(["app"],function (app){
 			}).
 			when("/routeTpl/select",{
 				templateUrl:routeTpl.select
+			}).
+			when("/routeTpl/todoList",{
+				templateUrl:routeTpl.todoList,
+				controller:"todoLostCtrl"
 			});
 	}])
 });

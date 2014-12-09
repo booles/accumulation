@@ -1,0 +1,21 @@
+<div class="bs-example">
+	<form action="" role="form">
+		<div class="from-group">
+			<label for="todoText">todoList</label>
+			<input type="text" class="form-control" id="todoText" placehodler="请输入内容" ng-keydown="todoKeydown($event)" ng-model="todoList"/>
+			<ul class="listBox">
+				<li ng-repeat="todoList in todosArray track by $index" ng-init="over = false;" ng-class="{bgColor:over}" ng-mouseover="over = !over;isDelShow=true" ng-mouseout="over = !over;isDelShow=false">
+					<span class="fl" ng-click="selectedFn($index)">选中---</span>
+					<span class=" listItem fl" ng-class="{selectListItem: todoList.selected}">{{todoList.todoList}}</span>
+					<span class="fr delet" ng-hide="!isDelShow" ng-click="delectItem($index)">X</span>
+				</li>
+			</ul>
+			<div ng-show="!!todosArray.length">
+				<span>总共有{{todosArray.length}}项</span>
+
+
+				<span>要清除{{clearArray.length}}项</span>
+			</div>
+		</div>
+	</form>
+</div>

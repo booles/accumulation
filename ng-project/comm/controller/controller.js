@@ -24,6 +24,10 @@ define(['app'],function (app){
         	{
         		name:"下拉框",
         		routeUrl:"#/routeTpl/select"
+        	},
+        	{
+        		name:"todoList",
+        		routeUrl:"#/routeTpl/todoList"
         	}
         ]
 
