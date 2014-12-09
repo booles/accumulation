@@ -1,9 +1,6 @@
 define(['app'],function (app){
 	app.
     controller('firstCtrl', ['$scope', function ($scope) {
-        $scope.template = {
-            left_silder_tpl:'./modules/left_silder/left_silder.html'
-        };
     }]).
     controller('contentCtrl', ['$scope', function ($scope) {
         

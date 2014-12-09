@@ -34,10 +34,20 @@
         </div>
 
         <div class="container app-content">
-            <div class="col-sm-2" ng-controller="leftSlidCtrl" ng-include="template.left_silder_tpl"></div>
+            
+            
+            <div class="col-sm-2" ng-controller="leftSlidCtrl">
+                <ul>
+                    <li ng-repeat="title in left_title">
+                        <a href="{{title.routeUrl}}" ng-bind="title.name"></a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="col-sm-10" ng-controller="contentCtrl">
                 <div ng-view></div>
             </div>
+
         </div>
         <div class="container" ng-controller="footerCtrl">
             footer
