@@ -1,0 +1,116 @@
+<div ng-controller="orderCtrl" ng-init="init()">
+    <div class="order_tab">
+        <ul class="order_tab_ul clearfix">
+            <li data-index="0" id="js-order" class="all_order">
+            	<span oval="1" class="o-type">
+            		<a href="#/example/order/all">全部订单</a>            		
+            	</span>&nbsp;&nbsp;
+                <div id="js-sub-menu" class="orders-sub-menu" style="display: none;">
+                    <ul class="sub-menu-ul">
+                        <li><a typeval="1" href="javascript:;">全部订单</a>
+                        </li>
+                        <li><a typeval="2" href="javascript:;">普通订单</a>
+                        </li>
+                        <li><a typeval="3" href="javascript:;">团购订单</a>
+                        </li>
+                        <li><a typeval="4" href="javascript:;">抢购订单</a>
+                        </li>
+                        <li><a typeval="5" href="javascript:;">预售订单</a>
+                        </li>
+                        <li><a typeval="6" href="javascript:;">淘实惠订单</a>
+                        </li>
+                        <li><a typeval="7" href="javascript:;">定向券订单</a>
+                        </li>
+                        <li><a typeval="8" href="javascript:;">美通卡订单</a>
+                        </li>
+                        <li><a typeval="9" href="javascript:;">国酷券订单</a>
+                        </li>
+                        <li><a typeval="10" href="javascript:;">3D订单</a>
+                        </li>
+                        <!--<li><a href="javascript:;" typeval="唯品惠订单</a></li>-->
+                    </ul>
+                </div> <i class="order-border" style="display: none;"></i> </li>
+            <li data-index="1" class="cur">
+            	<a href="#/example/order/phone">手机充值</a>
+            </li>
+            <li data-index="2">
+				<a href="#/example/order/caipiao">彩票订单</a>
+            </li>
+            <li data-index="1">
+            	<a href="#/example/order/jingpai">竞拍订单</a>
+            </li>
+            <li data-index="2">
+				<a href="#/example/order/chexian">车险订单</a>
+            </li>
+            <li data-index="1" >
+            	<a href="#/example/order/phoneOrder">手机充值</a>
+            </li>
+            <li data-index="2">
+				<a href="#/example/order/games">游戏订单</a>
+            </li>
+        </ul> <span class="ordersRecHref"><a target="_self" href="/ec/homeus/n/myaccount/profileRecOrdersReal.jsp">我的订单回收站</a></span>
+    </div>
+    <div class="item-row clearfix">
+        <div class="item-col220">订单商品</div>
+        <div class="item-col-140">收货人</div>
+        <div class="item-col-160">订单金额</div>
+        <div class="item-col-160">
+            <div class="all-status"> <span val="1" class="stutas-text">全部状态</span>
+                <div class="stutas-menu" style="display: none;">
+                    <ul>
+                        <li><a status="1" href="javascript:;">全部状态</a>
+                        </li>
+                        <li><a status="2" href="javascript:;">等待付款</a>
+                        </li>
+                        <li><a status="3" href="javascript:;">等待收货</a>
+                        </li>
+                        <li><a status="5" href="javascript:;">已完成</a>
+                        </li>
+                        <li><a status="4" href="javascript:;">已取消</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item-col-280">操作</div>
+    </div>
+    <div class="orderContent" style="border-bottom: 1px solid rgb(243, 243, 243);">
+        <div class="item-box clearfix" ng-repeat="eachOrderlist in orderlist">
+            <div test="5" class="item-info"> <span title="普通订单" class="ico-qiang">普</span> <span class="order-number">订单编号：{{eachOrderlist.orderId}}</span> <span class="order-time">下单时间：{{eachOrderlist.combinepayTime}}</span> <span class="gome-online">国美在线</span> <span lim:offlinetip="联系客服" lim:shopid="3" lim:page="0" lim:company="3" lim:innerhtm="" class="live800 online-ico" title=""><a style="cursor:pointer" class="onlines" href="javascript:;"></a></span>
+                <a shipid="{{eachOrderlist.orderShipid}}" orderid="{{eachOrderlist.orderId}}" class="gift-ico" href="javascript:;"></a>
+            </div>
+            <div class="list-row clearfix" style="height: 70px; line-height: 70px;">
+                <div col="15" class="list-col-220">
+                    <div title="{{orderProducts.prodName}}" class="pic-box" ng-repeat="orderProducts in eachOrderlist.orderProducts">
+                        <a href="{{orderProducts.proddetailurl}}" target="_blank">
+                            <img alt="" ng-src="{{orderProducts.imageurl | paddingSrc}}">
+                        </a>
+                        <i class="ui19 r-corner" style="display: block; top: 0px;">x{{orderProducts.quantity}}</i>
+                    </div>
+                </div>
+                <div class="list-col-140"> <span shipid="1912180017" orderid="4421100027" class="customer-receiver">		
+		            <a href="javascript:;" class="customer-ico"></a>							
+		            <span class="receiver">测试</span>
+                    <div style="left: 277.5px; top: 239px; display: none;" class="pop consignee">
+                        <p class="grayfont">测试<span class="mobile">18655552222</span>
+                        </p>
+                        <p class="grayfont mt">北京北京市海淀区(五环里)全部区域测试测试测试测试</p>
+                    </div>
+                    </span>
+                </div>
+                <div test="depositAmount2" class="list-col-160" style="padding-top: 19px; line-height: 17px;">
+                    <p style="padding:0;"><em class="dollar-sign">￥</em><span style="font-family:Arial;">1600.00</span>
+                    </p> <span class="pay-method">在线支付</span> </div>
+                <div class="list-col-160  finish " test="depositAmount21" style="height: 54px; padding-top: 16px;">
+                    <p class="status">已取消</p>
+                    <p class="car-logistics"> <a shipid="1912180017" orderid="4421100027" href="javascript:;" onclick="return false;" class="modify trace">跟踪<i></i></a> </p>
+                </div>
+                <div class="list-col-280 " style="padding-top: 8px;">
+                    <div time5="" class="l-c-280-pz"> </div>
+                    <div class="order-cont"> <a title="查看订单" href="/ec/homeus/myaccount/gadgets/shippingGroupDetailInfo.jsp?orderId=4421100027&amp;shippingGroupId=1912180017&amp;duration=1" target="_blank" class="modify v-o">查看订单</a> <a data-status="P" data-shipid="1912180017" data-orderid="4421100027" title="再次购买" class="regowucar J_regowecar" target="_blank" href="/ec/homeus/cart/cart.jsp">再次购买</a>
+                        <br> <a shipid="1912180017" orderid="4421100027" class="deleteOrder modify v-o">删除订单</a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

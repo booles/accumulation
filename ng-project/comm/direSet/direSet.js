@@ -24,6 +24,6 @@ define(["app"], function(app) {
           scope.test = "testDire";
       }
     };
-  }])
+  }]);
  
 })

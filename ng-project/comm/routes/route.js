@@ -7,6 +7,7 @@ define(["app"],function (app){
 	var rootUrl = "./modules/routeTpl/";
 
 	var routeTpl = {
+		order:  rootUrl+"order/order.html",
 		tab: rootUrl+"tab/tab.html",
 		dralog:rootUrl+"dralog/dralog.html",
 		select:rootUrl+"select/select.html",
@@ -16,17 +17,26 @@ define(["app"],function (app){
 
 	app.config(["$routeProvider",function ($routeProvider) {
 		$routeProvider.
-			when("/routeTpl/tab",{
+			when("/",{
+				template:"欢迎查看！"
+			}).
+			when('/example/order/:name', {
+				templateUrl: function (urlattr){
+					return "./modules/routeTpl/order/orderTpl/"+urlattr.name+".html"	
+				},
+				controller: 'orderCtrl'
+			}).
+			when("/example/tab",{
 				templateUrl:routeTpl.tab,
 				controller:"tabCtrl"
 			}).
-			when("/routeTpl/dralog",{
+			when("/example/dralog",{
 				templateUrl:routeTpl.dralog
 			}).
-			when("/routeTpl/select",{
+			when("/example/select",{
 				templateUrl:routeTpl.select
 			}).
-			when("/routeTpl/todoList",{
+			when("/example/todoList",{
 				templateUrl:routeTpl.todoList,
 				controller:"todoLostCtrl"
 			});

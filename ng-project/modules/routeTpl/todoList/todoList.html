@@ -12,7 +12,7 @@
 			</ul>
 			<div ng-show="!!todosArray.length">
 				<span>总共有{{todosArray.length}}项</span>
-				<span ng-click="clearAllFn()" ng-show="!!clearArray.length">要清除{{clearArray.length}}项</span>
+				<span ng-click="clearAllFn()" ng-show="!!clearLen">要清除{{clearLen}}项</span>
 			</div>
 		</div>
 	</form>

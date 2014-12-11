@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+			}
+			#div1{
+				
+				border-style: solid dotted dashed inset;
+				border-width: 1px 2px 3px 4px;
+				border-color: red green blue #f00;
+			}
+			#div2{
+				border-top: 1px solid #f00;
+				border-width: 1px 0;
+			}
+			#div3{
+				border-style: solid;
+				border-width: 27px;
+
+				-webkit-border-image: url(./2.jpg) 27 round stretch;
+				border-image: url(./2.jpg) 27 round stretch;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">11</div>
+		<div id="div2"></div>
+		<div id="div3">33</div>
+	</body>
+</html>

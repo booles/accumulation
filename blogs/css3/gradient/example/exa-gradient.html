@@ -1,0 +1,88 @@
+<html lang="zh-cn"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>gradient</title>
+		<style>
+			.zheng div,.fu div,.fu2 div{
+				width: 100px;
+				height: 100px;
+				margin: 30px;
+				color: red;
+				font-size: 30px;
+				float: left;
+
+			}
+			#div1{
+				background: -webkit-linear-gradient(0deg,#ccc,#000);
+				background: linear-gradient(0deg,#ccc,#000);
+			}
+			#div2{
+				background: -webkit-linear-gradient(90deg,#ccc,#000);
+				background: linear-gradient(90deg,#ccc,#000);
+			}
+
+			#div3{
+				background: -webkit-linear-gradient(180deg,#ccc,#000);
+				background: linear-gradient(180deg,#ccc,#000);
+			}
+
+			#div4{
+				background: -webkit-linear-gradient(360deg,#ccc,#000);
+				background: linear-gradient(360deg,#ccc,#000);
+			}			
+
+
+			#div5{
+				background: -webkit-linear-gradient(-0deg,#ccc,#000);
+				background: linear-gradient(-0deg,#ccc,#000);
+			}			
+			#div6{
+				background: -webkit-linear-gradient(270deg,#ccc,#000);
+				background: linear-gradient(270deg,#ccc,#000);
+			}			
+			#div7{
+				background: -webkit-linear-gradient(-180deg,#ccc,#000);
+				background: linear-gradient(-180deg,#ccc,#000);
+			}			
+			#div8{
+				background: -webkit-linear-gradient(-360deg,#ccc,#000);
+				background: linear-gradient(-360deg,#ccc,#000);
+			}
+
+			#div9{
+				background: -webkit-linear-gradient(45deg,#ccc,#000);
+				background: linear-gradient(45deg,#ccc,#000);
+			}
+			#div10{
+				width: 300px;
+				background: -webkit-linear-gradient(90deg,red, orange,yellow,green,blue,indigo,violet);
+				background: linear-gradient(90deg,red, orange,yellow,green,blue,indigo,violet);
+			}
+			#div11{
+				width: 300px;
+				background: -webkit-linear-gradient(to left,rgba(255,0,255,0.5) 30%,rgba(255,0,0,0.5) 50%);
+				background: linear-gradient(to left,rgba(255,255,255,0.5) 30%,rgba(255,0,0,0.5) 50%);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="zheng">
+			<div id="div1">0deg</div>
+			<div id="div2">90deg</div>
+			<div id="div3">180deg</div>
+			<div id="div4">360deg</div>
+		</div>
+		<div style="clear: both;"></div>
+		<div class="fu">
+			<div id="div5">-0deg</div>
+			<div id="div6">-90deg</div>
+			<div id="div7">-180deg</div>
+			<div id="div8">-360deg</div>
+		</div>
+		<div class="fu2">
+			<div id="div9">45deg</div>
+			<div id="div10">线性多色渐变</div>
+			<div id="div11">rgb</div>
+		</div>
+	
+</body></html>

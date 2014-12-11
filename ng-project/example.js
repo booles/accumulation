@@ -7,12 +7,7 @@ require.config({
         jquery: 'vendor/jquery/jquery-2.1.1',
         angular: "vendor/ng/angular",
         "angular-route": "vendor/ng/angular-route",
-        app:"./app",
-        direSet:'comm/direSet/direSet',
-        filter:'comm/filter/filter',
-        controller:'comm/controller/controller',
-        routeController:'comm/controller/routeController',
-        route:'comm/routes/route'
+        exampleApp:"./exampleApp",
     },
     priority: ['text', 'css'],
     shim: {
@@ -30,15 +25,10 @@ require.config({
 });
 
 require(['angular',
-        'app',
-        'domReady',
-        'controller',
-        'routeController',
-        'direSet',
-        'filter',
-        "route"], function(angular,app,dom) {
+        'exampleApp',
+        'domReady'], function(angular,app,dom) {
             
             dom(function (){
-              angular.bootstrap(document,["firstApp"]);
+              angular.bootstrap(document,["exampleApp"]);
             });
 });

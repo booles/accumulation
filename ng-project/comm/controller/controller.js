@@ -1,6 +1,7 @@
 define(['app'],function (app){
 	app.
-    controller('firstCtrl', ['$scope', function ($scope) {
+    controller('firstCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
+
     }]).
     controller('contentCtrl', ['$scope', function ($scope) {
         
@@ -14,20 +15,29 @@ define(['app'],function (app){
     controller('leftSlidCtrl', ['$scope', function ($scope) {
         $scope.left_title = [
         	{
+        		name:"我的订单",
+        		ch:"tab",
+        		routeUrl:"#/example/order/all"
+        	},
+        	{
         		name:"轮播",
-        		routeUrl:"#/routeTpl/tab"
+        		ch:"tab",
+        		routeUrl:"#/example/tab"
         	},
         	{
         		name:"弹框",
-        		routeUrl:"#/routeTpl/dralog"
+        		ch:"dralog",
+        		routeUrl:"#/example/dralog"
         	},
         	{
         		name:"下拉框",
-        		routeUrl:"#/routeTpl/select"
+        		ch:"down",
+        		routeUrl:"#/example/select"
         	},
         	{
         		name:"todoList",
-        		routeUrl:"#/routeTpl/todoList"
+        		ch:"todoList",
+        		routeUrl:"#/example/todoList"
         	}
         ]
 
