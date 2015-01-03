@@ -1,0 +1,47 @@
+<form action="" class="clearfix">
+    <div class="select_box fl">
+        <div class="select_value" id="select_value" isarr="d" arr="d"> <b>单程</b><span class="icon"></span> </div>
+        <ul class="select_list hide" style="display: none;">
+            <li arr="d"><a href="javascript:;">单程</a>
+            </li>
+            <li arr="f"><a href="javascript:;">往返</a>
+            </li>
+        </ul>
+    </div>
+    <div class="fl search_cont1">
+        <dl class="fl">
+            <dt class="fl search_label ml40">出发</dt>
+            <dd class="por_box fl">
+                <input type="text" types="city" id="leaveText" class="nText1 city_text" value="<%=data.depCity%>" citycode="BJS" values="北京" citycodes="BJS" autocomplete="on">
+            </dd>
+        </dl>
+        <div class="change fl" id="btn_change"> <a href="javascript:;">换</a> </div>
+        <dl class="fl">
+            <dt class="fl search_label">到达</dt>
+            <dd class="por_box fl">
+                <input type="text" types="city" id="arriveText" class="nText1 city_text" value="<%=data.arrCity%>" citycode="SHH" values="上海" citycodes="SHH" autocomplete="on">
+            </dd>
+        </dl>
+        <div id="gome-dcBox" class="gome-dcBox fl">
+            <div class="fl gome-dpbox-l gome-dpbox" style="position: static;"> <span class="gdp-tit">出发日期</span>
+                <div class="gome-info"> <span class="dp-w"></span>
+                    <input type="text" readonly="readonly" id="g_d_cf" class="gome-set g-dc" placeholder="" value="<%=data.depData%>" values="2015-01-05"> </div>
+            </div>
+            <div class="fl dp-f"> <span class="gdp-tit">返程日期</span>
+                <div class="gome-info"> <span class="dp-w"></span>
+                    <input type="text" id="fc_click" readonly="readonly" class="set-f g-dc disabled" placeholder=""> </div>
+            </div>
+        </div>
+        <div id="gome-fcBox" class="gome-dcBox fl" style="display: none;">
+            <div class="fl gome-dpbox-l gome-dpbox" id="gome_cf" style="position: static;"> <span class="gdp-tit">出发日期</span>
+                <div class="gome-info"> <span class="dp-w"></span>
+                    <input type="text" readonly="readonly" id="g_cf" class="gome-set g-cf" placeholder="" value="2015-01-05" values="2015-01-05"> </div>
+            </div>
+            <div class="fl gome-dpbox" id="gome_fc" style="position: static;"> <span class="gdp-tit">返程日期</span>
+                <div class="gome-info"> <span class="dp-w"></span>
+                    <input type="text" readonly="readonly" id="g_fc" class="gome-set g-fc" placeholder="" value="" values=""> </div>
+            </div>
+        </div>
+        <a class="fl btn_search" href="javascript:void(0)" title="重新搜索">重新搜索</a>
+    </div>
+</form>

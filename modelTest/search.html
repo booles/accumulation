@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>机票</title>
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link href="http://css.gomein.net.cn/css/n/firstPage/h_b_c.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://css.gomein.net.cn/xn/css/jipiao/style.min.css">
+    <style>
+    #gome-dcBox .gome-datePlug,
+    #gome_cf .gome-datePlug {
+        left: 88px;
+    }
+    #gome_fc .gome-datePlug {
+        left: 58px;
+    }
+    </style>
+    <script>
+    var dynSite = 'http://g.gome.com.cn',
+        staSite = 'http://www.gome.com.cn',
+        contextPath = '/ec/homeus',
+        imgServer = 'http://img.gomein.net.cn/images',
+        secureURL = 'https://g.gome.com.cn:443',
+        pictureserver = 'http://img.gomein.net.cn/image',
+        cookieDomain = '.gome.com.cn',
+        stageJsServer = 'http://js.gomein.net.cn',
+        stageImageServer = 'http://img.gomein.net.cn',
+        stageCssServer = 'http://css.gomein.net.cn',
+        cssserver = 'http://css.gomein.net.cn/css',
+        jsserver = 'http://js.gomein.net.cn/js',
+        versionData = '20140057002200110057';
+    var environment = "",
+        targetType = null,
+        contentLabels = null,
+        language = null;
+    </script>
+</head>
+
+<body>
+    <!-- 头部顶部 start -->
+    <script type="text/javascript">
+    var versionData = '20140029000900070032';
+    </script>
+    <script type="text/javascript" src="http://js.gomein.net.cn/??/f2ejs/g/jsConfig.min.js,/f2ejs/g/jsCssImport.min.js?v=20140029000900070029"></script>
+    <div id="topnav">
+        <div class="wbox clearfix">
+            <ul class="topside">
+                <li id="topNavHover" class="vphone" data-visitor="hover"><b></b><a href="http://shouji.gome.com.cn/" target="_blank">手机国美</a>
+                    <div class="vphone-down">
+                        <a href="http://shouji.gome.com.cn/" target="_blank"></a><em class="i-angle"><i></i></em>
+                    </div>
+                </li>
+                <li><a rel="nofollow" href="http://www.gomeart.com/?utm_source=gome&utm_medium=zuoshang/" target="_blank" title="国之美">国之美</a>
+                </li>
+                <li><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/redirect/redirect.jsp?url=http%3A%2F%2Fwww.multigold.com.cn%2F%3Fflag%3D1" target="_blank" title="多边黄金">多边黄金</a>
+                </li>
+            </ul>
+            <ul class="topmenu clearfix">
+                <li id="loginDiv" class="login-top">
+                    <span class="gwelcome">国美在线欢迎您！</span><a class="glogin" rel="nofollow" href="https://g.gome.com.cn:443/ec/homeus/myaccount/login.jsp?tableName=login&amp;orginURI=">请登录</a><a class="gsign" rel="nofollow" href="https://g.gome.com.cn:443/ec/homeus/myaccount/newregister/newregister.jsp">免费注册</a>
+                </li>
+                <li class="linespace"></li>
+                <li class="g-myoder"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/myOrders.jsp?flag=a0">我的订单</a>
+                </li>
+                <li class="pr hd-mygome js-tophover" id="homepageMyGome"><a rel="nofollow" class="menulink gmlink" href="http://g.gome.com.cn/ec/homeus/myaccount/gome/profileHome.jsp?flag=a">我的国美<b></b></a>
+                    <div class="menuhide">
+                        <ul class="mygomeinfo clearfix">
+                            <li class="first firstfix" id="helloWordSpan"><span class="fl">您好，请<a rel="nofollow" href="https://g.gome.com.cn:443/ec/homeus/myaccount/login.jsp?tableName=login&amp;orginURI=">登录</a></span>
+                            </li>
+                            <li class="mygome-item item-line"><span class="itemlist-name">订单提醒：</span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/myOrders.jsp?flag=a0" target="_blank">待支付订单</a><span class="highlight" id="waitPay"></span></span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/myOrders.jsp?flag=a0" target="_blank">待评价商品</a><span class="highlight" id="waitComm"></span></span>
+                            </li>
+                            <li class="mygome-item item-line"><span class="itemlist-name">优&nbsp;&nbsp;惠&nbsp;&nbsp;券：</span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gomeMyCoupon.jsp?flag=a4" target="_blank">红券</a><span class="highlight" id="redQuan"></span></span>
+                                <span class="mginfo blueq"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gomeMyCoupon.jsp?flag=a4" target="_blank">蓝券</a><span class="highlight" id="blueQuan"></span></span>
+                                <span class="mginfo blueq"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gomeMyCoupon.jsp?flag=a4" target="_blank">国酷券/折扣券</a><span class="highlight" id="discountQuan"></span></span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gomeMyCoupon.jsp?flag=a4" target="_blank">店铺券</a><span class="highlight" id="dianpuQuan"></span></span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gomeMyCoupon.jsp?flag=a4" target="_blank">品牌券</a><span class="highlight" id="pinpaiQuan"></span></span>
+                            </li>
+                            <li class="mygome-item"><span class="itemlist-name">&nbsp;</span>
+                                <span class="mginfo"><a rel="nofollow" href="http://g.gome.com.cn/ec/homeus/myaccount/gome/menupage/myFavorites.jsp" target="_blank">我的收藏夹</a><span class="highlight" id="my-favorites"></span></span>
+                                <span class="mginfo"><a rel="nofollow" href="http://www.gome.com.cn/ec/homeus/n/guesslike/guesslike.jsp" target="_blank">更多惊喜</a></span>
+                            </li>
+                        </ul>
+                        <div class="topbrowsed">
+                            <h3 class="tb-title">最近浏览的商品</h3>
+                            <ul id="topbrowsedprod">
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="linespace"></li>
+                <li>
+                    &nbsp;&nbsp;&nbsp;<a class='triggerLive800' href='javascript:void(0);'>在线客服</a>&nbsp;&nbsp;&nbsp;
+                </li>
+                <li class="pr top-map js-tophover t-help-center">
+                    <a target="_blank" rel="nofollow" class="menulink " href="http://help.gome.com.cn"><i class="i-fe-new"></i><span class="valign-inline">服务中心</span><b></b></a>
+                    <div class="menuhide">
+                        <div class="top-mapbox">
+                            <dl>
+                                <dd class="fsm-first">
+                                    <a href="http://help.gome.com.cn/question/29.html" target="_blank" rel="nofollow">购物流程</a>
+                                    <a href="http://help.gome.com.cn/question/33.html" class="tm-side" target="_blank" rel="nofollow">在线支付</a>
+                                    <a href="http://help.gome.com.cn/question/32.html" target="_blank" rel="nofollow">货到付款</a>
+                                    <a href="http://help.gome.com.cn/question/9.html" class="tm-side" target="_blank" rel="nofollow">配送查询</a>
+                                    <a href="http://help.gome.com.cn/question/10.html" target="_blank" rel="nofollow">退换货服务</a>
+                                    <a href="http://prom.gome.com.cn/html/prodhtml/topics/201408/chb/qxg_gm.html" class="tm-side" target="_blank" rel="nofollow">延保服务</a>
+                                    <a href="http://weixiu.gome.com.cn/" target="_blank" rel="nofollow">家电维修</a>
+                                    <a href="http://huishou.gome.com.cn/" class="tm-side" target="_blank" rel="nofollow">家电回收</a>
+                                </dd>
+                                <dd class="">
+                                    <a href="http://help.gome.com.cn/question/1.html" target="_blank" rel="nofollow">常见问题</a>
+                                    <a href="http://help.gome.com.cn/" class="tm-side" target="_blank" rel="nofollow">自助服务</a>
+                                    <a href="http://help.gome.com.cn/question/21.html" target="_blank" rel="nofollow">联系我们</a>
+                                    <a href="http://help.gome.com.cn/question/66.html" class="tm-side" target="_blank" rel="nofollow">监督举报</a>
+                                </dd>
+                                <dd>
+                                    <div class="telnum">客服热线：<strong>4008-708-708</strong>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </li>
+                <li class="pr top-map js-tophover company">
+                    <a target="_blank" rel="nofollow" class="menulink " href="http://enterprise.gome.com.cn/"><span class="valign-inline">企业服务</span><b></b></a>
+                    <div class="menuhide">
+                        <div class="top-mapbox">
+
+                            <a href="http://enterprise.gome.com.cn/" target="_blank" rel="nofollow">企业采购</a>
+                            <a href="http://g.gome.com.cn/ec/homeus/myaccount/customer/customer.jsp" target="_blank" rel="nofollow">企业客户</a>
+
+
+                        </div>
+                    </div>
+                </li>
+                <li class="no-map">
+                    <a target="_blank" rel="nofollow" class=" " href="http://bbs.gome.com.cn"><span class="valign-inline">国美社区</span></a>
+                </li>
+                <li id="menus-itemlast" class="no-map">
+                    <a target="_blank" rel="nofollow" class=" g-jion" href="http://www.gome.com.cn/join/"><span class="valign-inline">商家入驻</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--topEnd-->
+
+
+
+
+
+
+
+
+
+
+    <!-- 头部顶部 end -->
+    <!-- 头部导航 start-->
+    <div class="jpheader">
+        <div class="content logo-content clearfix">
+            <div class="logojp">
+            </div>
+            <ul class="menu clearfix">
+                <li><a href="http://www.gome.com.cn" title="首页" target="_blank">首页</a>
+                </li>
+                <li class="active"><a href="#" title="机票">机票</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 头部导航 end-->
+    <!-- 广告  start-->
+    <div class="content1" id="slider_flights">
+        <ol style="display:none;"></ol>
+        <ul id="focusAd">
+            <!-- 焦点图广告位 -->
+        </ul>
+    </div>
+    <!-- 广告  end-->
+    <!-- 主体 start-->
+    <div class="content">
+        <!-- 当前位置 start-->
+        <div class="current">
+            <a title="旅行" class="current_1" href="index.html">旅行</a>&gt;
+            <a title="国内机票" href="index.jsp">国内机票</a>&gt;
+            <strong id="topTitle"></strong>
+        </div>
+        <!-- 当前位置 end-->
+        <!-- 搜索条件 start-->
+        <div class="search_box" id="search_box"></div>
+        <!-- 搜索条件 end-->
+        <!-- 结果 start-->
+        <div class="search_main clearfix">
+
+            <!-- 左侧 -->
+            <div class="search_l">
+                <p id="loading" style="width:990px;text-align:center;">
+                    <img src="http://css.gomein.net.cn/xn/images/jipiao/loading.gif" alt="" />
+                    <span>正在为您努力加载，请稍候</span>
+                </p>
+                <div class="select_result clearfix" id="select_result">
+                    <!-- 筛选结果 start-->
+                    <div class="search_result_content" id="search_R">
+                    </div>
+                    <!-- 筛选结果 end-->
+                </div>
+                <div id="search_goaway" class="search_goaway clearfix mb15 border_bot"></div>
+                <div id="error">
+                    <div class="clearfix error_box"> <span class="fl error_icon"></span>
+                        <div class="fl error_word">
+                            <p class="mt8">您选择的去程日期晚于返程日期。返程日期默认改为<span class="date"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="closeA"></a>
+                </div>
+                <!-- 日历 start-->
+                <div class="clearfix" id="select-date-box" style="display:none;">
+                    <div class="search_btn_left" id="search_btn_left">
+                        <a class="arrow_left" rel="nofollow" href="javascript:void(0)"></a>
+                    </div>
+                    <div class="search_calendar">
+                        <ul id="search_calendar_ul">
+                        </ul>
+                    </div>
+                    <div class="search_btn_right" id="search_btn_right">
+                        <a class="arrow_right" rel="nofollow" href="javascript:void(0)" title="查看低价日历"></a>
+                    </div>
+                    <div class="panel_link">
+                        <a href="javascript:;"></a>
+                    </div>
+                </div>
+                <!-- 日历 end-->
+                <p id="loading2" style="text-align:center; width:990px; display:none;">
+                    <img src="http://css.gomein.net.cn/xn/images/jipiao/loading.gif" alt="">
+                    <span>正在为您努力加载，请稍候</span>
+                </p>
+                <div class="select_result clearfix" id="search_c_box" style="display:none;">
+                </div>
+            </div>
+            <!-- 右侧 -->
+            <div class="search_r">
+                <div class="protection_box1 clearfix">
+                    <img src="http://css.gomein.net.cn/xn/images/jipiao/gome_bz1.gif" height="125" width="162" alt="放心出行国美保障">
+                    <ul class="">
+                        <li>
+                            <span class="hbrz"></span>
+                            <div class="word_box">
+                                <p class="fontb">100%航协认证</p>
+                                <p>服务商均通过中国航空运输协会资格认证</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="zfwy"></span>
+                            <div class="word_box">
+                                <p class="fontb">100%支付无忧</p>
+                                <p>国际认证加密技术保障账户交易安全</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="jpbz"></span>
+                            <div class="word_box">
+                                <p class="fontb">100%机票保真</p>
+                                <p>售出机票均保证真实有效，让您登机无忧</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 结果 end-->
+        <!-- 国美保障 start-->
+        <div class="protection_box protection_box_990">
+            <img class="fl" src="http://css.gomein.net.cn/xn/images/jipiao/gome_bz1.gif" alt="放心出行国美保障" width="300" height="65" />
+            <ul>
+                <li>
+                    <span class="hbrz"></span>
+                    <div class="word_box">
+                        <p class="fontb">100%航协认证</p>
+                        <p>服务商均通过中国航空运输协会资格认证</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="zfwy"></span>
+                    <div class="word_box">
+                        <p class="fontb">100%支付无忧</p>
+                        <p>国际认证加密技术保障账户交易安全</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="jpbz"></span>
+                    <div class="word_box">
+                        <p class="fontb">100%机票保真</p>
+                        <p>售出机票均保证真实有效，让您登机无忧</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 国美保障 end-->
+    </div>
+    <!-- 主体 end-->
+    <!-- 公共底部 start -->
+    <div class="gome_flights_footer">
+        <div class="content clearfix">
+            <div class="footer_logo">
+                <img src="http://css.gomein.net.cn/xn/images/jipiao/footer_logo.png" width="170" height="80" alt="国美旅行  一场最美的旅行 " />
+            </div>
+            <ul class="footer_list">
+                <li class="first">
+                    <h4><strong>机票预订</strong></h4>
+                    <div class="fl">
+                        <a href="http://help.gome.com.cn/question/252.html#lc" target="_blank" title="机票预订流程">机票预订流程</a>
+                        <a href="http://help.gome.com.cn/question/252.html#xz" target="_blank" title="购票需知">购票需知</a>
+                        <a href="http://help.gome.com.cn/question/252.html#wt" target="_blank" title="预定常见问题">预定常见问题</a>
+                        <a href="http://help.gome.com.cn/question/252.html#gq" target="_blank" title="退票及改签说明">退票及改签说明</a>
+                        <a href="http://help.gome.com.cn/question/252.html#pz" target="_blank" title="行程单/发票/报销凭证">行程单/发票/报销</a>
+                    </div>
+                    <div class="fl">
+                        <a href="http://help.gome.com.cn/question/252.html#yz" target="_blank" title="机票真伪验证">机票真伪验证</a>
+                        <a href="http://help.gome.com.cn/question/252.html#cs" target="_blank" title="机票常识">机票常识</a>
+                        <a href=" http://help.gome.com.cn/question/252.html#gd" target="_blank" title="行李规定">行李规定</a>
+                        <a href="http://help.gome.com.cn/question/252.html#sx" target="_blank" title="乘机注意事项">乘机注意事项</a>
+                    </div>
+                </li>
+                <li>
+                    <h4>购物帮助</h4>
+                    <a href="http://help.gome.com.cn/question/1.html" target="_blank" title="常见问题" rel="nofollow">常见问题</a>
+                    <a href="http://help.gome.com.cn/question/33.html" target="_blank" title="在线支付" rel="nofollow">在线支付</a>
+                    <a href="http://help.gome.com.cn/question/3.html" target="_blank" title="登陆帮助" rel="nofollow">登陆帮助</a>
+                    <!-- 				<a href="http://help.gome.com.cn/question/2.html" target="_blank" title="忘记密码" rel="nofollow">忘记密码</a> -->
+                    <a href="http://help.gome.com.cn/question/2.html" target="_blank" title="账户安全" rel="nofollow">账户安全</a>
+                    <a href="http://help.gome.com.cn/question/39.html" target="_blank" title="退款说明" rel="nofollow">退款说明</a>
+                </li>
+                <li>
+                    <h4>会员专区</h4>
+                    <a href="http://help.gome.com.cn/question/26.html" target="_blank" title="会员介绍" rel="nofollow">会员介绍</a>
+                    <a href="http://help.gome.com.cn/question/23.html" target="_blank" title="积分说明" rel="nofollow">积分说明</a>
+                    <a href="http://help.gome.com.cn/question/27.html" target="_blank" title="优惠券说明" rel="nofollow">优惠券说明</a>
+                    <a href="http://help.gome.com.cn/question/20.html" target="_blank" title="电子券" rel="nofollow">电子券</a>
+                    <a href="http://help.gome.com.cn/question/42.html" target="_blank" title="国美社区" rel="nofollow">国美社区</a>
+                </li>
+                <li>
+                    <h4>国美在线</h4>
+                    <a href="http://help.gome.com.cn/about/company.html" target="_blank" title="关于国美在线" rel="nofollow">关于国美在线</a>
+                    <!-- 				<a href="#" title="商家入住" target="_blank" rel="nofollow">商家入住</a> -->
+                    <!-- 				<a href="#" title="销售联盟" target="_blank" rel="nofollow">销售联盟</a> -->
+                    <a href="http://help.gome.com.cn/question/21.html" target="_blank" title="联系我们" rel="nofollow">联系我们</a>
+                    <a href="http://www.gome.com.cn/links/" title="友情链接" target="_blank" rel="nofollow">友情链接</a>
+                    <a href="http://www.gomeart.com/" title="国之美" target="_blank" rel="nofollow">国之美</a>
+                    <a href="http://www.multigold.com.cn/" title="多边黄金" target="_blank" rel="nofollow">多边黄金</a>
+                </li>
+            </ul>
+            <div class="footer_download">扫描下载客户端</div>
+        </div>
+        <div class="footer_bottom">
+            <div class="content clearfix">
+                <div class="fl"> ©2000-2014 国美在线电子商务有限公司 版权所有<span class="ml10">沪ICP备11009419号</span><span class="ml10">沪B2-20120004号</span>
+                </div>
+                <div class="fr">
+                    <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=20111216142637606" title="经营性网站备案信息">经营性网站备案信息</a>
+                    <a href="https://ss.knet.cn/verifyseal.dll?sn=2011071100100011373&comefrom=trust" title="可信网站信用评价">可信网站信用评价</a>
+                    <a href="http://search.cxwz.org/cert/l/CX20111018000607000618" title="诚信网站">诚信网站</a>
+                    <a href="http://www.bj.cyberpolice.cn/index.do" title="海淀网络警察提醒您">海淀网络警察提醒您</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 公共底部 end -->
+
+    <!-- 以下是弹层内容 -->
+    <!-- 选择城市弹层 start-->
+    <div class="selsect_city_box hide">
+        <span class="close_btn">关闭</span>
+        <p class="c_grey">支持中文或拼音</p>
+        <!-- 	<p class="c_orange">对不起，暂不支持该地址。</p> -->
+        <div class="selectcity_box" id="selectcity_box">
+            <div class="selectcity_tab_ulbg">
+                <ul class="selectcity_tab_ul clearfix" id="selectcity_ul">
+                    <li class="active"><a href="javascript:;">热门</a>
+                    </li>
+                    <li><a href="javascript:;">ABCDEF</a>
+                    </li>
+                    <li><a href="javascript:;">GHJ</a>
+                    </li>
+                    <li><a href="javascript:;">KLMN</a>
+                    </li>
+                    <li><a href="javascript:;">PQRSTW</a>
+                    </li>
+                    <li><a href="javascript:;">XYZ</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 热门 -->
+            <div class="selectcity_tab_cont clearfix" style="display:block">
+                <a class="name" href="javascript:;" code="BJS">北京</a>
+                <a class="name" href="javascript:;" code="SHH">上海</a>
+                <a class="name" href="javascript:;" code="CAN">广州</a>
+                <a class="name" href="javascript:;" code="SZX">深圳</a>
+                <a class="name" href="javascript:;" code="CTU">成都</a>
+                <a class="name" href="javascript:;" code="HGH">杭州</a>
+                <a class="name" href="javascript:;" code="WUH">武汉</a>
+                <a class="name" href="javascript:;" code="XIY">西安</a>
+                <a class="name" href="javascript:;" code="CKG">重庆</a>
+                <a class="name" href="javascript:;" code="TAO">青岛</a>
+                <a class="name" href="javascript:;" code="CSX">长沙</a>
+                <a class="name" href="javascript:;" code="NKG">南京</a>
+                <a class="name" href="javascript:;" code="XMN">厦门</a>
+                <a class="name" href="javascript:;" code="KMG">昆明</a>
+                <a class="name" href="javascript:;" code="DLC">大连</a>
+                <a class="name" href="javascript:;" code="TSN">天津</a>
+                <a class="name" href="javascript:;" code="CGO">郑州</a>
+                <a class="name" href="javascript:;" code="SYX">三亚</a>
+                <a class="name" href="javascript:;" code="TNA">济南</a>
+                <a class="name" href="javascript:;" code="FOC">福州</a>
+            </div>
+            <!-- A-F -->
+            <div class="selectcity_tab_cont clearfix">
+                <dl class="clearfix">
+                    <dt>A</dt>
+                    <dd>
+                        <a href="javascript:;" code="NGQ" class="name">阿里</a>
+                        <a href="javascript:;" code="YIE" class="name">阿尔山</a>
+                        <a href="javascript:;" code="AQG" class="name">安庆</a>
+                        <a href="javascript:;" code="AAT" class="name">阿勒泰</a>
+                        <a href="javascript:;" code="AKA" class="name">安康</a>
+                        <a href="javascript:;" code="AOG" class="name">鞍山</a>
+                        <a href="javascript:;" code="AVA" class="name">安顺</a>
+                        <a href="javascript:;" code="AKU" class="name">阿克苏</a>
+                        <a href="javascript:;" code="AXF" class="name">阿拉善左旗</a>
+                        <a href="javascript:;" code="RHT" class="name">阿拉善右旗</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>B</dt>
+                    <dd>
+                        <a href="javascript:;" code="BAV" class="name">包头</a>
+                        <a href="javascript:;" code="BHY" class="name">北海</a>
+                        <a href="javascript:;" code="BJS" class="name">北京</a>
+                        <a href="javascript:;" code="AEB" class="name">百色</a>
+                        <a href="javascript:;" code="BSD" class="name">保山</a>
+                        <a href="javascript:;" code="BPL" class="name">博乐</a>
+                        <a href="javascript:;" code="BFJ" class="name">毕节</a>
+                        <a href="javascript:;" code="RLK" class="name">巴彦淖尔</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>C</dt>
+
+                    <dd>
+                        <a href="javascript:;" code="CSX" class="name">长治</a>
+                        <a href="javascript:;" code="JUH" class="name">池州</a>
+                        <a href="javascript:;" code="CGQ" class="name">长春</a>
+                        <a href="javascript:;" code="CZX" class="name">常州</a>
+                        <a href="javascript:;" code="BPX" class="name">昌都</a>
+                        <a href="javascript:;" code="CHG" class="name">朝阳</a>
+                        <a href="javascript:;" code="CGD" class="name">常德</a>
+                        <a href="javascript:;" code="NBS" class="name">长白山</a>
+                        <a href="javascript:;" code="CTU" class="name">成都</a>
+                        <a href="javascript:;" code="CKG" class="name">重庆</a>
+                        <a href="javascript:;" code="CSX" class="name">长沙</a>
+                        <a href="javascript:;" code="CIF" class="name">赤峰</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>D</dt>
+                    <dd>
+                        <a href="javascript:;" code="DAT" class="name">大同</a>
+                        <a href="javascript:;" code="DLC" class="name">大连</a>
+                        <a href="javascript:;" code="DOY" class="name">东营</a>
+                        <a href="javascript:;" code="DQA" class="name">大庆</a>
+                        <a href="javascript:;" code="DDG" class="name">丹东</a>
+                        <a href="javascript:;" code="DLU" class="name">大理</a>
+                        <a href="javascript:;" code="DNH" class="name">敦煌</a>
+                        <a href="javascript:;" code="DAX" class="name">达州</a>
+                        <a href="javascript:;" code="DCY" class="name">稻城</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>E</dt>
+                    <dd>
+                        <a href="javascript:;" code="ENH" class="name">恩施</a>
+                        <a href="javascript:;" code="DSN" class="name">鄂尔多斯</a>
+                        <a href="javascript:;" code="ERL" class="name">二连浩特</a>
+                        <a href="javascript:;" code="EJN" class="name">额济纳旗</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>F</dt>
+                    <dd>
+                        <a href="javascript:;" code="FUO" class="name">佛山</a>
+                        <a href="javascript:;" code="FOC" class="name">福州</a>
+                        <a href="javascript:;" code="FUG" class="name">阜阳</a>
+                        <a href="javascript:;" code="FYJ" class="name">抚远</a>
+                    </dd>
+                </dl>
+            </div>
+            <!-- G-J -->
+            <div class="selectcity_tab_cont clearfix">
+                <dl class="clearfix">
+                    <dt>G</dt>
+                    <dd>
+                        <a href="javascript:;" code="KWE" class="name">贵阳</a>
+                        <a href="javascript:;" code="KWL" class="name">桂林</a>
+                        <a href="javascript:;" code="CAN" class="name">广州</a>
+                        <a href="javascript:;" code="GYS" class="name">广元</a>
+                        <a href="javascript:;" code="GOQ" class="name">格尔木</a>
+                        <a href="javascript:;" code="KOW" class="name">赣州</a>
+                        <a href="javascript:;" code="GYU" class="name">固原</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>H</dt>
+                    <dd>
+                        <a href="javascript:;" code="HMI" class="name">哈密</a>
+                        <a href="javascript:;" code="HET" class="name">呼和浩特</a>
+                        <a href="javascript:;" code="HEK" class="name">黑河</a>
+                        <a href="javascript:;" code="HLD" class="name">海拉尔</a>
+                        <a href="javascript:;" code="HRB" class="name">哈尔滨</a>
+                        <a href="javascript:;" code="HAK" class="name">海口</a>
+                        <a href="javascript:;" code="TXN" class="name">黄山</a>
+                        <a href="javascript:;" code="HGH" class="name">杭州</a>
+                        <a href="javascript:;" code="HDG" class="name">邯郸</a>
+                        <a href="javascript:;" code="HFE" class="name">合肥</a>
+                        <a href="javascript:;" code="JZH" class="name">黄龙</a>
+                        <a href="javascript:;" code="HZG" class="name">汉中</a>
+                        <a href="javascript:;" code="HTN" class="name">和田</a>
+                        <a href="javascript:;" code="HIA" class="name">淮安</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>J</dt>
+                    <dd>
+                        <a href="javascript:;" code="JXA" class="name">鸡西</a>
+                        <a href="javascript:;" code="JJN" class="name">晋江</a>
+                        <a href="javascript:;" code="JNZ" class="name">锦州</a>
+                        <a href="javascript:;" code="JDZ" class="name">景德镇</a>
+                        <a href="javascript:;" code="JGN" class="name">嘉峪关</a>
+                        <a href="javascript:;" code="JGS" class="name">井冈山</a>
+                        <a href="javascript:;" code="JNG" class="name">济宁</a>
+                        <a href="javascript:;" code="JIU" class="name">九江</a>
+                        <a href="javascript:;" code="JMU" class="name">佳木斯</a>
+                        <a href="javascript:;" code="TNA" class="name">济南</a>
+                        <a href="javascript:;" code="JGD" class="name">加格达奇</a>
+                        <a href="javascript:;" code="JIC" class="name">金昌</a>
+                        <a href="javascript:;" code="SWA" class="name">揭阳</a>
+                    </dd>
+                </dl>
+            </div>
+            <!-- K-N -->
+            <div class="selectcity_tab_cont clearfix">
+                <dl class="clearfix">
+                    <dt>K</dt>
+                    <dd>
+                        <a href="javascript:;" code="KHG" class="name">喀什</a>
+                        <a href="javascript:;" code="KMG" class="name">昆明</a>
+                        <a href="javascript:;" code="KGT" class="name">康定</a>
+                        <a href="javascript:;" code="KRY" class="name">克拉玛依</a>
+                        <a href="javascript:;" code="KRL" class="name">库尔勒</a>
+                        <a href="javascript:;" code="KCA" class="name">库车</a>
+                        <a href="javascript:;" code="KJI" class="name">喀纳斯</a>
+                        <a href="javascript:;" code="KJH" class="name">凯里</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>L</dt>
+                    <dd>
+                        <a href="javascript:;" code="LHW" class="name">兰州</a>
+                        <a href="javascript:;" code="LYA" class="name">洛阳</a>
+                        <a href="javascript:;" code="LJG" class="name">丽江</a>
+                        <a href="javascript:;" code="LLB" class="name">荔波</a>
+                        <a href="javascript:;" code="LZY" class="name">林芝</a>
+                        <a href="javascript:;" code="LZH" class="name">柳州</a>
+                        <a href="javascript:;" code="LZO" class="name">泸州</a>
+                        <a href="javascript:;" code="LYG" class="name">连云港</a>
+                        <a href="javascript:;" code="HZH" class="name">黎平</a>
+                        <a href="javascript:;" code="LCX" class="name">连城</a>
+                        <a href="javascript:;" code="LXA" class="name">拉萨</a>
+                        <a href="javascript:;" code="LNJ" class="name">临沧</a>
+                        <a href="javascript:;" code="LYI" class="name">临沂</a>
+                        <a href="javascript:;" code="LLV" class="name">吕梁</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>M</dt>
+                    <dd>
+                        <a href="javascript:;" code="LUM" class="name">芒市</a>
+                        <a href="javascript:;" code="MDG" class="name">牡丹江</a>
+                        <a href="javascript:;" code="NZH" class="name">满洲里</a>
+                        <a href="javascript:;" code="MIG" class="name">绵阳</a>
+                        <a href="javascript:;" code="MXZ" class="name">梅县</a>
+                        <a href="javascript:;" code="OHE" class="name">漠河</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>N</dt>
+                    <dd>
+                        <a href="javascript:;" code="NKG" class="name">南京</a>
+                        <a href="javascript:;" code="NAO" class="name">南充</a>
+                        <a href="javascript:;" code="NNG" class="name">南宁</a>
+                        <a href="javascript:;" code="NNY" class="name">南阳</a>
+                        <a href="javascript:;" code="NTG" class="name">南通</a>
+                        <a href="javascript:;" code="KHN" class="name">南昌</a>
+                        <a href="javascript:;" code="NLT" class="name">那拉提</a>
+                        <a href="javascript:;" code="NGB" class="name">宁波</a>
+                    </dd>
+                </dl>
+            </div>
+            <!-- P-W -->
+            <div class="selectcity_tab_cont clearfix">
+                <dl class="clearfix">
+                    <dt>P</dt>
+                    <dd>
+                        <a href="javascript:;" code="PZI" class="name">攀枝花</a>
+                        <a href="javascript:;" code="SYM" class="name">普洱</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>Q</dt>
+                    <dd>
+                        <a href="javascript:;" code="JUZ" class="name">衢州</a>
+                        <a href="javascript:;" code="JIQ" class="name">黔江</a>
+                        <a href="javascript:;" code="SHP" class="name">秦皇岛</a>
+                        <a href="javascript:;" code="IQN" class="name">庆阳</a>
+                        <a href="javascript:;" code="IQM" class="name">且末</a>
+                        <a href="javascript:;" code="NDG" class="name">齐齐哈尔</a>
+                        <a href="javascript:;" code="TAO" class="name">青岛</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>R</dt>
+                    <dd>
+                        <a href="javascript:;" code="RKZ" class="name">日喀则</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>S</dt>
+                    <dd>
+                        <a href="javascript:;" code="SZX" class="name">深圳</a>
+                        <a href="javascript:;" code="SJW" class="name">石家庄</a>
+                        <a href="javascript:;" code="SYX" class="name">三亚</a>
+                        <a href="javascript:;" code="SHE" class="name">沈阳</a>
+                        <a href="javascript:;" code="SHA" class="name">上海</a>
+                        <a href="javascript:;" code="HPG" class="name">神农架</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>T</dt>
+                    <dd>
+                        <a href="javascript:;" code="TVS" class="name">唐山</a>
+                        <a href="javascript:;" code="TEN" class="name">铜仁</a>
+                        <a href="javascript:;" code="TCG" class="name">塔城</a>
+                        <a href="javascript:;" code="TCZ" class="name">腾冲</a>
+                        <a href="javascript:;" code="HYN" class="name">台州</a>
+                        <a href="javascript:;" code="THQ" class="name">天水</a>
+                        <a href="javascript:;" code="TSN" class="name">天津</a>
+                        <a href="javascript:;" code="TGO" class="name">通辽</a>
+                        <a href="javascript:;" code="TLQ" class="name">吐鲁番</a>
+                        <a href="javascript:;" code="TYN" class="name">太原</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>W</dt>
+                    <dd>
+                        <a href="javascript:;" code="WEH" class="name">威海</a>
+                        <a href="javascript:;" code="WUH" class="name">武汉</a>
+                        <a href="javascript:;" code="WUZ" class="name">梧州</a>
+                        <a href="javascript:;" code="WNH" class="name">文山</a>
+                        <a href="javascript:;" code="WUX" class="name">无锡</a>
+                        <a href="javascript:;" code="WEF" class="name">潍坊</a>
+                        <a href="javascript:;" code="WUS" class="name">武夷山</a>
+                        <a href="javascript:;" code="HLH" class="name">乌兰浩特</a>
+                        <a href="javascript:;" code="WNZ" class="name">温州</a>
+                        <a href="javascript:;" code="URC" class="name">乌鲁木齐</a>
+                        <a href="javascript:;" code="WXN" class="name">万州</a>
+                        <a href="javascript:;" code="WUA" class="name">乌海</a>
+                    </dd>
+                </dl>
+            </div>
+            <!-- X-Z -->
+            <div class="selectcity_tab_cont clearfix">
+                <dl class="clearfix">
+                    <dt>X</dt>
+                    <dd>
+                        <a href="javascript:;" code="ACX" class="name">兴义</a>
+                        <a href="javascript:;" code="XIC" class="name">西昌</a>
+                        <a href="javascript:;" code="XMN" class="name">厦门</a>
+                        <a href="javascript:;" code="DIG" class="name">香格里拉</a>
+                        <a href="javascript:;" code="SIA" class="name">西安</a>
+                        <a href="javascript:;" code="XNN" class="name">西宁</a>
+                        <a href="javascript:;" code="XFN" class="name">襄阳(中国)</a>
+                        <a href="javascript:;" code="XIL" class="name">锡林浩特</a>
+                        <a href="javascript:;" code="JHG" class="name">西双版纳</a>
+                        <a href="javascript:;" code="XUZ" class="name">徐州</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>Y</dt>
+                    <dd>
+                        <a href="javascript:;" code="YIW" class="name">义乌</a>
+                        <a href="javascript:;" code="LLF" class="name">永州</a>
+                        <a href="javascript:;" code="UYN" class="name">榆林</a>
+                        <a href="javascript:;" code="YTY" class="name">扬州</a>
+                        <a href="javascript:;" code="ENY" class="name">延安</a>
+                        <a href="javascript:;" code="YCU" class="name">运城</a>
+                        <a href="javascript:;" code="YNT" class="name">烟台</a>
+                        <a href="javascript:;" code="INC" class="name">银川</a>
+                        <a href="javascript:;" code="YIH" class="name">宜昌</a>
+                        <a href="javascript:;" code="YBP" class="name">宜宾</a>
+                        <a href="javascript:;" code="YIC" class="name">宜春</a>
+                        <a href="javascript:;" code="YNZ" class="name">盐城</a>
+                        <a href="javascript:;" code="YNJ" class="name">延吉</a>
+                        <a href="javascript:;" code="YUS" class="name">玉树</a>
+                        <a href="javascript:;" code="YIN" class="name">伊宁</a>
+                        <a href="javascript:;" code="LDS" class="name">伊春</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>Z</dt>
+                    <dd>
+                        <a href="javascript:;" code="ZUH" class="name">珠海</a>
+                        <a href="javascript:;" code="ZAT" class="name">昭通</a>
+                        <a href="javascript:;" code="DYG" class="name">张家界</a>
+                        <a href="javascript:;" code="HSN" class="name">舟山</a>
+                        <a href="javascript:;" code="CGO" class="name">郑州</a>
+                        <a href="javascript:;" code="ZHY" class="name">中卫</a>
+                        <a href="javascript:;" code="HJJ" class="name">芷江</a>
+                        <a href="javascript:;" code="ZHA" class="name">湛江</a>
+                        <a href="javascript:;" code="ZYI" class="name">遵义</a>
+                        <a href="javascript:;" code="YZY" class="name">张掖</a>
+                        <a href="javascript:;" code="ZQZ" class="name">张家口</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- 选择城市弹层 end-->
+    <!-- 城市名称联想层 start-->
+    <div class="relation_city_box hide" id="relation_city_box">
+        <ul></ul>
+    </div>
+    <!-- 城市名称联想层 end-->
+    <!-- 日历插件 start-->
+    <div class="gome_calendar hide">
+        <div class="calendar_title01 calendar_year"><a id="calendar_lastmonth">&nbsp;</a><span id="calendar_title1">2014年&nbsp;11月</span>
+        </div>
+        <div class="calendar_title02 calendar_year"><a id="calendar_nextmonth">&nbsp;</a><span id="calendar_title2">2014年&nbsp;12月</span>
+        </div>
+        <dl class="calendar_month1">
+            <dt class="day0">日</dt>
+            <dt class="day1">一</dt>
+            <dt class="day2">二</dt>
+            <dt class="day3">三</dt>
+            <dt class="day4">四</dt>
+            <dt class="day5">五</dt>
+            <dt class="day6">六</dt>
+            <dd>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;" class="over_day">1</a>
+                <a href="javascript:;" class="over_day">2</a>
+                <a href="javascript:;" class="over_day">3</a>
+                <a href="javascript:;" class="over_day">4</a>
+                <a href="javascript:;" class="over_day">5</a>
+                <a href="javascript:;" class="over_day">6</a>
+                <a href="javascript:;" class="over_day">7</a>
+                <a href="javascript:;" class="over_day">8</a>
+                <a href="javascript:;" class="over_day">9</a>
+                <a href="javascript:;" class="over_day">10</a>
+                <a href="javascript:;" class="over_day">11</a>
+                <a href="javascript:;" class="over_day">12</a>
+                <a href="javascript:;" class="over_day">13</a>
+                <a href="javascript:;" class="over_day">14</a>
+                <a href="javascript:;" class="over_day">15</a>
+                <a href="javascript:;" class="over_day">16</a>
+                <a href="javascript:;" class="over_day">17</a>
+                <a href="javascript:;" class="over_day">18</a>
+                <a href="javascript:;" class="over_day">19</a>
+                <a href="javascript:;" class="over_day">20</a>
+                <a href="javascript:;" class="over_day">21</a>
+                <a href="javascript:;" class="over_day">22</a>
+                <a href="javascript:;" class="over_day">23</a>
+                <a href="javascript:;" class="over_day">24</a>
+                <a href="javascript:;" class="over_day">25</a>
+                <a href="javascript:;" class="over_day">26</a>
+                <a href="javascript:;" class="today">27</a>
+                <a href="javascript:;">28</a>
+                <a href="javascript:;">29</a>
+                <a href="javascript:;">30</a>
+
+            </dd>
+        </dl>
+        <dl class="calendar_month2">
+            <dt class="day0">日</dt>
+            <dt class="day1">一</dt>
+            <dt class="day2">二</dt>
+            <dt class="day3">三</dt>
+            <dt class="day4">四</dt>
+            <dt class="day5">五</dt>
+            <dt class="day6">六</dt>
+            <dd>
+                <a href="javascript:;" class="blank_day">&nbsp;</a>
+                <a href="javascript:;">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;" class="select_day">4</a>
+                <a href="javascript:;" class="linked_day">5</a>
+                <a href="javascript:;" class="linked_day">6</a>
+                <a href="javascript:;" class="linked_day">7</a>
+                <a href="javascript:;" class="linked_day">8</a>
+                <a href="javascript:;" class="linked_day">9</a>
+                <a href="javascript:;" class="end_day">10</a>
+                <a href="javascript:;">11</a>
+                <a href="javascript:;">12</a>
+                <a href="javascript:;">13</a>
+                <a href="javascript:;">14</a>
+                <a href="javascript:;">15</a>
+                <a href="javascript:;">16</a>
+                <a href="javascript:;">17</a>
+                <a href="javascript:;">18</a>
+                <a href="javascript:;">19</a>
+                <a href="javascript:;">20</a>
+                <a href="javascript:;">21</a>
+                <a href="javascript:;">22</a>
+                <a href="javascript:;">23</a>
+                <a href="javascript:;">24</a>
+                <a href="javascript:;">25</a>
+                <a href="javascript:;">26</a>
+                <a href="javascript:;">27</a>
+                <a href="javascript:;">28</a>
+                <a href="javascript:;">29</a>
+                <a href="javascript:;">30</a>
+                <a href="javascript:;">31</a>
+            </dd>
+        </dl>
+    </div>
+    <!-- 日历插件 end-->
+    <!-- 机型start -->
+    <div class="model_direction" id="model_pop">
+        <table cellpadding="0" cellspacing="0" width="385">
+            <thead>
+                <th width="55">机型</th>
+                <th>机型名称</th>
+                <th>类型</th>
+                <th>最少座位数</th>
+                <th>最多座位数</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>747</td>
+                    <td>空中客车 A330</td>
+                    <td>宽体</td>
+                    <td>256</td>
+                    <td>456</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 机型 end -->
+    <!-- 经停信息 start-->
+    <div class="model_direction" id="stopcity_pop">
+
+    </div>
+    <!-- 经停信息 end-->
+    <!-- 改退签说明 start-->
+    <div class="change_direction" id="change_pop">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="65" class="fontb">签转规定：</td>
+                    <td>不得签转</td>
+                </tr>
+                <tr>
+                    <td valign="top" class="fontb">签转规定：</td>
+                    <td>相同舱位航班起飞前每次收取30%的改期费起飞后每次收取50%的改期费。如变更航班、日期与升舱同时进行，需同时收取变更费和差价。</td>
+                </tr>
+                <tr>
+                    <td valign="top" class="fontb">退票规定：</td>
+                    <td>航班起飞前收取50%退票费；起飞后不允许退票。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 改退签说明 end-->
+    <!-- 高端经济舱说明 start-->
+    <div class="change_direction" id="cabintype_pop">
+        <p>高端经济舱说明高端经济舱说明高端经济舱说明高端经济舱说明高端经济舱说明高端经济舱说明</p>
+    </div>
+    <!-- 高端经济舱说明 end-->
+    <!-- 查看低价日历 start -->
+    <div class="gome_bigcalendar">
+        <div class="bigcalendar_title clearfix">
+            <a class="bigcalendar_prevmonth">&nbsp;</a>
+            <span id="calendar_title1">2014年&nbsp;11月</span>
+            <a class="bigcalendar_nextmonth">&nbsp;</a>
+        </div>
+        <dl class="bigcalendar_month clearfix">
+            <dt class="day0">日</dt>
+            <dt class="day1">一</dt>
+            <dt class="day2">二</dt>
+            <dt class="day3">三</dt>
+            <dt class="day4">四</dt>
+            <dt class="day5">五</dt>
+            <dt class="day6">六</dt>
+            <dd class="clearfix">
+                <a href="javascript:;" class="over_day">27</a>
+                <a href="javascript:;" class="over_day">28</a>
+                <a href="javascript:;" class="over_day">29</a>
+                <a href="javascript:;" class="over_day">30</a>
+                <a href="javascript:;" class="over_day">31</a>
+                <a href="javascript:;" class="">01</a>
+                <a href="javascript:;" class="">02</a>
+                <a href="javascript:;" class="">03</a>
+                <a href="javascript:;" class="">04</a>
+                <a href="javascript:;" class="">05</a>
+                <a href="javascript:;" class="">06</a>
+                <a href="javascript:;" class="today">07</a>
+                <a href="javascript:;" class="">08</a>
+                <a href="javascript:;" class="">09</a>
+                <a href="javascript:;" class="">10</a>
+                <a href="javascript:;" class="select_day">11</a>
+                <a href="javascript:;" class="linked_day">12</a>
+                <a href="javascript:;" class="linked_day">13</a>
+                <a href="javascript:;" class="linked_day">14</a>
+                <a href="javascript:;" class="linked_day">15</a>
+                <a href="javascript:;" class="linked_day">16</a>
+                <a href="javascript:;" class="end_day">17</a>
+                <a href="javascript:;" class="">18</a>
+                <a href="javascript:;" class="">19</a>
+                <a href="javascript:;" class="">20</a>
+                <a href="javascript:;" class="">21</a>
+                <a href="javascript:;" class="">22</a>
+                <a href="javascript:;" class="">23</a>
+                <a href="javascript:;" class="">24</a>
+                <a href="javascript:;" class="">25</a>
+                <a href="javascript:;" class="">26</a>
+                <a href="javascript:;" class="">27</a>
+                <a href="javascript:;">28</a>
+                <a href="javascript:;">29</a>
+                <a href="javascript:;">30</a>
+
+            </dd>
+        </dl>
+        <div class="tips_box">温馨提示：由于票价和仓位变化比较频繁，请以实时查询报价为准。</div>
+    </div>
+
+    <div class="error_tip2" style="display: none;"><i></i><span>请选出发城市</span>
+    </div>
+    <div class="gome_bigcalendar" id="gome_bigcalendar">
+        <!-- 这段style请删掉 为展现不同效果所添加-->
+        <div class="bigcalendar_title clearfix">
+            <a class="bigcalendar_prevmonth">&nbsp;</a>
+            <span id="calendar_title">2014年&nbsp;11月</span>
+            <a class="bigcalendar_nextmonth">&nbsp;</a>
+        </div>
+        <div class="bigcalendar_title clearfix" style="display:none;">
+            <a class="bigcalendar_prevmonth_disable">&nbsp;</a>
+            <span id="calendar_title1">2014年&nbsp;11月</span>
+            <a class="bigcalendar_nextmonth_disable">&nbsp;</a>
+        </div>
+        <dl class="bigcalendar_month clearfix">
+            <dt class="day0">日</dt>
+            <dt class="day1">一</dt>
+            <dt class="day2">二</dt>
+            <dt class="day3">三</dt>
+            <dt class="day4">四</dt>
+            <dt class="day5">五</dt>
+            <dt class="day6">六</dt>
+            <dd style="height:0px;clear:both;"></dd>
+            <dd class="clearfix" id="rili">
+                <div class="riliBox">
+
+                </div>
+            </dd>
+        </dl>
+        <div class="tips_box">温馨提示：由于票价和仓位变化比较频繁，请以实时查询报价为准。</div>
+    </div>
+    <!-- 查看低价日历 end -->
+
+    <div class="pop_content" style="display:none;">
+        <a href="javascript:;" title="关闭" class="pop_btn_close"></a>
+        <div class="clearfix error_box">
+            <span class="fl error_icon mt5"></span>
+            <div class="fl error_word">
+                <p class="pop_big_word">停留太久了，价格已变动</p>
+                <p>将为您加载最新价格。</p>
+            </div>
+        </div>
+        <a href="javascript:;" title="知道了" class="pop_btn_know">知道了</a>
+    </div>
+    <div class="pop_cover" style="display:none;"></div>
+
+    <span id="live800" class="live800 live800_gome" style="display:none;" lim:company="3" lim:page="0" lim:shopid="3" lim:shopnsame="%E5%95%86%E9%93%BA%E5%90%8D%E5%AD%97" lim:offlinetip="">
+    <a href="javascript:;"></a>
+</span>
+
+    <a class="gome_flights_gotop" href="javascript:void(0);" style="display:none;">回顶部</a>
+
+    <script type="text/javascript" src="http://js.gomein.net.cn/xn/js/jquery-1.7.1.min.js"></script>
+    <script src="http://js.gomein.net.cn/xn/js/jquery.cookie.min.js"></script>
+    <script src="http://js.gomein.net.cn/xn/js/calendar.min.js"></script>
+    <script type="text/javascript" src="http://js.gomein.net.cn/xn/js/underscore.min.js"></script>
+    <script src="http://js.gomein.net.cn/xn/js/json3.min.js"></script>
+    <script src="http://js.gomein.net.cn/xn/js/template.min.js"></script>
+
+    <!-- <script type="text/javascript" src="http://js.atguat.net.cn/xn/js/commRequest.js"></script> -->
+    <script type="text/javascript" src="http://js.gomein.net.cn/xn/js/palceholder.min.js"></script>
+    <script type="text/javascript" src="http://js.gomein.net.cn/xn/js/flightsPublic.min.js"></script>
+    <script src="http://js.gomein.net.cn/xn/js/loaded.min.js"></script>
+    <script type="text/javascript">
+    /*versionData  公共版本号控制 */
+    </script>
+</body>
+
+<script type="text/javascript" src="http://js.gomein.net.cn/xn/js/screen.min.js"></script>
+<script src="http://js.gomein.net.cn/xn/js/config.min.js"></script>
+<script type="text/javascript" src="http://js.gomein.net.cn/xn/js/config.min.js"></script>
+
+</html>
