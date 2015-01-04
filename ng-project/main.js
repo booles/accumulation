@@ -39,6 +39,6 @@ require(['angular',
         "route"], function(angular,app,dom) {
             
             dom(function (){
-              angular.bootstrap(document,["firstApp"]);
+                angular.bootstrap(document,["firstApp"]);
             });
 });

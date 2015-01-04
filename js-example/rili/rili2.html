@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="./rili.css">
+        <script src="jquery-1.7.2.js"></script>
+		<script src="./rili.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="gome_bigcalendar">
+			<div class="bigcalendar_title clearfix">
+				<button class="pre">pre</button>
+				<a class="bigcalendar_prevmonth">&nbsp;</a>
+				<span id="calendar_title1">2014年&nbsp;11月</span>
+				<a class="bigcalendar_nextmonth">&nbsp;</a>
+				<button class="next">next</button>
+			</div>
+			<dl class="bigcalendar_month clearfix">
+				<dt class="day0">日</dt>
+				<dt class="day1">一</dt>
+				<dt class="day2">二</dt>
+				<dt class="day3">三</dt>
+				<dt class="day4">四</dt>
+				<dt class="day5">五</dt>
+				<dt class="day6">六</dt>
+				<dd class="rili clearfix">
+				</dd>
+			</dl>
+			<div class="tips_box">温馨提示：由于票价和仓位变化比较频繁，请以实时查询报价为准。</div>
+			<div class="riliDiv2">
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;" class=""></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+			</div>
+		</div>
+	</body>
+	<script>
+
+	//判断是否是闰年
+	function runNian(year) {
+	    if(year%400 === 0 || (year%4 === 0 && year%100 !== 0) ) {
+	        return true;
+	    }
+	    else { return false; }
+	};
+
+	//获取每月的总天数
+	function monthData(_year){
+		return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+	}
+
+
+	function trans(time){
+		return time.replace(/-0?/g,"/");
+	};
+
+	var weekend = ["日","一","二","三","四","五","六"];
+
+	function monthToday(time){
+		var date = trans(time),
+			oDate = new Date,
+			time = date.split("/"),
+			timeYear = +time[0],
+			timeMonth = +time[1];
+
+		var preMonth =  timeMonth == 1 ? 12 : timeMonth - 1,
+			currentMonth = +time[1],
+			nextMonth = timeMonth == 12 ? 1 : timeMonth + 1,
+
+			preDate = monthData(timeYear)[preMonth-1],
+			currentMonthDate = monthData(timeYear)[timeMonth-1],
+			nextDate = monthData(timeYear)[nextMonth-1];
+		
+		return {
+				preMonth: preMonth,
+				currentMonth:currentMonth,
+				nextMonth: nextMonth,
+				preDate:preDate,
+				currentMonthDate:currentMonthDate,
+				nextDate:nextDate,
+				currentDate:new Date(date).getDate(),
+				day:new Date(timeYear+"/"+timeMonth+"/"+1).getDay(),
+				year:timeYear
+			};
+	};
+
+	function qujian(time1,time2){
+			
+	}
+
+		
+	
+		var json;
+		function setDateFn(timedate){
+
+			json = monthToday(timedate);
+
+			
+
+			//var qujianzhi = qujian("2014-12-15","2014-12-25");
+
+			var riliDiv = $(".riliDiv2").clone().removeClass("riliDiv2"),
+				rili = riliDiv.find("a");
+			
+
+			$("#calendar_title1").html(json.year+"年&nbsp;"+json.currentMonth+"月");
+
+			rili.text("").removeClass("over_day");
+
+			var m = 1;
+
+			rili.eq(json.currentDate+json.day-1).addClass("today");
+
+			rili.each(function (i){
+				if(i<json.day){
+					$(this).addClass("over_day allowed").text(json.preDate - (json.day - i-1));
+				}
+				if(i>=json.day){
+					if(m<=json.currentMonthDate){
+						$(this).text(m++);
+						
+					}else{
+						$(this).addClass("over_day allowed").text(m-json.currentMonthDate);
+						m++;
+					}
+				};
+					
+			});	
+
+			$(".rili").append(riliDiv);
+
+			
+		};
+
+		$(".pre").off();
+		$(".pre").on("click",function (){
+			var prejson = monthToday(json.year+"-"+json.preMonth+"-"+json.currentDate),
+				year  = prejson.year;
+			if(prejson.currentMonth == 12 && prejson.preMonth == 11){
+				year = prejson.year-1; 
+			};
+			setDateFn(year+"-"+json.preMonth+"-"+json.currentDate);	
+
+			$(".rili").animate({margin:"450px"});
+		});
+		$(".next").off();
+		$(".next").on("click",function (){
+			var nextjson = monthToday(json.year+"-"+json.preMonth+"-"+json.currentDate),
+				year  = nextjson.year;
+			if(nextjson.currentMonth == 11 && nextjson.nextMonth == 12){
+				year = nextjson.year+1; 
+			};
+			setDateFn(year+"-"+json.nextMonth+"-"+json.currentDate);	
+		});
+		setDateFn("2014-11-10");
+
+	</script>
+</html>

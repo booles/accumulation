@@ -1,0 +1,200 @@
+@charset "utf-8";
+/* CSS reset */
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,q,th,td,caption,article,aside,figure,figcaption,footer,header,hgroup,nav,section,audio,video{
+	margin:0;
+	padding:0;
+}
+body{
+	font:400 12px/1.5 Arial,SimSun,Tahoma,Helvetica,sans-serif;
+	color:#5e5e5e;
+	background:#f6f6f6;
+}
+a,img,iframe,html{
+	border:none;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+	display:block;
+}
+ol,ul{
+	list-style:none;
+	col
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+sup{
+	vertical-align:text-top;
+}
+sub{
+	vertical-align:text-bottom;
+}
+textarea{
+	resize:none;
+}
+a{
+	text-decoration:none;
+	color:#5e5e5e;
+}
+a:hover{
+	text-decoration:underline;
+	color:#c00;
+}
+a,input{
+	outline: none;
+	hide-focus: expression(this.hideFocus = true);
+}
+.clear{
+	clear:both;
+}
+.clearfix:after{
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0;
+}
+.clearfix{
+	zoom:1;
+}
+.content,.indexCont{
+	width:1200px;
+	margin:0 auto;
+}
+/* ----------------查看低价日历--------------------- */
+.gome_bigcalendar{
+	width:433px;
+	height:365px;
+	border:1px solid #ddd;
+	background:#fff;
+	position:absolute;
+	margin: 0px auto;
+}
+.bigcalendar_title{
+	height:41px;
+	border-bottom:1px solid #ddd;
+	background:#f0f0f0;
+	color:#ea5504;
+	font:bold 14px/41px arial;
+	text-align:center;
+	overflow:hidden;
+}
+.bigcalendar_prevmonth,.bigcalendar_nextmonth,.bigcalendar_nextmonth_disable,.bigcalendar_prevmonth_disable{
+	width:20px;
+	height:20px;
+	background:url(../../images/jipiao/gomeBigCalendarBg.gif) no-repeat;
+	margin-top:10px;
+	overflow:hidden;
+}
+.bigcalendar_prevmonth:hover,.bigcalendar_nextmonth:hover,.bigcalendar_nextmonth_disable:hover,.bigcalendar_prevmonth_disable{
+	text-decoration:none;
+}
+.bigcalendar_prevmonth{
+	float:left;
+	margin-left:13px;
+	background-position:0px 0px;
+}
+.bigcalendar_prevmonth:hover{
+	background-position:0px -40px;
+}
+.bigcalendar_nextmonth:hover{
+	background-position:-20px -40px;
+}
+.bigcalendar_prevmonth_disable{
+	float:left;
+	margin-left:13px;
+	background-position:0px -20px;
+	cursor:default;
+}
+.bigcalendar_nextmonth_disable{
+	float:right;
+	margin-right:13px;
+	background-position:-20px -20px;
+	cursor:default;
+}
+.bigcalendar_nextmonth{
+	float:right;
+	margin-right:13px;
+	background-position:-20px 0px;
+}
+.bigcalendar_title span{
+	float:left;
+	margin-left:140px;
+}
+.bigcalendar_month{
+	width:440px;
+}
+.bigcalendar_month dt{
+	float:left;
+	width:62px;
+	height:26px;
+	border-bottom:1px solid #ddd;
+	text-align:center;
+	line-height:26px;
+	color:#5e5e5e;
+	font-size:12px;
+	background:#f0f0f0;
+	overflow: hidden;
+}
+.bigcalendar_month dd{
+	/* width:450px; */
+}
+.bigcalendar_month dd a{
+	float:left;
+	width:41px;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	height:34px;
+	padding:7px 10px;
+	line-height:14px;
+	color:#5e5e5e;
+}
+.bigcalendar_month dd a:hover{
+	text-decoration: none;
+}
+.bigcalendar_month a.over_day{
+	color:#b3b3b3;
+	cursor: not-allowed;
+}
+.bigcalendar_month a.today{
+	color:#fff;
+	background:#ff8000;
+}
+.bigcalendar_month a.select_day{
+	color:#fff;
+	background:#bb3d00;
+}
+.bigcalendar_month a.linked_day{
+	background:#ffeedc;
+}
+.bigcalendar_month a.end_day{
+	color:#fff;
+	background:#ee5303;
+}
+.gome_bigcalendar .tips_box{
+	line-height:50px;
+	color:#b3b3b3;
+	padding-left:20px;
+	clear: both;
+}
+.gome_bigcalendar .price,.gome_bigcalendar .price_none{
+	color:#ff8000;
+	font:bold 14px/25px arial;
+}
+.gome_bigcalendar .price_none{
+	text-align:right;
+	font:14px/25px arial;
+}
+.rili {
+	width: 10000px;
+	overflow: hidden;
+}
+
+.rili div {
+	float: left;
+	width: 450px;
+}
+.rili .allowed{
+	  cursor: not-allowed;
+}

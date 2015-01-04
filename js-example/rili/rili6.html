@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="./rili.css">
+        <script src="jquery-1.7.2.js"></script>
+        <script src="./riliShuju.js"></script>
+		<script src="./rili.js"></script>
+		
+	</head>
+
+	<body>
+		<input type="text" id="test1">
+		<input type="button" id="btn" value="按钮">
+		<div class="gome_bigcalendar">
+			<div class="bigcalendar_title clearfix">
+				<button class="pre">pre</button>
+				<a class="bigcalendar_prevmonth">&nbsp;</a>
+				<span id="calendar_title1">2014年&nbsp;11月</span>
+				<a class="bigcalendar_nextmonth">&nbsp;</a>
+				<button class="next">next</button>
+			</div>
+			<dl class="bigcalendar_month clearfix">
+				<dt class="day0">日</dt>
+				<dt class="day1">一</dt>
+				<dt class="day2">二</dt>
+				<dt class="day3">三</dt>
+				<dt class="day4">四</dt>
+				<dt class="day5">五</dt>
+				<dt class="day6">六</dt>
+				<dd class="rili clearfix">
+				</dd>
+			</dl>
+			<div class="tips_box">温馨提示：由于票价和仓位变化比较频繁，请以实时查询报价为准。</div>
+		</div>
+	</body>
+	<script>
+
+
+
+	//判断是否是闰年
+	function runNian(year) {
+	    if(year%400 === 0 || (year%4 === 0 && year%100 !== 0) ) {
+	        return true;
+	    }
+	    else { return false; }
+	};
+
+	function addZore(time){
+		return time<10 ? "0"+time : time;
+	};
+
+	//获取每月的总天数
+	function monthData(_year){
+		return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+	}
+
+
+	function trans(time){
+		return time.replace(/-0?/g,"/");
+	};
+
+	function dayToTime(day){
+		return day*24*3600*1000;
+	};
+
+	function timeToYear(time){
+
+		var setTime = new Date(time);
+		return setTime.getFullYear() + "-" + (setTime.getMonth()+1) + "-"+ setTime.getDate();
+	};
+
+	function transFormDate(arr){
+		var jsons = {};
+		for(var f=0;f<strDate.data.length;f++){
+			jsons[strDate.data[f].rq] = strDate.data[f].pr;
+		};
+		return 	jsons;
+	};
+
+	function toZero(time){
+		return time.replace(/[-/](\d+)/g,function ($0,$1){
+			return "-"+ addZore($1);
+		});
+	}
+
+	var weekend = ["日","一","二","三","四","五","六"];
+
+	function monthToday(time){
+		var date = trans(time),
+			oDate = new Date,
+			time = date.split("/"),
+			timeYear = +time[0],
+			timeMonth = +time[1],
+			timeDate = +time[2];
+
+		var preMonth =  timeMonth == 1 ? 12 : timeMonth - 1,
+			currentMonth = +time[1],
+			nextMonth = timeMonth == 12 ? 1 : timeMonth + 1,
+
+			preDate = monthData(timeYear)[preMonth-1],
+			currentMonthDate = monthData(timeYear)[timeMonth-1],
+			nextDate = monthData(timeYear)[nextMonth-1];
+		return {
+				preMonth: preMonth,
+				currentMonth:currentMonth,
+				nextMonth: nextMonth,
+				preDate:preDate,
+				currentMonthDate:currentMonthDate,
+				nextDate:nextDate,
+				currentDate:timeDate ? new Date(date).getDate() : 0,
+				day:new Date(timeYear+"/"+timeMonth+"/"+1).getDay(),
+				year:timeYear,
+				currentTime:new Date(date).getTime()
+			};
+	};
+		
+	
+
+		function setDateFn(timedate,selectDate){
+
+			var someArray = someMonths(timedate,monthToday(timedate)),
+				allMonthDate = [],times = 0;
+
+			var selectDateArray = selectDate.split("-");
+
+			var m = -1;
+
+			$("#calendar_title1").html(selectDateArray[0] + "年 "+selectDateArray[1]+"月");
+
+
+			if(!$(".rili div")[0]){
+
+				for(var n =0;n<someArray.length;n++){
+
+					renderHtml(monthToday(someArray[n]),selectDate);
+				};
+				
+			}else{
+				var oA = $(".rili div a");
+				console.log(oA);
+				oA.each(function (){
+					console.log($(this).attr("timer") == selectDate);
+					if($(this).attr("timer") == selectDate){
+						oA.removeClass("today");
+						$(this).addClass("today");
+					}	
+				});
+			}
+
+
+			for(var l =0;l<someArray.length;l++){
+
+				var someArrayArray = someArray[l].split("-");
+				allMonthDate.push(monthToday(someArray[l]));
+				if(someArrayArray[0] == selectDateArray[0] && someArrayArray[1] == selectDateArray[1]){
+					
+					m = l;
+				}
+			};
+
+			$(".rili").css({
+					marginLeft: -450*m
+			});
+
+			$(".pre").off("click").on("click",function (){
+				if(m<=0) return;
+				m--;
+				$("#calendar_title1").html(someArray[m].split("-")[0] + "年 "+someArray[m].split("-")[1]+"月");
+				$(".rili").animate({
+					marginLeft: -450*m
+				});
+
+			});
+
+			$(".next").off("click").on("click",function (){
+				if(m>=someArray.length - 1) return;
+				m++;
+				$("#calendar_title1").html(someArray[m].split("-")[0] + "年 "+someArray[m].split("-")[1]+"月");
+				$(".rili").animate({
+					marginLeft: -450*m
+				});						
+			});
+
+
+
+			//添加完内容后添加样式
+
+			addStyle(allMonthDate,someArray);
+		};
+		//添加样式
+		function addStyle(allMonthDate,someArray){
+				var riliAllDiv = $(".rili div");
+				riliAllDiv.each(function (i){
+
+					var jsonMonthDate = allMonthDate[i],
+						allDivA = $(this).find("a");
+					if(jsonMonthDate.currentDate) allDivA.eq(jsonMonthDate.currentDate+jsonMonthDate.day-1).addClass("today");
+
+					for(var dex=jsonMonthDate.day-1;dex>=0;dex--){
+						allDivA.eq(dex).addClass("over_day");
+					};
+					for(var dex2=jsonMonthDate.currentMonthDate+jsonMonthDate.day;dex2<=allDivA.length;dex2++){
+
+						allDivA.eq(dex2).addClass("over_day");
+					};
+
+					if(i == allMonthDate.length-1){
+						//console.log(jsonMonthDate.currentDate);
+						for(var dex=jsonMonthDate.currentDate+jsonMonthDate.day;dex<=allDivA.length;dex++){
+							allDivA.eq(dex).addClass("over_day");
+						};
+					}
+				});
+				singleOrReturn("single")();
+		};
+
+		function singleOrReturn(single){
+			var riliAllDiv = $(".rili div");
+			return 	single == "single" ? function (){
+							riliAllDiv.off("click");
+							riliAllDiv.on("click",function (event){
+								if($(event.target).hasClass("over_day")){
+									return false;
+								}else{
+									riliAllDiv.find("a").removeClass("select_day")
+									$(event.target).addClass("select_day");
+								}
+							})	
+					} : function (){
+							riliAllDiv.off("click");
+							riliAllDiv.on("click",function (event){
+							})	
+						};
+		};
+
+		//计算出相隔的月数，返回数组
+		function someMonths(timedate,json){
+			var futrueTime = timeToYear(json.currentTime+dayToTime(90)),
+				futrueTimeArray = futrueTime.split("-"),
+				timeDateArray = timedate.split("-"),
+				chazhi = futrueTimeArray[0] - timeDateArray[0],
+				chazhiDate = (chazhi * 12 + (+futrueTimeArray[1])) - timeDateArray[1],
+				year = futrueTimeArray[0],
+				arr = [],str = timedate;
+
+			if(+timeDateArray[1]+chazhiDate>12){
+				for(var k =0;k<chazhiDate+1;k++){
+					if((+timeDateArray[1])+k<=12){
+						str = (+timeDateArray[0])+"-"+(+timeDateArray[1]+k)+(k==0?"-"+(timeDateArray[2]):"");
+						arr.push(toZero(str));
+					}else{
+						str = (+timeDateArray[0]+1)+"-"+((+timeDateArray[1])+k - 12);
+						arr.push(toZero(str));
+					};
+				}
+			}else{
+				for(var z=0;z<chazhiDate+1;z++){				
+					str = timeDateArray[0]+"-"+(+timeDateArray[1]+z)+(z==0?"-"+(timeDateArray[2]):"");
+					arr.push(toZero(str));					
+				}
+			};
+			arr.splice(arr.length-1,1,toZero(futrueTime));
+
+			return arr;
+		};
+		//渲染每月
+		function renderHtml(json,selectDate,bl){
+			//console.log(json);
+			var cow = Math.ceil((json.currentMonthDate+json.day)/7)*7,
+				oDiv = $('<div></div>'),m = 1,jsons = transFormDate(strDate);
+				
+
+				while(cow--){
+					oDiv.append('<a href="javascript:;"></a>');
+				};			
+			
+			oDiv.find("a").each(function (i){
+				if(i<json.day){
+					$(this).text(addZore(json.preDate - (json.day - i-1)));
+				}
+				if(i>=json.day){
+					if(m<=json.currentMonthDate){
+						$(this).text(addZore(m++)).attr("timer",json.year+"-"+addZore(json.currentMonth)+"-"+addZore(m-1));
+						if(jsons[$(this).attr("timer")]){
+							$(this).append('<p class="price">¥'+jsons[$(this).attr("timer")]+'</p>');
+							if(selectDate == $(this).attr("timer")){
+								$(this).addClass("today");
+							}
+						}else{
+							$(this).addClass("over_day");
+						};
+
+
+					};
+				};
+					
+			});
+			$(".rili").append(oDiv);
+			
+				
+		};
+
+		$("#btn").click(function(){
+			setDateFn(strDate.data[0].rq,$("#test1").val());  //选中的日期和开始的日期
+			
+		});;
+
+
+		
+
+	</script>
+</html>

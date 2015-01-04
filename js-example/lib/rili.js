@@ -5,7 +5,7 @@ var createDateRili = function (){
 		var dataTime  = new Date();	
 		//获取每月的总天数
 		function monthData(_year){
-				return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+			return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
 		}
 		
 		//判断某年某月的1号是星期几

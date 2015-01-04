@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="./rili.css">
+        <script src="jquery-1.7.2.js"></script>
+		<script src="./rili.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="gome_bigcalendar">
+			<div class="bigcalendar_title clearfix">
+				<button class="pre">pre</button>
+				<a class="bigcalendar_prevmonth">&nbsp;</a>
+				<span id="calendar_title1">2014年&nbsp;11月</span>
+				<a class="bigcalendar_nextmonth">&nbsp;</a>
+				<button class="next">next</button>
+			</div>
+			<dl class="bigcalendar_month clearfix">
+				<dt class="day0">日</dt>
+				<dt class="day1">一</dt>
+				<dt class="day2">二</dt>
+				<dt class="day3">三</dt>
+				<dt class="day4">四</dt>
+				<dt class="day5">五</dt>
+				<dt class="day6">六</dt>
+				<dd class="rili clearfix">
+				</dd>
+			</dl>
+			<div class="tips_box">温馨提示：由于票价和仓位变化比较频繁，请以实时查询报价为准。</div>
+		</div>
+	</body>
+	<script>
+
+	var strDate = {
+				  "isSuccess": "Y",
+				  "failReason": "",
+				  "data": [
+				    {
+				      "rq": "2014-12-25",
+				      "xq": "周四",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2014-12-26",
+				      "xq": "周五",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2014-12-27",
+				      "xq": "周六",
+				      "pr": 350.0
+				    },
+				    {
+				      "rq": "2014-12-28",
+				      "xq": "周日",
+				      "pr": 280.0
+				    },
+				    {
+				      "rq": "2014-12-29",
+				      "xq": "周一",
+				      "pr": 350.0
+				    },
+				    {
+				      "rq": "2014-12-30",
+				      "xq": "周二",
+				      "pr": 350.0
+				    },
+				    {
+				      "rq": "2014-12-31",
+				      "xq": "周三",
+				      "pr": 450.0
+				    },
+				    {
+				      "rq": "2015-01-01",
+				      "xq": "周四",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-02",
+				      "xq": "周五",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-03",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-04",
+				      "xq": "周日",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-05",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-06",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-07",
+				      "xq": "周三",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-08",
+				      "xq": "周四",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-09",
+				      "xq": "周五",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-10",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-11",
+				      "xq": "周日",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-12",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-13",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-14",
+				      "xq": "周三",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-15",
+				      "xq": "周四",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-01-16",
+				      "xq": "周五",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-17",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-18",
+				      "xq": "周日",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-19",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-20",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-21",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-22",
+				      "xq": "周四",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-23",
+				      "xq": "周五",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-24",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-25",
+				      "xq": "周日",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-26",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-27",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-01-28",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-29",
+				      "xq": "周四",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-30",
+				      "xq": "周五",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-01-31",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-01",
+				      "xq": "周日",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-02",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-03",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-04",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-05",
+				      "xq": "周四",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-06",
+				      "xq": "周五",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-07",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-08",
+				      "xq": "周日",
+				      "pr": 450.0
+				    },
+				    {
+				      "rq": "2015-02-09",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-10",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-11",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-12",
+				      "xq": "周四",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-13",
+				      "xq": "周五",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-14",
+				      "xq": "周六",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-02-15",
+				      "xq": "周日",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-02-16",
+				      "xq": "周一",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-02-17",
+				      "xq": "周二",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-02-18",
+				      "xq": "周三",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-19",
+				      "xq": "周四",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-20",
+				      "xq": "周五",
+				      "pr": 450.0
+				    },
+				    {
+				      "rq": "2015-02-21",
+				      "xq": "周六",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-22",
+				      "xq": "周日",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-23",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-02-24",
+				      "xq": "周二",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-25",
+				      "xq": "周三",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-26",
+				      "xq": "周四",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-02-27",
+				      "xq": "周五",
+				      "pr": 450.0
+				    },
+				    {
+				      "rq": "2015-02-28",
+				      "xq": "周六",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-03-01",
+				      "xq": "周日",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-03-02",
+				      "xq": "周一",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-03-03",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-03-04",
+				      "xq": "周三",
+				      "pr": 400.0
+				    },
+				    {
+				      "rq": "2015-03-05",
+				      "xq": "周四",
+				      "pr": 570.0
+				    },
+				    {
+				      "rq": "2015-03-06",
+				      "xq": "周五",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-07",
+				      "xq": "周六",
+				      "pr": 480.0
+				    },
+				    {
+				      "rq": "2015-03-08",
+				      "xq": "周日",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-09",
+				      "xq": "周一",
+				      "pr": 370.0
+				    },
+				    {
+				      "rq": "2015-03-10",
+				      "xq": "周二",
+				      "pr": 370.0
+				    },
+				    {
+				      "rq": "2015-03-11",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-03-12",
+				      "xq": "周四",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-13",
+				      "xq": "周五",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-14",
+				      "xq": "周六",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-03-15",
+				      "xq": "周日",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-03-16",
+				      "xq": "周一",
+				      "pr": 370.0
+				    },
+				    {
+				      "rq": "2015-03-17",
+				      "xq": "周二",
+				      "pr": 370.0
+				    },
+				    {
+				      "rq": "2015-03-18",
+				      "xq": "周三",
+				      "pr": 410.0
+				    },
+				    {
+				      "rq": "2015-03-19",
+				      "xq": "周四",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-20",
+				      "xq": "周五",
+				      "pr": 440.0
+				    },
+				    {
+				      "rq": "2015-03-21",
+				      "xq": "周六",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-03-22",
+				      "xq": "周日",
+				      "pr": 570.0
+				    },
+				    {
+				      "rq": "2015-03-23",
+				      "xq": "周一",
+				      "pr": 360.0
+				    },
+				    {
+				      "rq": "2015-03-24",
+				      "xq": "周二",
+				      "pr": 340.0
+				    },
+				    {
+				      "rq": "2015-03-25",
+				      "xq": "周三",
+				      "pr": 440.0
+				    }
+				  ]
+				}
+
+	//判断是否是闰年
+	function runNian(year) {
+	    if(year%400 === 0 || (year%4 === 0 && year%100 !== 0) ) {
+	        return true;
+	    }
+	    else { return false; }
+	};
+
+	//获取每月的总天数
+	function monthData(_year){
+		return  [31,runNian(_year)?29:28,31,30,31,30,31,31,30,31,30,31];
+	}
+
+
+	function trans(time){
+		return time.replace(/-0?/g,"/");
+	};
+
+	function dayToTime(day){
+		return day*24*3600*1000;
+	};
+
+	function timeToYear(time){
+
+		var setTime = new Date(time);
+		return setTime.getFullYear() + "-" + (setTime.getMonth()+1) + "-"+ setTime.getDate();
+	}
+
+	var weekend = ["日","一","二","三","四","五","六"];
+
+	function monthToday(time){
+		var date = trans(time),
+			oDate = new Date,
+			time = date.split("/"),
+			timeYear = +time[0],
+			timeMonth = +time[1],
+			timeDate = +time[2];
+
+		var preMonth =  timeMonth == 1 ? 12 : timeMonth - 1,
+			currentMonth = +time[1],
+			nextMonth = timeMonth == 12 ? 1 : timeMonth + 1,
+
+			preDate = monthData(timeYear)[preMonth-1],
+			currentMonthDate = monthData(timeYear)[timeMonth-1],
+			nextDate = monthData(timeYear)[nextMonth-1];
+		
+		return {
+				preMonth: preMonth,
+				currentMonth:currentMonth,
+				nextMonth: nextMonth,
+				preDate:preDate,
+				currentMonthDate:currentMonthDate,
+				nextDate:nextDate,
+				currentDate:timeDate ? new Date(date).getDate() : 0,
+				day:new Date(timeYear+"/"+timeMonth+"/"+1).getDay(),
+				year:timeYear,
+				currentTime:new Date(date).getTime()
+			};
+	};
+		
+	
+
+		function setDateFn(timedate){
+
+			var json = monthToday(timedate);
+
+			var someArray = someMonths(timedate,json);
+
+			var allMonthDate = [];
+
+			var times = 0;
+
+			for(var l =0;l<someArray.length;l++){
+				allMonthDate.push(monthToday(someArray[l]));
+				renderHtml(monthToday(someArray[l]));
+			};
+
+			
+			//添加完内容后添加样式
+
+			addStyle(allMonthDate,someArray);
+			
+
+		};
+		//添加样式
+		function addStyle(allMonthDate,someArray){
+				var riliAllDiv = $(".rili div");
+
+				riliAllDiv.each(function (i){
+					var jsonMonthDate = allMonthDate[i],
+						allDivA = $(this).find("a");
+					//console.log(jsonMonthDate.currentDate);
+					if(jsonMonthDate.currentDate) allDivA.eq(jsonMonthDate.currentDate+jsonMonthDate.day-1).addClass("today");
+
+					for(var dex=jsonMonthDate.day-1;dex>=0;dex--){
+						allDivA.eq(dex).addClass("over_day");
+					};
+					for(var dex2=jsonMonthDate.currentMonthDate+jsonMonthDate.day;dex2<=allDivA.length;dex2++){
+						//console.log(dex2);
+						allDivA.eq(dex2).addClass("over_day");
+					};
+
+					if(i == allMonthDate.length-1){
+						//console.log(jsonMonthDate.currentDate);
+						for(var dex=jsonMonthDate.currentDate+jsonMonthDate.day;dex<=allDivA.length;dex++){
+							allDivA.eq(dex).addClass("over_day");
+						};
+					}
+				});
+				singleOrReturn("single")();
+
+
+		};
+
+		function singleOrReturn(single){
+			var riliAllDiv = $(".rili div");
+			return 	single == "single" ? function (){
+							riliAllDiv.off("click");
+							riliAllDiv.on("click",function (event){
+								if($(event.target).hasClass("over_day")){
+									return false;
+								}else{
+									riliAllDiv.find("a").removeClass("select_day")
+									$(event.target).addClass("select_day");
+								}
+							})	
+					} : function (){
+							riliAllDiv.off("click");
+							riliAllDiv.on("click",function (event){
+								console.log("123");
+							})	
+						};
+		}
+
+		//计算出相隔的月数，返回数组
+		function someMonths(timedate,json){
+			var futrueTime = timeToYear(json.currentTime+dayToTime(90)),
+				futrueTimeArray = futrueTime.split("-"),
+				timeDateArray = timedate.split("-"),
+				chazhi = futrueTimeArray[0] - timeDateArray[0],
+				chazhiDate = (chazhi * 12 + (+futrueTimeArray[1])) - timeDateArray[1],
+				year = futrueTimeArray[0],
+				arr = [],str = timedate;				
+
+			if(+timeDateArray[1]+chazhiDate>12){
+				for(var k =0;k<chazhiDate+1;k++){
+					if((+timeDateArray[1])+k<=12){
+						str = (+timeDateArray[0])+"-"+(+timeDateArray[1]+k)+(k==0?"-"+(timeDateArray[2]):"");
+						arr.push(str);
+					}else{
+						str = (+timeDateArray[0]+1)+"-"+k;
+						arr.push(str);
+					};
+				}
+			}else{
+				for(var z=0;z<chazhiDate+1;z++){				
+					str = timeDateArray[0]+"-"+(+timeDateArray[1]+z)+(z==0?"-"+(timeDateArray[2]):"");
+					arr.push(str);					
+				}
+			};
+			
+			arr.splice(arr.length-1,1,futrueTime);
+			return arr;
+		};
+		//渲染每月
+		var abc = 0;
+		function renderHtml(json){
+			//console.log(json);
+			var cow = Math.ceil((json.currentMonthDate+json.day)/7)*7,
+				oDiv = $('<div></div>'),m = 1,getDate = "",k=0;
+
+				if(abc == 0){
+					getDate = strDate.data.splice(0,json.currentMonthDate-json.currentDate+1)
+				}else{
+					getDate = strDate.data.splice(0,json.currentMonthDate)
+				};
+
+				abc++;
+
+				console.log(getDate);
+
+				while(cow--){
+					oDiv.append('<a href="javascript:;"></a>');
+				};			
+			
+			oDiv.find("a").each(function (i){
+				if(i<json.day){
+					$(this).text(addZore(json.preDate - (json.day - i-1)));
+				}
+				if(i>=json.day){
+					if(m<=json.currentMonthDate){
+						$(this).text(addZore(m++));
+						if(json.currentDate && m-1>=json.currentDate+json.day-1 && abc == 1){
+							$(this).append('<div class="price">¥'+(getDate[k++].pr)+'</div>');
+						};
+					}else{
+						//$(this).text(addZore(m-json.currentMonthDate));
+						//m++;
+					};
+				};
+					
+			});
+			
+			$(".rili").append(oDiv);	
+				
+		};
+
+		function addZore(time){
+			return time<10 ? "0"+time : time;
+		}
+
+		setDateFn("2014-12-25");
+
+	</script>
+</html>

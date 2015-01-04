@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style>
+            #clor {
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+        </style>
+        <script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+    </head>
+
+    <body>
+        <div id="div1">
+            <input type="text" id="oInput">
+        </div>
+        
+        <div id="clor"></div>
+
+    </body>
+    
+    <script>
+
+        var modelTest = Backbone.Model.extend({
+            defaults:{
+                "name":"wangyun",
+                "sex":"女"
+            }
+        });
+
+        var newModel = new modelTest();
+
+        newModel.on("change:name",function (){
+            console.log("123");    
+        })
+
+        var Conll = Backbone.Collection.extend({
+            model:modelTest
+        });
+
+        var data = new Conll({
+            content:"Hello backbone!"
+        });
+
+        var viewTest = Backbone.View.extend({
+            el:$("body"),
+            initialize:function (){
+                $("#oInput").val(data.models[0].get("content"));
+            },
+            events:{
+                "input #oInput":"show"
+            },
+            show:function (){
+                 $("#clor").text($("#oInput").val());
+                 newModel.set({name:$("#oInput").val()})
+            },
+            hide:function (){
+                $("#clor").hide();      
+            }
+        });
+
+
+        var view = new viewTest();
+
+    </script>
+
+</html>

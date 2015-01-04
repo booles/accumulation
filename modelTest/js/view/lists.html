@@ -1,7 +1,108 @@
-<ul>
-    <%for(var i=0;i<data.length;i++){%>
-        <li>
-            <%=data[i]%>
-        </li>
-        <%}%>
-</ul>
+<%var jixing = {S:"小型","M":"中型","L":"大型"}%>
+<%var c = {Y:"经济舱","C":"头等舱","F":"商务舱"}%>
+	<div class="noresults_box" <%if(hb.length>0){%>style="display: none;"<%}else{%>style="display: block;"<%}%>>
+		<div class="mesg" id="mesg"></div>
+		<div class="clearfix error_box">
+			<span class="fl error_icon"></span>
+			<div class="fl error_word">
+				<p>很抱歉，没有找到符合筛选条件的航班。</p>
+				<p>您还可以：<a class="c_blue" id="c_blue" title="清空筛选条件" href="javascript:void(0);">清空筛选条件</a></p>
+			</div>
+		</div>
+	</div>
+<%for(var i=0;i<hb.length;i++){%>
+	<%var hbRach = hb[i]%>
+		<div class="search_result_content" hkgs = <%=hbRach.hkgs%> qfjc=<%=hbRach.qfjc%> >
+			<table cellpadding="0" cellspacing="0" width="100%" class="result_table" qfjc= <%=hbRach.qfjc%> ddjc= <%=hbRach.ddjc%> flightNo="<%=hbRach.hbh%>" airline="<%=hbRach.hkgs%>">
+				<thead>
+					<th width="79" align="center">
+						<div class="flight_logo pubFlights_<%=hbRach.hkgs%>"></div>
+					</th>
+					<th width="135" align="left">
+						<div class="airline_name"><%=hkgszd[hbRach.hkgs]%> <%=hbRach.hbh%></div>
+						<div class="model">
+							机型：<span ><%=hbRach.jxdm%> <%=jixing[hbRach.jxdx]%></span> 
+						</div>
+					</th>
+					<th width="102" align="center">
+						<div class="time"><%=hbRach.qfsj%></div>
+						<div class="city"><%=qfjczd[hbRach.qfjc]%></div>
+					</th>
+					<th width="90" align="center">
+						<div class="stopcity" <%if(hbRach.jtcs == 0){%>style="display: none;"<%}%>>
+							<span class="help" rquestEd="0" data="<%=hbRach.hbh%>,<%=hbRach.qfjc%>,<%=hbRach.ddjc%>,<%=cfrq.split("T")[0]%> <%=hbRach.qfsj%>:00">经停</span>
+						</div>
+						<div class="arrow"></div>
+						<%var xcls = hbRach.xcls.replace(/(\\d+)(h)/,function ($0,$1,$2){
+							return ($1<10 ? $1.slice(1,2) : $1 )+"小时"
+						}).replace("m","分钟")%>
+						<div class="stoptime"><%=xcls%></span> </div>
+					</th>
+					<th width="95" align="center">
+						<div class="time"><%=hbRach.ddsj%>
+							<i <%if(hbRach.ddsj.split(":")[0] > hbRach.qfsj.split(":")[0]){%>style="display: none;"<%}%> class="sub_icon secondTime" times = "<%=hbRach.ddsj.split(" ")[0].replace(/-/g,"/")%>|<%=hbRach.qfsj.split(" ")[0].replace(/-/g,"/")%>" >
+								次日
+							</i>
+						</div>
+						<%var didian = ddjczd[hbRach.ddjc];%>
+						<div class="city" title="<%=didian%>"> <%if(didian.length>6){%><%=didian.slice(0,6)%><%}else{%><%=didian%><%}%> </div>
+					</th>
+					<th width="130" align="center"><span class="startprice">¥ <%=hbRach.hbzdj%><i>起</i></span></th>
+					<th width="80" align="center"><span class=ontime>准点率<i><%=hbRach.zdl%>%</i></span></th>
+					<th width="85" align="center"><span class="meals"><%if(hbRach.cs){%>有<%}else{%>无<%}%>餐食</span></th>
+					<th>机建+燃油 ¥<%=hbRach.jjf%> + ¥<%=hbRach.ryf%></th>
+				</thead>
+			</table>
+			<table cellpadding="0" cellspacing="0" width="100%" class="result_table mt10">
+				<tbody>
+					<%for(var k=0,leng = hbRach.cwlb.length;k<leng;k++){%>
+						<%var cwlbEach = hbRach.cwlb[k]%>
+						<tr <%if(k>=3){%>style="display: none;"<%}%>>
+							<td width="205" align="right">
+								<div class="cabintype"><span style="display: none;" class="direction"><%if(k==0){%><!--高端经济舱--><%}%></span></div>
+							</td>
+							<td width="75" align="center"><%=c[cwlbEach.c]%></td>
+							<td width="140" align="left"><%if(cwlbEach.zk<100){%><%=cwlbEach.zk/10%>折<%}%></td>
+							<td width="68" align="center">
+								<div class="change" data={beginAirPort:"<%=hbRach.qfjc%>",endAirPort:"<%=hbRach.ddjc%>",depDate:"<%=cfrq.split("T")[0]%>",cabin:"<%=cwlbEach.c%>",flightNo:"<%=hbRach.hbh%>",specialPolicyId:"<%=cwlbEach.gys%>"}>
+									<span class="c_blue help">退改签说明</span>
+								</div>
+							</td>
+							<td width="55" align="center">
+								<%if(cwlbEach.yh){%>
+									<%for(var ki=0;ki<cwlbEach.yh.length;ki++){%>
+										<%if(cwlbEach.yh[ki].l == 1){%>
+											<span class="original_price">¥ <%=cwlbEach.crj%></span>
+										<%}%>
+									<%}%>
+								<%}%>
+							</td>
+							<td width="90" align="left"><span class="startprice1">¥ <%=cwlbEach.adFareGome%><i class="sub_icon" style="display: none;">特价</i></span></td>
+								<td width="160">
+									<%if(cwlbEach.yh){%>
+										<%for(var ik=0;ik<cwlbEach.yh.length;ik++){%>
+											<%var yh = cwlbEach.yh[ik];%>
+											<%if(yh.l == 1){%>
+												<span class="block_green" title="已降 ¥<%=yh.z%>">降 ¥<%=yh.z%></span>
+											<%}else if(yh.l == 2){%>
+												<span class="block_orange" title="返 ¥<%=yh.z%>">返 ¥<%=yh.z%></span>
+											<%}else{%>
+												<span class="block_blue" title="送保险">送保险</span>
+											<%}%>
+										<%}%>
+									<%}%>
+								</td>
+							<td width="80" align="left">
+								<a href="javascript:void(0);" cabin="<%=cwlbEach.c%>" subCabin="<%=cwlbEach.zc%>" crj="<%=cwlbEach.crj%>" gys="<%=cwlbEach.gys%>" class="btn_book"><%if(cheng){%><%=cheng%><%}else{%>预订<%}%></a>
+							</td>
+							<td align="center"><span class="c_red"><span><%if(cwlbEach.sy<5){%>仅剩<%=cwlbEach.sy%>张<%}else{%> &nbsp;&nbsp; <%}%></span></td>
+						</tr>
+					<%}%>
+				</tbody>
+			</table>
+			<div class="additional_info">
+				<span style="display: none;" >最高返券30元</span>
+				<%if(hbRach.cwlb.length>3){%><span class="btn_allprice">所有价格<i></i></span><%}%>
+			</div>
+		</div>
+<%}%>'

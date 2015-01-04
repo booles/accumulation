@@ -11,6 +11,14 @@ require.config({
         "renderSearch": "../renderSearch",
 
         "lists": "../lists",
+        "test":"../test",
+
+
+        "tools":"../tools/tools",
+
+        "httpServer":"../tools/httpServer",
+
+        "data":"../data"
     },
     shim: {
         "jQuery": {
@@ -24,8 +32,13 @@ require.config({
     }
 });
 
-require(["domReady!", "jQuery", "renderSearch", "lists"],
-    function(dom, jQuery, renderSearch, lists) {
-        //渲染列表
-        lists.renderList([1, 2, 3, 4, 5]);
+require(["domReady!", "jQuery", "renderSearch", "lists","httpServer"],
+    function(dom, jQuery, renderSearch, lists,httpServer) {
+        
+       httpServer.httpServer.listServer([],function (respones){
+            lists.renderList(respones.data);
+            $("#loading").hide();
+       });
+
+
     });

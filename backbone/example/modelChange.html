@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style>
+            
+        </style>
+        <script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+    </head>
+
+    <body>
+        <div id="div1"></div>
+    </body>
+    
+    <script>
+
+        /*
+            //多个变化属性共享一个函数
+
+            obj.on("change:name change:sex",function (model,value){   //value 值为修改后的内容 "change:name change:sex"这种形式会执行两次
+                model.previous("name"); //之前改变的值   //wangyun
+                model.previousAttributes(); //之前的对象
+            });
+
+            
+            //每个变化的属性对应一个函数
+
+            var objs = {};
+            obj.on(objs);
+
+
+        */
+
+        var modelTest = Backbone.Model.extend({
+            defaults:{
+                "name":"wangyun",
+                "sex":"女"
+            }
+        });
+
+        var newModel = new modelTest();
+
+        /*newModel.on("change",function (){
+            console.log("数据改变！");    
+        });
+
+         newModel.on("change:name change:sex",function (model,value){
+            console.log("数据改变！最新值为："+value);  
+            console.log(model.previous("name")); 
+            console.log(model.previousAttributes()); 
+        });*/   
+
+        function changeSex(model,value){
+            console.log(model.previous("name"));
+            console.log("数据改变！最新值为："+value);   
+        };
+
+        function changeName(model,value){
+            console.log("数据改变！最新值为："+value);      
+        }
+
+
+        var changevalue = {
+            "change sex":changeSex,
+            "change name":changeName
+        };
+
+
+        newModel.on(changevalue);
+
+
+        newModel.set({"name":"123","sex":"男"});
+
+
+
+
+
+
+
+
+
+        var Conll = Backbone.Collection.extend({
+            model:modelTest
+        });
+
+        var data = new Conll({
+            content:"Hello backbone!"
+        });
+
+        var viewTest = Backbone.View.extend({
+            el:$("body"),
+            initialize:function (){
+                $("#div1").html(data.models[0].get("content"));    
+            }
+        });
+
+
+        new viewTest();
+
+    </script>
+
+</html>
