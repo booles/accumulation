@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    	#data {
+    		width: 600px;
+    		font-size: 16px;
+    	}
+    	.bigcalendar_title {
+			height: 41px;
+			border-bottom: 1px solid #ddd;
+			background: #f0f0f0;
+			color: #ea5504;
+			font: 700 14px/41px arial;
+			text-align: center;
+			overflow: hidden;
+			padding: 0px 20px;
+		}
+
+		.bigcalendar_title a{
+			padding: 0px 5px;
+			cursor: pointer;
+		}
+
+		.prevmonth {
+			float: left;
+		}
+
+		.nextmonth {
+			float: right;
+		}
+		.calendar_title {
+			float: left;
+		}
+
+		table {
+			width: 100%;
+			border-collapse:collapse;
+		}
+		table th, table td{
+			text-align: center;
+			width: 0.142em;
+			border: 1px solid #ddd;			
+		}
+
+		table th{
+			background: #f0f0f0;
+
+		}
+
+		table td {
+			line-height: 2em;
+		}
+
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+</head>
+
+<body>
+    <div id="data">
+        <div class="bigcalendar_title clearfix">
+            <a class="prevmonth">-</a>
+            <span id="calendar_title">2015年 01月</span>
+            <a class="nextmonth"> + </a>
+        </div>
+        <div class="calendar1">
+        	<table>
+	            <thead>
+	                <tr>
+	                    <th>日</th>
+	                    <th>一</th>
+	                    <th>二</th>
+	                    <th>三</th>
+	                    <th>四</th>
+	                    <th>五</th>
+	                    <th>六</th>
+	                </tr>
+	            </thead>
+	            <tbody></tbody>
+	        </table>
+        </div>
+    </div>
+</body>
+
+<script>
+
+	var tools = {
+		getTotalDate:function (year,month){   //求得当月的天数
+			var d = new Date();
+				d.setFullYear(year);
+				d.setMonth(month);
+      			d.setDate(0);
+
+			return d.getDate();	
+		},
+		trans:function (timer){
+			return timer.replace(/-+/g,"/");	
+		},
+		addZore:function (time){
+			return time<10 ? "0"+time : time;
+		}
+	}
+
+	var CustomData = function (){
+		this.data = null;
+	};
+
+	CustomData.prototype = {
+		init:function (initDate){
+				this.date = this.getCurrenTime(initDate);
+				var date = this.date;
+				this.createAppendHtml(date);   //生成日历列表
+				this.events();
+		},
+		events:function (){
+			var that = this;
+			$(".prevmonth").on("click",function (){
+					that.prevmonth();	
+			});
+			$(".nextmonth").on("click",function (){
+					that.nextmonth();	
+			});		
+		},
+		createAppendHtml:function (date){
+			var rows = Math.ceil((date.totalDate+date.Dy)/7); //行数
+				currentDay = date.currentDay;
+				//负责生成tr
+				this.paddingHtml({
+					appendTo:$(".calendar1 tbody"),
+					parents:"tr",
+					parNum:rows,
+					children:"td",
+					chidrenNum:7
+				},function (){
+					var children = $(".calendar1 tbody td");
+					$("#calendar_title").text(date.Y+"年"+tools.addZore(date.Mo)+"月");
+					for(var i=0;i<date.totalDate;i++){
+						children.eq(currentDay++).text(i+1);
+					};
+				});	
+		},
+		paddingHtml:function (options,callBack){
+			options.appendTo.html("");
+			for(var i=0;i<options.parNum;i++){
+				var createParent = $("<"+options.parents+"/>");
+				for(var k=0;k<options.chidrenNum;k++){
+					var createChild = $("<"+options.children+"/>");
+					createParent.append(createChild);
+				};
+				options.appendTo.append(createParent);
+			};
+
+			if(callBack) callBack();
+
+		},
+		getCurrenTime:function (times){
+			var d,currenTime,getFullYear,getMonth;
+			if(times){
+				d = new Date(tools.trans(times));
+			}else{
+				d = new Date();
+			};
+			currenTime = {
+				Y : d.getFullYear(),
+				Mo : d.getMonth()+1,
+				Da : d.getDate(),
+				H : d.getHours(),
+				Mi : d.getMinutes(),
+				S : d.getSeconds(),
+				Dy:d.getDay(),
+				totalDate: tools.getTotalDate(d.getFullYear(),d.getMonth()+1),
+				currentDay:(function (){
+					d.setDate(1);
+					return d.getDay();	
+				})()
+			};
+			return currenTime;
+		},
+		prevmonth:function (){
+			this.addReduction("-");
+		},		
+		nextmonth:function (){
+			this.addReduction("+");
+		},
+		cross:function (y,m){
+			var y = m<1 ? y-1 : (m>12 ? y+1 : y),
+				m = m<=0 ? 12 : m>12 ? 1 : m;
+			return {Y: y,Mo: m}
+		},
+		addReduction:function (mark){
+			var num = mark === "-" ? (--this.date.Mo) : (++this.date.Mo),
+				crossJson = this.cross(this.date.Y,num),
+				m = crossJson.Y+"-"+ crossJson.Mo,
+				date = this.getCurrenTime(m);
+				
+				this.date = date;
+				this.createAppendHtml(date);
+		}
+	};
+	
+	var customData = new CustomData();
+
+	console.log(customData.init());  //初始化时可以传入指定日期
+
+</script>
+
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body>
+		<div id="div1">111</div>
+	</body>
+	<script>
+		var oDiv = document.getElementById("div1");
+
+		var handle = fnClick("111");
+
+		function fnClick(a){
+			return function (){
+					alert(a);
+					oDiv.removeEventListener("click",handle,false);
+			}	
+		};		
+
+		oDiv.addEventListener("click",handle,false);		
+	</script>
+</html>
