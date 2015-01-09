@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    	#data {
+    		font-size: 16px;
+    	}
+    	.bigcalendar_title {
+			height: 41px;
+			border-bottom: 1px solid #ddd;
+			background: #f0f0f0;
+			color: #ea5504;
+			font: 700 14px/41px arial;
+			text-align: center;
+			overflow: hidden;
+			padding: 0px 20px;
+		}
+
+		.calendar{
+			width: 25em;
+			float: left;
+			border: 1px solid #ccc;
+		}
+		.right-calendar {
+			border-left: none;
+		}
+
+		.bigcalendar_title a{
+			padding: 0px 0.00625px;
+			cursor: pointer;
+			display: block;
+			width: 10px;
+			display: none;
+		}
+
+		.prevmonth {
+			float: left;
+		}
+
+		.nextmonth {
+			float: right;
+		}
+		.calendar_title {
+			float: left;
+		}
+
+		table {
+			width: 100%;
+			border-collapse:collapse;
+		}
+		table th, table td{
+			text-align: center;
+			width: 0.142em;
+			border: 1px solid #ddd;			
+		}
+
+		table th{
+			background: #f0f0f0;
+
+		}
+
+		table td {
+			line-height: 2em;
+			
+		}
+
+		.red{
+			background: red;
+			color: #fff;
+		}
+		.disable {
+			cursor: not-allowed;
+			background: #ccc;
+		}
+
+		.ok {
+			cursor: pointer;
+		}
+
+		.today{
+			color: #fff;
+			background: #00afc7;
+		}
+
+    </style>
+    <script src="jquery-1.7.2.js"></script>
+</head>
+
+<body>
+    <div id="data">
+    </div>
+</body>
+
+<script>
+
+	/*
+		日历基本功能，能够前后切换月数
+
+		比当前日期小，要做限制，并且不能切换到上个月
+	*/
+
+
+	var tools = {
+		getTotalDate:function (year,month){   //求得当月的天数
+			var d = new Date();
+				d.setFullYear(year);
+				d.setMonth(month);
+      			d.setDate(0);
+
+			return d.getDate();	
+		},
+		trans:function (timer){
+			return timer.replace(/-+/g,"/");	
+		},
+		dateToNum:function (timer){
+			return +(timer.replace(/-+/g,""));	
+		},
+		addZore:function (time){
+			return time<10 ? "0"+time : time;
+		},
+		addYMD:function (y,m,d){
+			return y+"-"+tools.addZore(m)+"-"+tools.addZore(d);	
+		}
+	};
+
+	(function($) {
+
+	  var o = $({});
+
+	  $.subscribe = function() {
+	    o.on.apply(o, arguments);
+	  };
+
+	  $.unsubscribe = function() {
+	    o.off.apply(o, arguments);
+	  };
+
+	  $.publish = function() {
+	    o.trigger.apply(o, arguments);
+	  };
+
+	}($));
+
+
+	var CustomData = function (){
+		this.data = null,
+		this.dateNum = 1;
+		this.limit = false;
+		this.initDate = "";
+	};
+
+	CustomData.prototype = {
+		init:function (initDate){
+				this.initDate = initDate || this.getToday().format;
+				this.date = this.getCurrenTime(initDate);
+				var date = this.date;
+				this.dateNum = 2;
+				this.limit  = true;
+				this.wholeHtml();  //生成一骨架
+				this.createAppendHtml(date);   //生成日历列表
+				this.events();
+
+				
+				console.log(tools.dateToNum(this.initDate));
+				
+
+		},
+		events:function (){
+			var that = this;
+			$(".prevmonth").on("click",function (){
+				that.prevmonth();	
+			});
+			$(".nextmonth").on("click",function (ev){
+				that.nextmonth();	
+			});
+
+			$.subscribe("calendar:addClass",function (ev,data){
+				if(data["that"].hasClass(data.ok)){
+					data["that"].addClass(data.addClass);
+				}
+			});
+
+			$(".calendar").on({
+				"mouseover":function (){
+					//$(this).addClass("red");
+					$.publish("calendar:addClass",{that:$(this),not:"disable",addClass:"red",ok:"ok"});
+				},
+				"mouseout":function (){
+					$(this).removeClass("red");
+				}
+			},"td");
+		},
+		wholeHtml:function (n){
+			n = this.dateNum;
+			var html = '<div class="calendar">\
+				        <div class="bigcalendar_title clearfix">\
+				            <a class="prevmonth">-</a>\
+				            <span class="title"></span>\
+				            <a class="nextmonth"> + </a>\
+				        </div>\
+				        	<table>\
+					            <thead>\
+					                <tr>\
+					                    <th>日</th>\
+					                    <th>一</th>\
+					                    <th>二</th>\
+					                    <th>三</th>\
+					                    <th>四</th>\
+					                    <th>五</th>\
+					                    <th>六</th>\
+					                </tr>\
+					            </thead>\
+					            <tbody></tbody>\
+					        </table>\
+			    	</div>';
+			for(var i=0;i<n;i++) $("#data").append(html);
+
+			var calendar = $(".calendar");
+			if(n>1) {
+				calendar.first().find(".prevmonth").show();
+				calendar.last().find(".nextmonth").show();
+			}else{
+				calendar.find(".prevmonth,.nextmonth").show();
+			}
+		},
+		createAppendHtml:function (date){
+			var dateArr = [date];
+				for(var i=1;i<this.dateNum;i++){
+					crossJson = this.cross(date.Y,date.Mo+i),
+					m = crossJson.Y+"/"+ crossJson.Mo+"/"+1,
+					date2 = this.getCurrenTime(m);
+					dateArr.push(date2);
+				};
+				this.moreDateRender(dateArr);
+				
+		},
+		moreDateRender:function (options){
+			var that = this;
+			//负责生成tr
+			for(var i=0;i<options.length;i++){
+				this.paddingHtml({
+					appendTo:$(".calendar").eq(i),
+					appendToEle:"tbody",
+					parents:"tr",
+					children:"td",
+					chidrenNum:7,
+					date:options[i]
+				},function (children,parent,date){
+					var currentDay = date.currentDay;
+					parent.find(".title").text(date.Y+"年"+tools.addZore(date.Mo)+"月");
+					
+					for(var i=0;i<date.totalDate;i++){
+						var n = i+1,
+							arrtFormat = tools.addYMD(date.Y,date.Mo,n),
+							currentDayAdd = currentDay++,
+							format = date.current.format,
+							currentEle = children.eq(currentDayAdd);
+
+						currentEle.text(n).attr("time",format); 
+						if(arrtFormat == format){
+							currentEle.text("今天").addClass("today");
+							
+						}else if(that.limit && arrtFormat < format){
+							currentEle.addClass("disable");
+						}else{
+							currentEle.addClass("ok");
+						}
+					};
+				});
+			}
+		},
+		paddingHtml:function (options,callBack){
+			var rows = Math.ceil((options.date.totalDate+options.date.Dy)/7), //行数
+				appendTo = options.appendTo.find(options.appendToEle);
+				appendTo.html("");
+			for(var i=0;i<rows;i++){
+				var createParent = $("<"+options.parents+"/>");
+				for(var k=0;k<options.chidrenNum;k++){
+					var createChild = $("<"+options.children+"/>");
+					createChild.addClass("st");
+					createParent.append(createChild);
+				};
+				appendTo.append(createParent);
+			};
+
+			if(callBack) callBack(options.appendTo.find(options.children),options.appendTo,options.date);
+
+		},
+		getToday:function (){
+			var currentD = new Date(),
+				currentY = currentD.getFullYear(),
+				currentM = currentD.getMonth()+1,
+				today = currentD.getDate();
+
+			return {
+					currentY : currentY,
+					currentM : currentM,
+					today : today,
+					format : tools.addYMD(currentY,currentM,today)
+				};
+		},
+		getCurrenTime:function (times){
+			var d,currenTime,getFullYear,getMonth,
+				that = this;
+
+			if(times){
+				d = new Date(tools.trans(times));
+			}else{
+				d = new Date();
+			};
+			currenTime = {
+				Y : d.getFullYear(),
+				Mo : d.getMonth()+1,
+				Da : d.getDate(),
+				H : d.getHours(),
+				Mi : d.getMinutes(),
+				S : d.getSeconds(),
+				Dy:d.getDay(),
+				current:that.getToday(),
+				totalDate: tools.getTotalDate(d.getFullYear(),d.getMonth()+1),
+				currentDay:(function (){
+					d.setDate(1);
+					return d.getDay();	
+				})()
+			};
+			return currenTime;
+		},
+		prevmonth:function (){
+			this.addReduction("-");
+		},		
+		nextmonth:function (){
+			this.addReduction("+");
+		},
+		cross:function (y,m){
+			var y = m<1 ? y-1 : (m>12 ? y+1 : y),
+				m = m<=0 ? 12 : (m>12 ? 1 : m);
+			return {Y: y,Mo: m}
+		},
+		addReduction:function (mark){
+			var num = mark === "-" ? (--this.date.Mo) : (++this.date.Mo),
+				crossJson = this.cross(this.date.Y,num),
+				m = crossJson.Y+"/"+ crossJson.Mo+"/1",
+				date = this.getCurrenTime(m);
+
+				this.date = date;
+				this.createAppendHtml(date);
+		}
+	};
+	
+	var customData = new CustomData();
+
+	console.time("a");
+	customData.init("2015-05-20");  //初始化时可以传入指定日期
+	console.timeEnd("a");
+
+</script>
+
+
+</html>

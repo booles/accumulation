@@ -21,6 +21,7 @@
 再打印出onclick得值：
 
 `	
+	console.log(oBtn["onclick"]); //null<br/>
 	console.log(oBtn["onclick"]); //null
 `
 
