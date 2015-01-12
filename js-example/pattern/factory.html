@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+		var bigCar = function (){
+				
+		};
+
+		bigCar.prototype.drive = function (){
+			console.log(this);
+		};
+		bigCar.prototype.drag = function (){
+				
+		};
+
+			var factory = (function (){
+				var types = {};
+
+				return {
+					getTypes:function (type,options){
+						var getType = types[type];
+
+
+						return (getType ? new getType(options) : null);	
+					},
+					register:function (type,getType){
+						var proto = getType.prototype;
+
+						types[type] = getType;
+
+
+						return factory;
+					}
+				}		
+			})();
+
+			factory.register("bigCar",bigCar);
+
+			factory.getTypes("bigCar").drive();
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

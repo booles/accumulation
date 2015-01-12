@@ -80,7 +80,7 @@
 			cursor: pointer;
 		}
 
-		.today,.select{
+		.today{
 			color: #fff;
 			background: #00afc7;
 		}
@@ -164,15 +164,6 @@
 		this.endDate = "";
 	};
 
-	(function ($){
-
-		$.fn.calendar = function (options){
-			var custom = new CustomData();
-				custom.init(options);
-		};	
-			
-	})(jQuery)
-
 	CustomData.prototype = {
 		init:function (options){
 
@@ -182,8 +173,7 @@
 					initDate: "",
 					endDate: "",
 					dateNum:2,
-					paddingEle: "",
-					section:false
+					paddingEle: ""
 				};
 				//不改变定义的默认值
 				this.defaults = $.extend({},defaults,options); 
@@ -192,8 +182,6 @@
 				this.limit = this.defaults.limit;
 				this.endDate = this.defaults.endDate;
 				this.paddingEle = this.defaults.paddingEle;
-
-				this.section = this.defaults.section;
 
 				this.date = this.getCurrenTime(this.initDate);  //获取初始信息
 				this.wholeHtml();  //生成一骨架
@@ -205,42 +193,26 @@
 			var parents = $("#"+this.defaults.id);
 			return {
 				parents:parents,
-				calendar:parents.find(".calendar"),
-				allOk:parents.find("td.ok")
+				calendar:parents.find(".calendar")
 			}	
 		},
 		events:function (){
-			var that = this,
-				getElement = that.getElement(),
-				allOk = getElement.allOk;
-			getElement.parents.find(".prevmonth").off("click").on("click",function (){
+			var that = this;
+			$(".prevmonth").off("click").on("click",function (){
 				that.prevmonth();	
 			});
-			getElement.parents.find(".nextmonth").off("click").on("click",function (ev){
-				that.nextmonth();
+			$(".nextmonth").off("click").on("click",function (ev){
+				that.nextmonth();	
 			});
-
-			
-			function section(index,ble){
-				if(ble){
-					allOk.slice(0,index).addClass("red");
-				}else{
-					allOk.slice(0,index).removeClass("red");
-				}
-			}
-
-			getElement.parents.off("mouseover mouseout click").on({
+			$(".calendar").off("mouseover mouseout click").on({
 				"mouseover":function (){
-					$(this).addClass("select");
-					if(that.section) section($(this).attr("data-num"),true);
+					$(this).addClass("red");
 				},
 				"mouseout":function (){
-					$(this).removeClass("select");
-					if(that.section) section($(this).attr("data-num"));
-
+					$(this).removeClass("red");
 				},
 				"click":function (){
-					that.paddingEle.val($(this).attr("time"));
+					alert($(this).attr("time"));
 				}
 			},"td.ok");
 		},
@@ -270,7 +242,8 @@
 			    	</div>';
 			parents.html("");
 			for(var i=0;i<n;i++) parents.append(html);
-			var calendar = parents.find(".calendar");
+
+			var calendar = $(".calendar");
 			if(n>1) {
 				calendar.last().find(".nextmonth").show();
 			}else{
@@ -330,13 +303,7 @@
 						}
 					};
 				});
-			};
-
-			/*给可以点击的td打上编号*/
-			this.getElement().allOk.each(function (i){
-				$(this).attr("data-num",i);
-			});
-			this.events();
+			}
 		},
 		paddingHtml:function (options,callBack){
 			var rows = Math.ceil((options.date.totalDate+options.date.Dy)/7), //行数
@@ -351,7 +318,6 @@
 				};
 				appendTo.append(createParent);
 			};
-
 			if(callBack) callBack(options.appendTo.find(options.children),options.appendTo,options.date);
 
 		},
@@ -443,26 +409,17 @@
 		}
 	};
 	
-	
+	var customData = new CustomData();
 
 	//console.time("a");
 	/*customData.init({
 		initDate:"2015-10-20"
 	});  //初始化时可以传入指定日期*/
 	//console.timeEnd("a");
-	var customData = new CustomData();
+
 	$("#one").click(function(){
 		var that = $(this);
-
-		/*$().calendar({
-			id:"data",
-			paddingEle:that
-		});*/
-		/*customData.init({
-			id:"data",
-			paddingEle:that
-		});*/
-	new CustomData().init({
+		customData.init({
 			id:"data",
 			paddingEle:that
 		});
@@ -470,25 +427,12 @@
 
 	$("#two").click(function(){
 		var that = $(this);
-		new CustomData().init({
+		customData.init({
 			id:"data2",
 			initDate:"2015-02-20",
 			endDate:"2015-04-20",
-			paddingEle:that,
-			section:true
+			paddingEle:that
 		});
-		/*$().calendar({
-			id:"data2",
-			initDate:"2015-02-20",
-			endDate:"2015-04-20",
-			paddingEle:that
-		});*/
-		/*customData.init({
-			id:"data2",
-			initDate:"2015-02-20",
-			endDate:"2015-04-20",
-			paddingEle:that
-		});*/
 	});;
 
 </script>
