@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body>
+		
+	</body>
+	<script>
+			(function(){
+			    var ifr = document.createElement('iframe');document.body.appendChild(ifr)
+			    with(ifr.contentWindow) {
+			         a = [1,2,3];
+			         console.log(a);
+			         console.log(Array);
+			         console.log(0, a instanceof Array);
+			         console.log(1, a.constructor === Array);
+			         console.log(2, Array.isArray(a));
+			         console.log(3, Object.prototype.toString.call(a) === '[object Array]')
+			     }
+			})();
+
+
+		</script>
+</html>

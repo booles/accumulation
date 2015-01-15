@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    	#data {
+    		font-size: 16px;
+    	}
+    	.bigcalendar_title {
+			height: 41px;
+			border-bottom: 1px solid #ddd;
+			background: #f0f0f0;
+			color: #ea5504;
+			font: 700 14px/41px arial;
+			text-align: center;
+			overflow: hidden;
+			padding: 0px 20px;
+		}
+
+		.calendar{
+			width: 20em;
+			float: left;
+			border: 1px solid #ccc;
+		}
+		.right-calendar {
+			border-left: none;
+		}
+
+		.bigcalendar_title a{
+			padding: 0px 0.00625px;
+			cursor: pointer;
+			display: block;
+			width: 10px;
+			display: none;
+		}
+
+		.prevmonth {
+			float: left;
+		}
+
+		.nextmonth {
+			float: right;
+		}
+		.calendar_title {
+			float: left;
+		}
+
+		table {
+			width: 100%;
+			border-collapse:collapse;
+		}
+		table th, table td{
+			text-align: center;
+			width: 0.142em;
+			border: 1px solid #ddd;			
+		}
+
+		table th{
+			background: #f0f0f0;
+
+		}
+
+		table td {
+			line-height: 2em;
+			
+		}
+
+		.red{
+			background: #e2f3f8;
+			color: #000;
+		}
+		.disable {
+			cursor: not-allowed;
+			background: #ccc;
+		}
+
+		.ok {
+			cursor: pointer;
+		}
+
+		.today,.select{
+			color: #fff;
+			background: #00afc7;
+		}
+
+		#two {
+			display: none;
+		}
+
+    </style>
+    <script src="../../lib/jquery-1.7.2.js"></script>
+    <script src="./js/rili.js"></script>
+</head>
+
+<body>
+	
+	<label for="d"><input id="d" checked="checked" type="radio" name="arrive" data-arrive="d">单程</label>
+	<label for="f"><input id="f" type="radio" name="arrive" data-arrive="f">往返</label>
+
+	<input type="text" id="one" />
+	<input type="text" id="two" />
+    <div id="data"></div>    
+    <div id="data2"></div>
+</body>
+
+<script>
+
+				
+
+var arrive = $("input[name='arrive']");
+
+	arrive.change(function (){
+		if($(this).is(":checked") && $(this).attr("data-arrive") == "f"){
+			$("#two").show().trigger("paddingDate");
+		}else{
+			$("#two").hide();
+		}
+	})
+	
+	$("#one").val("2015-01-20");
+
+	$("#two").bind("paddingDate",function (ev,data){
+		data = data || $("#one").val();
+		$(this).val(data);		
+	});
+
+	$("#one").bind("date:d",function (){
+		var that = $(this);
+		$().calendar({
+			id:"data",
+			selectDate:that.val(),
+			paddingEle:that,
+			direction:"positive",
+			clickDate:function (that,time,timer){
+				$("#two").trigger("paddingDate",timer)
+			}
+		});
+	});
+
+	$("#one").bind("date:f",function (){
+		var that = $(this);
+		$().calendar({
+			id:"data",
+			selectDate:that.val(),
+			paddingEle:that,
+			section:true,
+			clickDate:function (that,time,timer){
+				$("#two").trigger("paddingDate",timer)
+			}
+		});
+	});
+
+
+	$("#one").click(function(){
+		console.log(arrive.is(":checked"),arrive.attr("data-arrive"));
+		if(arrive.eq(0).is(":checked"))
+			$(this).trigger("date:d");
+		else
+			$(this).trigger("date:f");
+
+	});
+
+	$("#two").click(function(){
+		var that = $(this);
+		$().calendar({
+			id:"data2",
+			initDate:$("#one").val(),
+			selectDate:that.val(),
+			paddingEle:that,
+			section:true
+		});
+	});;
+
+</script>
+
+
+</html>

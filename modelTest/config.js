@@ -1,24 +1,24 @@
 require.config({
-    baseUrl: "./js/lib",
-    paths: {
-        "jQuery": "jquery-1.7.1",
-        "jquery.cookie": "jquery.cookie",
-        "domReady": "domReady",
-        "text": "text",
-        "template": "template",
+    baseUrl: "./js",
+   paths: {
+        "jQuery": "./lib/jquery-1.7.1",
+        "jquery.cookie": "./lib/jquery.cookie",
+        "domReady": "./lib/domReady",
+        "text": "./lib/text",
+        "template": "./lib/template",
 
-        "getCookie": "../getCookie",
-        "renderSearch": "../renderSearch",
+        "getCookie": "getCookie",
+        "renderSearch": "renderSearch",
 
-        "lists": "../lists",
-        "test":"../test",
+        "lists": "lists",
+        "test":"test",
 
 
-        "tools":"../tools/tools",
+        "tools":"./tools/tools",
 
-        "httpServer":"../tools/httpServer",
+        "httpServer":"./tools/httpServer",
 
-        "data":"../data"
+        "data":"data"
     },
     shim: {
         "jQuery": {

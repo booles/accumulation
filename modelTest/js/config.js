@@ -26,12 +26,14 @@ require.config({
     }
 });
 
+
 require(["domReady!", "jQuery", "renderSearch", "lists","httpServer"],
     function(dom, jQuery, renderSearch, lists,httpServer) {
-        console.log("123");
-        console.log(httpServer);
-        //渲染列表
-      //  lists.renderList([1, 2, 3, 4, 5]);
+        
+       httpServer.httpServer.listServer([],function (respones){
+            lists.renderList(respones.data);
+            $("#loading").hide();
+       });
 
 
     });
