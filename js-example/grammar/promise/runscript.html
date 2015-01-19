@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			function addEvent(element,evName,useCapture){
+				return new Promise(function (reslove,reject){
+					element.addEventListener(evName,function listener(event){
+							reslove(listener);
+					this.removeEventListener(evName, listener, useCapture);	
+					},useCapture);
+				})		
+			};
+
+			function runscript(src){
+				return new Promise(function (resolve,reject){	
+					var script = document.createElement("script");
+					script.src = src;
+					script.addEventListener("load",resolve);
+					script.addEventListener('error',reject);
+					(document.getElementsByTagName('head')[0] || document.body || document.documentElement).appendChild(script);
+				});
+			}
+
+
+			window.onload = function (){
+				var oDiv = document.getElementById("div1");
+
+				addEvent(oDiv,"click",false).then(function (){
+					runscript("./a.js").then(function (){
+						console.log("成功");	
+					});		
+				});
+
+				
+
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			1111111111111111
+		</div>
+		<div id="div2"></div>
+	</body>
+</html>

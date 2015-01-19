@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="./css/default.min.css">
+         <link rel="stylesheet" href="./css/index.css">
+		<script src="./lib/highlight.min.js"></script>
+        <script src="./lib/marked.js"></script>
+		<style>
+			#div1 {
+				width: 45%;
+				min-height: 800px;
+				border: 1px solid #999;
+				padding: 2em;
+				float: left;
+				font-size: 25px;
+				margin-left: 10px;
+			}
+			#content {
+				width: 45%;
+				height: 800px;
+				overflow-y: auto;
+				padding: 2em;
+				float: left;
+				border: 1px solid #999;
+				
+			}
+			#div2 {
+				color: ##444;
+				height: 100%;
+				padding: 2em;
+			}
+
+		</style>
+		<script>
+			window.onload = function (){
+				function markdown(){
+					marked.setOptions({
+						highlight: function (code) {
+							return hljs.highlightAuto(code).value;
+						}
+					});
+					document.getElementById("div2").innerHTML = marked(document.getElementById("div1").value);
+				};
+				document.onkeyup = markdown
+				document.onkeydown = markdown
+			};
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+		<div id="content">
+			<div id="div2"></div>
+		</div>
+		<textarea id="div1"></textarea>
+	</body>
+	<script></script>
+</html>
