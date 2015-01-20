@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>给标签添加内容</title>
+		<style>
+			
+		</style>
+		<script>
+			var str = '<a href="www.51js.com" target="_self">abcdefg</a>';
+        //$1$2为元素的开始标签，$3为要查找的内容前面的innerText，$4为要查找的内容后面innerText，$5为元素的结束标签
+
+        /*var reg = /<(.*)(\s+.*>)(.*a.*)(<\/\1>)/g;
+
+        console.log(reg.test(str));
+
+        console.log(new RegExp("(a)","g"));
+
+        str.replace(reg,function ($0,$1){
+        	console.log($0,$1);
+        })*/
+
+		function example(html,content){
+				
+			var reg = /<(\w+?).+?>(.+?)<\/\1>/g;
+				html.match(reg);
+			var str2 = RegExp.$2,
+				reg2 = new RegExp("("+content+")","g");
+
+				htmlArray = html.split(str2);
+
+				console.log(htmlArray);
+
+				console.log(htmlArray.join(str2.replace(reg2,"<font color=red>$1</font>"+content)));
+		};
+
+		
+
+		example(str,"a");
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
