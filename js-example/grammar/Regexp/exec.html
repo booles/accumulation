@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>给标签添加内容</title>
+		<style>
+			
+		</style>
+		<script>
+
+			/*
+					当 exec() 找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。
+
+					如果在一个字符串中完成了一次模式匹配之后要开始检索新的字符串，就必须手动地把 lastIndex 属性重置为 0。
+
+					在循环中反复地调用 exec() 方法是唯一一种获得全局模式的完整模式匹配信息的方法。
+			*/
+
+			var str = "1111abc2222abbbc333abbc";
+
+			var re = /[a-z]([a-z]+)[a-z]/ig;
+			var temp;
+			while((temp = re.exec(str)) != null)
+			console.log(temp[1]);
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

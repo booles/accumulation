@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>给标签添加内容</title>
+		<style>
+			
+		</style>
+		<script>
+		/*删除字符串中的某一项*/
+		/*var str="5,3,13,231,33,5,71,9,3";
+
+		var reg = /\b5,|,3\b/g;
+
+		console.log(reg.exec(str));
+		console.log(reg.exec(str));*/
+
+
+		//取得div中所有的内容
+
+		/*var str="<div id='name2' class='a'><b>正文内容12</b></div><div id='name1'><b>正文内容44</b></div><div id='name3'><b>正文内容33</b></div>";
+
+		var reg = /\<div id\=[^>]+\>([^div]+)\<\/div\>/g;
+
+
+		var tem;
+
+		while(( tem = reg.exec(str) ) != null)
+
+		console.log(RegExp.$1);
+
+	console.log('http://www.163.com/index.asp?a=test1&b=test2&c=test3'.replace(/&[^&]+$/,''));
+
+
+	var html = '<b>sss</b><i>iii</i>';
+	var html_ = html.replace( /\<(\/?)b\>/ig, function ($0,$1){  //会匹配两次，第一次替换掉b，第二次替换上/
+			console.log($0,$1);
+			return '<'+$1+'strong>';
+	} );
+
+	console.log(html_);*/
+
+	/*var str="aa<br>aa<br>aaa<br>aaa<br>aa<br>aaaaaaaaaa<br>aaa<br>aaaaa";
+
+	var reg = /^((\w+<br>){5})([\s\S]*)$/g;
+
+		console.log(reg.exec(str));*/
+	/*var str = "010.1";
+	
+	var reg = /^0+([1-9].+|0\..+)/g;	
+
+	str.replace(reg,function ($0,$1){
+		console.log($1);
+	});		
+*/
+	//驼峰写法
+	/*var s = 'abc_bcd_efg';
+
+	console.log(s.replace(/[_-]([a-z])/g,function ($0,$1){
+		return $1.toUpperCase();
+	}));;
+
+		var str = "abc1abc1abc2abcabc";
+		var reg = /(abc){2}/g;
+
+		console.log(str.match(reg));*/
+
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			aaaa
+			aaa
+			aaa
+		</div>
+	</body>
+	<script>
+		var oDiv = document.getElementById("div1").innerHTML;
+
+		console.log(oDiv.replace(/\r\n/g,"<br>"));
+	</script>
+</html>

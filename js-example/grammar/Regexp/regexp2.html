@@ -32,9 +32,22 @@
        		console.log(regss.exec(str));
        		console.log(str.replace(regss,">$1 $3<"));
 
-       		var str3="1111abc2222abbbc333abbc";
+       		 
+/*str="1111abc2222abbbc333abbc";
+var re=/[a-z]([a-z]+)[a-z]/ig;
+var tmp;
+while((tmp=re.exec(str))!=null)
+alert(tmp[1]);*/
 
-       		var reg3 = /[a-z][a-z][a-z]/g;
+			var str3="1111abc2222abbbc333abbc";
+
+       		var reg3 = /[a-z]([a-z]+)[a-z]/ig;
+
+       		var temp;
+       		while((temp=reg3.exec(str3))!=null);
+
+       		alert(temp);
+
 
 		</script>
 	</head>

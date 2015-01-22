@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>给标签添加内容</title>
+		<style>
+			
+		</style>
+
+	</head>
+
+	<body>
+		<pre id="div1">
+			.heb-ft{
+				text-align:right;
+				border:0 none;
+				padding:10px 0 0;
+			}
+			.heb-ft .nBtn{
+			    padding:2px 20px;
+			    margin:0 0 0 10px;
+			    font-weight:700;
+			}
+		</pre>
+	</body>
+	<script>
+
+			var oDivHtml = document.getElementById("div1").innerHTML;
+
+			var reg = /;\s+/g;
+
+			console.log(reg.test(oDivHtml));
+
+			var oDivHtml1 = oDivHtml.replace(reg,";")
+
+			console.log(oDivHtml1.replace(/\{\s+/g,"{").replace(/\}\s+/g,"}"));
+
+		</script>
+</html>
