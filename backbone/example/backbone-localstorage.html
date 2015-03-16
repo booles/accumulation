@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>        
+		<script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        <script src="../lib/backbone.localStorage.js"></script>
+	</head>
+
+	<body>
+		<div id="oDiv">
+			<input type="text" id="oInput" />
+			<button id="delectList">删除localStorage</button>
+		</div>
+		<ul id="ulList">
+			
+		</ul>
+		
+		<script type="text/template" id = "listTpl">
+			<li>
+				1
+			</li>
+		</script>
+
+	</body>
+		<script>
+
+		var Model = Backbone.Model.extend({
+		});
+
+		var Con = Backbone.Collection.extend({
+			model : Model,
+			localStorage : new Backbone.LocalStorage('todos-backbone'),
+			delectLists : function (){
+				console.log(this.where({a:1}));		
+			}
+		});
+
+		var con = new Con();
+
+		var View = Backbone.View.extend({
+			el : "#ulList",
+			initialize : function (){
+				this.render();
+				this.listenTo(con,"add",this.addList);
+
+
+				con.fetch({rest:true});
+			},
+			addList : function (){
+				console.log("123");
+			},
+			render : function (){
+				var tpls = _.template($("#listTpl").html())();	
+
+				this.$el.html(tpls);
+			}
+		});
+
+		var ListView = Backbone.View.extend({
+			el : "#oDiv",
+			events : {
+				'keypress #oInput' : 'addList',
+				'click #delectList' : 'delectList'
+			},
+			addList : function (ev){
+				if (ev.which == 13){
+					con.create({a:1});
+				}	
+			},
+			delectList : function (){
+				console.log(con.delectLists());
+				_.invoke(con.delectLists(),"destroy")	
+			}
+		});
+
+		var view  = new View();
+		var listView  = new ListView();
+
+
+		
+
+   
+		</script>
+</html>

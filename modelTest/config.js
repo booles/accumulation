@@ -39,6 +39,4 @@ require(["domReady!", "jQuery", "renderSearch", "lists","httpServer"],
             lists.renderList(respones.data);
             $("#loading").hide();
        });
-
-
     });

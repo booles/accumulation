@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>        
+		<script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        <script src="../lib/backbone.localStorage.js"></script>
+	</head>
+
+	<body>
+		<a href="#/new">添加新项</a>
+		<div class="page"></div>
+		<div class="formView"></div>
+
+		<script type = "text/template" id = "home">
+			<ul>
+				<% _.each(datas,function (d){ %>
+					<li>
+						<span><%= d.get('name') %></span>	
+						<span><%= d.get('age') %></span>	
+						<span><%= d.get('height') %></span>	
+						<span><%= d.get('width') %></span>
+						<a href = '#/editor' id = 'editor'>编辑</a>
+					</li>
+				<%});%>
+			</ul>
+		</script>
+		
+		<script type = "text/template" id = "formTpl">
+			<form id="forms">
+				姓名：<input type="text" id="name" name = "name">
+				年龄：<input type="text" id="age" name = "age">
+				体重：<input type="text" id="width" name = "width">
+				身高：<input type="text" id="height" name = "height">
+				<button type="submit" id="sub">提交</button>
+			</form>
+		</script>
+
+	</body>
+		<script>
+
+		(function ($){
+			$.fn.serializePbject = function (){
+				var serializes = this.serializeArray(),o = {};
+				$.each(serializes,function (){
+					if(o[this.name] != undefined){
+						if(!o[this.name].push){
+							o[this.name] = [o[this.name]]
+						};
+						o[this.name] = this.value || "";
+					}else{
+						o[this.name] = this.value || "";
+					}
+				})
+			return o;
+			}		
+		})(jQuery)
+
+
+		var Model = Backbone.Model.extend({
+			url : "../data/a.json"
+		});
+		var model = new Model();
+
+		
+
+		var Con = Backbone.Collection.extend({
+/*			url : "../data/a.json"
+*/		
+		localStorage: new Backbone.LocalStorage('todos-backbone'),
+		});
+		var users = Backbone.Model.extend({
+			rootUrl : "../data/a.json"
+		});
+
+		var ListView = Backbone.View.extend({
+			el : '.page',
+			render : function (){
+
+				var con = new Con(),
+					that = this;
+
+				con.fetch({success : function (data){
+					var temp = _.template($("#home").html())({datas:con.models});
+					that.$el.html(temp);
+				}});
+					
+			}
+		});
+
+		var FormView = Backbone.View.extend({
+			el : '.formView',
+			events : {
+				'submit #forms' : 'savaData'
+			},
+			render : function (){
+
+				var con = new Con(),
+					that = this;
+				var temp = _.template($("#formTpl").html())();
+				console.log(temp);
+					that.$el.html(temp);
+			},
+			savaData : function (ev){
+				var arr = $(ev.currentTarget).serializePbject();
+				console.log(arr);
+
+				var user = new users();
+
+				user.sava(arr,{
+					error : function (data){
+						console.log(data);
+					}
+				});
+
+				return false;
+			}	
+
+		});
+
+		var listView = new ListView();
+		var formView = new FormView();
+
+		
+
+
+		var Route = Backbone.Router.extend({
+			routes : {
+				"" : "home",
+				"new" : "new"
+			}
+		});
+
+		var route = new Route();
+
+		route.on('route:home',function (){
+			listView.render();	
+		});
+		route.on('route:new',function (){
+			formView.render();	
+		});
+
+		Backbone.history.start();
+
+
+	</script>
+</html>

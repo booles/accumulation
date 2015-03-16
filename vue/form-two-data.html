@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			li{
+				list-style: none;
+			}
+			.line {
+				text-decoration: line-through;
+			}
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<form action="" id="demo">
+			<input type="text" v-model = "twoData" lazy>
+			{{twoData}}
+		</form>
+	</body>
+	<script>
+		var demos = new Vue({
+			el:"#demo",
+			data:{
+				twoData:"wang"
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>        
+		<script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        <script src="../lib/backbone.localStorage.js"></script>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		$(function (){
+			Backbone.on({abc:function (a,b,c,d,e,f){
+				console.log(a,b,c,d,e,f);	
+			}
+			});
+			Backbone.on({abc:function (abd){
+				console.log(abd);	
+			}
+			});
+
+			Backbone.trigger("abc","abd",1,2,3,4,5);
+		})
+	</script>
+</html>

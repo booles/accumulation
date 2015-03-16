@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				在ie下typeof alert 和 typeof document.getElementById 为object，
+				其他浏览器返回function，jQuery修复了这个bug
+			*/
+			var isFunction = (function() {
+			    // Performance optimization: Lazy Function Definition
+			    return "object"  === typeof document.getElementById ?
+			           isFunction = function(fn){
+			                try {
+			                    return /^\s*\bfunction\b/.test("" + fn);
+			                } catch (x) {
+			                    return false
+			                }
+			           }:
+			           isFunction = function(fn){
+			               return "[object Function]" === Object.prototype.toString.call(fn);
+			           };
+			})();
+
+			alert(Object.prototype.toString.call(arguments))
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

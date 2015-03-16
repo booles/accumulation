@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<script src="../lib/jquery-1.7.2.js"></script>
+        <script src="../lib/underscore.js"></script>
+        <script src="../lib/backbone.js"></script>
+        <script src="../lib/backbone.localStorage.js"></script>
+	</head>
+
+	<body>
+
+	</body>
+	<script>
+		var Model = Backbone.Model.extend({
+			url:"../data/a.json",
+			defaults:{
+				a:0
+			},
+			validate:function (attr){
+				console.log(attr.a);	
+			},
+			initialize:function (data){
+				console.log("123");	
+				var c =0;
+				this.on("change:a",function (model){
+					c++;
+					console.log("c" + c);
+					console.log(model);
+					console.log(model.get("a"));
+				});
+				this.on("error",function (model){
+					console.log(model);	
+				})
+			}
+		});
+
+		
+
+		var model = new Model();
+
+		model.set("a",2);
+
+		model.set({"validata":1})
+
+		model.fetch({
+			success:function (data){
+				var a = data.toJSON().a;
+				model.set("a",a);
+			}
+		});
+	</script>
+</html>
