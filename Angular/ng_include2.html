@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			.done-true {
+			  text-decoration: line-through;
+			  color: grey;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<div ng-include="view/list.html"></div>
+	  </div>
+	</body>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp",[],function(){console.log("hello");});
+
+		
+	</script>
+</html>

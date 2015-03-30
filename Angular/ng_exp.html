@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			.done-true {
+			  text-decoration: line-through;
+			  color: grey;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app>
+		<div ng-controller="conTro">
+			<span>{{titole()}}of{{arr.length}}</span><a href="#" ng-click="rest()">rest</a>
+
+			<ul>
+				<li ng-repeat="list in arr">
+					<input type="checkbox" ng-model="list.done">
+					<span class="done-{{list.done}}">{{list.text}}</span>
+				</li>
+			</ul>
+			<div>
+				<input type="text" ng-model="txt" placeholder="请写入"/><button ng-click="add()">add</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	function conTro($scope,$element){
+		console.log($element.html());
+		$scope.arr = [
+			{
+				text:"111111111111111",
+				done:true
+			},
+			{
+				text:"22222222222222",
+				done:false
+			}
+		];
+		$scope.titole = function(){
+			var num=0;
+			angular.forEach($scope.arr,function(todo){
+				num += todo.done ? 0 : 1;
+			});
+
+			return num;
+		};
+		$scope.rest = function(){
+			var oldArr = $scope.arr;
+				$scope.arr = [];
+
+			angular.forEach(oldArr,function (todo){
+				if(!todo.done) $scope.arr.push(todo);	
+			})
+
+		};
+		$scope.add = function (){
+			$scope.arr.push({
+				text:$scope.txt,
+				done:false
+			})	
+		};		
+	};
+	</script>
+</html>

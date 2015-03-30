@@ -1,0 +1,14 @@
+<div ms-controller="allCheck">
+    <ul>
+    	<li>
+    		<input type="checkbox" ms-click="checkClick" ms-checked="checkAllBool"/>全选
+    	</li>
+    	<li ms-repeat="arr" >
+    		<input type="checkbox" ms-value="el" ms-duplex="selected"/>
+    		{{el}}
+    	</li>
+    	<li>
+    		<button ms-click="send">提交</button>
+    	</li>
+    </ul>
+</div>

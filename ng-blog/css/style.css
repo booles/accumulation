@@ -1,0 +1,64 @@
+body, h2,ul{
+	margin:0px;
+	padding: 0px;
+}
+
+body{
+	background: #eee;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+h2{
+	width: 900px;
+	margin: 0px auto;
+	padding: 30px 0;
+}
+
+
+
+.blogDiv,.list {
+
+	width: 900px;
+	border: 1px solid #999;
+	box-shadow: 5px 5px 8px #ccc;
+	margin: 0px auto;
+}
+
+.blogDiv ul {
+
+}
+
+.blogDiv ul li {
+	width: 100%;
+	height: 120px;
+	line-height: 120px;
+	border-bottom: 1px solid #ccc;
+	margin: 0px 30px;
+}
+
+.blogDiv ul span {
+	display: inline-block;
+
+}
+
+.blogDiv ul a {
+	display: inline-block;
+}
+
+.list li{
+	line-height: 60px;
+
+}

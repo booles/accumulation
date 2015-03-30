@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			.block{
+				background: red;
+			}
+			.noned .nod {
+				display: none;
+			}
+			.inputBlock {
+				display: none;
+			}
+			.noned .inputBlock {
+				display: block;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp"  ng-controller="conTroll">
+		
+		<div ng-class="{block:list.oTrue,noned: a == b}">
+			<label class="nod"  ng-dblclick="good(a)">双击！！</label>
+			<input type="text" value="显示" class="inputBlock" ng-blur="rest()" a-focus="a == b">
+		</div>
+		 
+	</body>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp",[],function(){console.log("hello");});
+
+		myApp.controller("conTroll",function ($scope,$http){
+			
+			$scope.a = [1,2];
+
+			$scope.good = function (a){
+				console.log(a);
+				$scope.b = a;
+			};
+
+			$scope.rest = function (){
+				console.log("1111");
+					console.log($scope.b);
+					$scope.b = null;
+			};
+			
+		});
+
+
+
+	</script>
+</html>

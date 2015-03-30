@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			.block{
+				background: red;
+			}
+			.noned .nod {
+				display: none;
+			}
+			.inputBlock {
+				display: none;
+			}
+			.noned .inputBlock {
+				display: block;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp"  ng-controller="conTroll">
+		
+		<div ng-init="friends = [{name:'John', phone:'555-1276'},
+                         {name:'Mary', phone:'800-BIG-MARY'},
+                         {name:'Mike', phone:'555-4321'},
+                         {name:'Adam', phone:'555-5678'},
+                         {name:'Julie', phone:'555-8765'},
+                         {name:'Juliette', phone:'555-5678'}]"></div>
+		<div>{{ [1,2,3,4,5] | limitTo: 1 }}</div>
+       	<div>
+       		serch:<input type="text" ng-model="serchText" />
+       		<ul>
+       			<li ng-repeat="item in friends | filter:serchText ">
+       				<span>name:{{item.name}}</span>
+       				<span>phone:{{item.phone}}</span>
+       			</li>
+       		</ul>
+       	</div>
+		 <table>
+        <tr>
+          <th ng-click="f='name'; rev=!rev">名字</th>
+          <th ng-click="f='age'; rev=!rev">年龄</th>
+        </tr>
+    
+        <tr ng-repeat="o in data | orderBy: f : rev">
+          <td>{{ o.name }}</td>
+        <td>{{ o.age }}</td>
+       </tr>
+     </table>
+	</body>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp",[]);
+
+		myApp.controller("conTroll",function ($scope){
+				$scope.data =[
+					      {name: 'B', age: 4},  
+					       {name: 'A', age: 1},  
+					      {name: 'D', age: 3},  
+					       {name: 'C', age: 3},  
+					     ];
+		});
+
+
+	</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<style>
+			.done-true {
+			  text-decoration: line-through;
+			  color: grey;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp"  ng-controller="conTroll">
+		<div ng-include src="ng_exp.html"></div>
+		<div ng-include src="tep"></div>
+		<input type="text" ng-model="width">
+        <div></div>
+		 
+	</body>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp",[],function(){console.log("hello");});
+
+		myApp.controller("conTroll",function ($scope,$http){
+			
+			var p = $http({
+				method:"GET",
+				url:"ng_include.html"
+
+			});
+			p.success(function (response, status, headers, config){
+				console.log(response);
+			});
+		});
+
+
+
+	</script>
+</html>

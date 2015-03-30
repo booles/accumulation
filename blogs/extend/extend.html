@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script src="../jquery-1.7.2.js"></script>
+		<script>
+		
+	/*var json1 = {
+		a:1
+	};
+	var json2 = {
+		a:2,
+		b:1
+	}
+	var a = $.extend(json1);
+
+	console.log(json1);
+	console.log($.json);*/
+
+
+	var json1 = {
+		a:1,
+		b:[1,2,3,5,6],
+		c:{
+			wang:{a:1,b:4},
+			wei:2
+		}
+	}
+
+	var json2 = {
+		a:2,
+		b:[100,300],
+		c:{
+			wang:1,
+			ding:3
+		},
+		d:1
+	}
+
+		function extend(){
+			var target = arguments[0] || {},
+				options,src,copy,isArray,clone;
+
+			if((options = arguments[1]) != null){
+				for(var name in options){
+					src = target[name];
+					copy = options[name];
+
+					if(  jQuery.isPlainObject(copy) || (isArray = jQuery.isArray(copy)) ){
+
+						if(isArray){
+							clone = jQuery.isArray(src) ? src :  [];
+						}else{
+							clone = jQuery.isPlainObject(src) ? src : {};
+						};
+
+						target[name] = extend(clone,copy);
+
+					}else if(copy != undefined){
+						target[name] = copy;
+					}
+				}
+			}
+
+			return target;
+
+		}
+
+		//extend(json1,json2);
+
+		//console.log(json1,json2);
+
+		//扩展静态方法
+
+		var src1 = {
+		name:"tome",
+		location:{
+			city:"Beijing",
+			county:"China"
+		}
+	};
+	var src2 = {
+		name:"",
+		location:{
+			live:"New York",
+			county:"USA"
+		}
+	};
+
+
+
+	$.extend(src1,src2);
+
+	console.log(src1);
+
+
+
+
+		/*function recursion(num){
+			if( num < 1 ) {
+				return 1;
+			};
+
+			return recursion( num - 1 ) * num;
+		}
+
+		recursion(num);						recursion(6);					720	
+
+
+		recursion( num - 1 ) * num;			recursion( 6 - 1 ) * 6;			120 * 6 = 720
+
+
+		recursion( num - 1 ) * num;			recursion( 5 - 1 ) * 5;			24 * 5 	= 120
+
+
+		recursion( num - 1 ) * num;			recursion( 4 - 1 ) * 4;			6 * 4 	= 24
+
+
+		recursion( num - 1 ) * num;			recursion( 3 - 1 ) * 3;			2 * 3 	= 6
+
+
+		recursion( num - 1 ) * num;			recursion( 2 - 1 ) * 2;			1 * 2 	= 2
+
+
+		recursion( num );					recursion( 1 );					1*/
+	
+
+jQuery.extend = jQuery.fn.extend = function() {
+	/*
+		传入的对象分为扩展对象和被扩展对象
+	*/
+	var options, name, src, copy, copyIsArray, clone, //
+		target = arguments[0] || {},	//被扩展的对象
+		i = 1,							//设置扩展对象的起始值，默认从第二项开始
+		length = arguments.length,		//传递参数的个数，以便下面循环扩展对象使用
+		deep = false;					//默认浅复制
+
+	/*
+		处理深层拷贝或浅拷贝情况
+		extend(Boolean,src1,src2..srcN);
+	*/
+	if ( typeof target === "boolean" ) {
+
+		deep = target;	//将deep设为target，此时target为传进来的Boolean值，true or false；
+
+		target = arguments[ i ] || {};  //重新设置被扩展对象，为参数的第二项
+
+		i++;							//重设扩展对象的起始值，从第三项开始
+	}
+
+	/*
+		被扩展的不是对象或函数，可能是String，Number或其他；
+		extend("",src1,src2...srcN);
+		重新设置target的值为空对象
+	*/
+
+	if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
+		target = {};
+	}
+
+	/*
+		当只传入一个对象
+		extend(src1);
+		将target设为jQuery对象或者jQuery.prototype，来扩展jQuery静态属性方法或是实例属性方法
+		$.extend(src1);   //jQuery对象
+		$.fn.extend(src1) //jQuery.prototype
+	*/
+	if ( i === length ) {
+		target = this;
+		i--;			//重设扩展对象起始值，从第0个开始
+	}
+
+	/*
+		被扩展对象和扩展对象所有情况处理完毕，开始循环进行拷贝
+		对从i开始的多个参数进行遍历
+	*/
+
+	for ( ; i < length; i++ ) {
+		
+		if ( (options = arguments[ i ]) != null ) {  //只处理有定义扩展对象
+			//扩展基本对象
+			for ( name in options ) {       //循环每一项扩展对象
+				src = target[ name ];		
+				copy = options[ name ];		
+
+				// 防止循环引用，window === window.window.window
+				if ( target === copy ) {
+					continue;
+				}
+
+				/*
+					对象或数组做深拷贝
+					deep：判断是否要深拷贝
+					copy:保证copy存在
+					jQuery.isPlainObject：判断copy是否是一个纯粹的对象，通过{} 或 new Object 创建
+					jQuery.isArray:判断是否为数组
+				*/
+				if ( deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
+					//为数组
+					if ( copyIsArray ) {
+						copyIsArray = false; //设为false，以便下次再重新判断是否为数组
+						clone = src && jQuery.isArray(src) ? src : [];  //设置clone为一个数组
+
+					} else {
+						clone = src && jQuery.isPlainObject(src) ? src : {}; //设置clone为一个对象
+					}
+
+					//递归深度拷贝
+					target[ name ] = jQuery.extend( deep, clone, copy );
+
+				//过滤未定义的值
+				} else if ( copy !== undefined ) {
+					target[ name ] = copy;
+				}
+			}
+		}
+	}
+
+	//返回修改后的对象
+	return target;
+};
+
+		</script>
+	</head>
+
+	<body>
+		<input type="checkbox" id="a" />
+	</body>
+	<script>
+		console.log( $("#a").pushStack({a:1}) );
+	</script>
+</html>

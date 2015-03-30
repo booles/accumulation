@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/angular-route.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+		<ng-view/>
+	</body>
+	<script>
+	var myApp = angular.module("myApp",["ngRoute"],function ($routeProvider){
+		console.log($routeProvider);
+		$routeProvider.when("/",{
+
+			templateUrl:"book.html",
+			controller:"bookCtrl"
+		})	
+	});
+
+	/*myApp.controller("bookCtrl",["$scope",function (scope){
+		scope.book = "book";	
+	}]);*/
+
+	function bookCtrl(){
+		$scope.book = "book"	
+	}
+	</script>
+</html>

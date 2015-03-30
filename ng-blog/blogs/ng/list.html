@@ -1,0 +1,12 @@
+<div class="main">
+	<h2>{{title}}</h1>
+	<div class="blogDiv">
+		<ul>
+			<li ng-repeat="blogList in blogLists">
+			<a href="#/blogs/ng/{{blogList.id}}">{{blogList.list}}</a>
+			<span>日期：{{blogList.times}}</span>
+		</li>
+		</ul>
+
+	</div>
+</div>	
